@@ -88,6 +88,7 @@
         <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
     <allow-navigation href="http://172.24.0.216:8100" sessionid="3330a05f" />
+    <plugin name="cordova-plugin-nativestorage" spec="2.3.2" />
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
 </widget>
