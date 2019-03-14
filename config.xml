@@ -87,6 +87,7 @@
         <variable name="WEB_APPLICATION_CLIENT_ID" value="mywebapplicationclientid=1:347712232584:android:5dcc9f0d4cb3df0f" />
         <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
     </plugin>
+    <allow-navigation href="http://172.24.0.216:8100" sessionid="3330a05f" />
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
 </widget>
