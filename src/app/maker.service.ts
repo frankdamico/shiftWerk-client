@@ -7,8 +7,8 @@ import data from 'mockDataMaker.json';
 export class MakerService {
 
   constructor() { }
-  allMakers: Array<Object> = data;
-  getMakerById(id: Number): Object {
-    return data.find(maker => maker.id === id);
+  allMakers: Array<any> = data;
+  getMakerById(id: Number) {
+    return this.allMakers.find(maker => maker.id === id);
   }
 }
