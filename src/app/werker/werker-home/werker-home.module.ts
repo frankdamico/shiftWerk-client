@@ -29,8 +29,30 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    WerkerHomeMainComponent,
+    WerkerNotificationsComponent,
+    WerkerProfileComponent,
+    WerkerHistoryComponent,
+    WerkerSearchComponent,
+    WerkerSettingsComponent,
+    WerkerScheduleComponent,
+    WerkerShiftSmallComponent,
+    WerkerShiftExpandedComponent,
+    UserNavbarComponent
   ],
-  declarations: [WerkerHomePage]
+  declarations: [
+    WerkerHomePage,
+    WerkerHomeMainComponent,
+    WerkerNotificationsComponent,
+    WerkerProfileComponent,
+    WerkerHistoryComponent,
+    WerkerSearchComponent,
+    WerkerSettingsComponent,
+    WerkerScheduleComponent,
+    WerkerShiftSmallComponent,
+    WerkerShiftExpandedComponent,
+    UserNavbarComponent
+  ]
 })
 export class WerkerHomePageModule {}
