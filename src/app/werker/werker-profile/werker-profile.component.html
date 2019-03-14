@@ -1,3 +1,72 @@
-<p>
-  werker-profile works!
-</p>
+<p>werker-profile works!</p>
+<form>
+  <ion-item enter-name>
+    <ion-label>Display Name:</ion-label>
+    <ion-input placeholder="Enter first name"></ion-input><ion-input placeholder="and last name"></ion-input>
+      <input placeholder="Enter first name"></input><input placeholder="and last name"></input>
+    <Button ion-button>SAVE/EDIT</Button>
+  </ion-item>
+
+  <p></p>
+  <ion-item enter-photo>
+    <ion-input placeholder="Upload profile photo">
+      <div>[ PHOTO IMAGE ] <Button ion-button>ADD/CHANGE PHOTO</Button></div>
+    </ion-input>
+  </ion-item>
+  <p></p>
+
+  <ion-item enter-bio>
+    <ion-label>Bio:</ion-label>
+    <ion-textarea placeholder="Enter short bio.  Include brief work experience and tell us a little about yourself."></ion-textarea> 
+      <textarea rows="4" placeholder="Enter short bio"></textarea>
+    <Button ion-button>SAVE/EDIT</Button>
+  </ion-item>
+
+  <p></p>
+  <ion-item enter-positions>
+    <ion-list>
+      <ion-item>
+        <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
+        Select position(s):
+          <Button ion-button>Bartender</Button>
+          <ion-label></ion-label>
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item>
+        <Button ion-button>Server</Button>
+        <ion-label></ion-label>
+        <ion-toggle slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+          <Button ion-button>Expeditor</Button>
+        <ion-label></ion-label>
+        <ion-toggle slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+          <!-- <Button ion-button>Expeditor</Button> -->
+        <ion-label>Dishwasher</ion-label>
+        <ion-toggle slot="end"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item enter-positions>
+
+  <p></p>
+  <ion-item enter-certification>
+    <ion-input placeholder="Upload profile photo">
+      <div>[ CERTIFICATION IMAGE ] <Button ion-button>ADD/UPDATE Certification</Button></div>
+    </ion-input>
+  </ion-item>
+  <p></p>
+
+  
+  <div class-name=werkerFavs>
+      <ul>
+        <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
+        <li><a href>Fav1 Maker1</a></li>
+        <li><a href>Fav2 Maker2</a></li>
+        <li><a href>Fav3 Maker3</a></li>
+      </ul>
+    </div>
+  </div>
+
+</form>
