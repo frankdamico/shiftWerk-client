@@ -1,25 +1,28 @@
 <p>werker-profile works!</p>
+<h3>Your Profile</h3>
 <form>
-  <ion-item enter-name>
-    <ion-label>Display Name:</ion-label>
+  <ion-item enter-werker>
+    <ion-label>Name:</ion-label>
     <ion-input placeholder="Enter first name"></ion-input><ion-input placeholder="and last name"></ion-input>
-      <input placeholder="Enter first name"></input><input placeholder="and last name"></input>
-    <Button ion-button>SAVE/EDIT</Button>
+    <input placeholder="Enter first name"></input><input placeholder="and last name"></input>
+    <p></p>
+    <ion-label>Email:</ion-label>
+    <ion-input placeholder="Enter email"></ion-input>
+      <input placeholder="Enter email"></input>
+    <p></p>
+    <ion-label>Phone:</ion-label>
+    <ion-input placeholder="Enter phone"></ion-input>
+      <input placeholder="Enter phone"></input>
+    <!-- <p></p>
+    <Button ion-button>SAVE/EDIT</Button> -->
   </ion-item>
 
   <p></p>
-  <ion-item enter-photo>
-    <ion-input placeholder="Upload profile photo">
-      <div>[ PHOTO IMAGE ] <Button ion-button>ADD/CHANGE PHOTO</Button></div>
-    </ion-input>
-  </ion-item>
-  <p></p>
-
   <ion-item enter-bio>
     <ion-label>Bio:</ion-label>
+    <p></p>
     <ion-textarea placeholder="Enter short bio.  Include brief work experience and tell us a little about yourself."></ion-textarea> 
       <textarea rows="4" placeholder="Enter short bio"></textarea>
-    <Button ion-button>SAVE/EDIT</Button>
   </ion-item>
 
   <p></p>
@@ -48,8 +51,29 @@
         <ion-toggle slot="end"></ion-toggle>
       </ion-item>
     </ion-list>
-  </ion-item enter-positions>
+  </ion-item>
 
+  <p></p>
+  <ion-item last-minute>
+    <!-- Rounded switch -->
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round">
+        <ion-label>Available Last-Minute</ion-label>
+        <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle>
+      </span>
+    </label>
+  </ion-item>
+  
+  
+  <p></p>
+  <ion-item enter-photo>
+    <ion-input placeholder="Upload profile photo">
+      <div>[ PHOTO IMAGE ] <Button ion-button>ADD/CHANGE PHOTO</Button></div>
+    </ion-input>
+  </ion-item>
+  <p></p>
+  
   <p></p>
   <ion-item enter-certification>
     <ion-input placeholder="Upload profile photo">
@@ -58,6 +82,7 @@
   </ion-item>
   <p></p>
 
+  <Button ion-button>SAVE/EDIT PROFILE</Button>
   
   <div class-name=werkerFavs>
       <ul>
