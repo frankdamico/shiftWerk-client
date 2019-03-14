@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,16 +8,7 @@ import { AuthService } from '../auth.service';
 })
 export class HomePage {
   constructor(
-    private nativeStorage: NativeStorage,
-    private auth: AuthService,
+    private auth: AuthService
   ) {}
-  loginMessage = '';
-  infoMessage = '';
-  getInfo(): void {
-    this.nativeStorage.getItem('google_user')
-      .then(user => {
-        this.infoMessage = user.name + ' ' + user.email + ' ' + user.picture;
-      })
-      .catch(err => this.infoMessage = err);
-  }
+  infoMessage = 'Logged in!';
 }
