@@ -16,6 +16,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private auth: AuthService
   ) {
+    console.log('initializing');
     this.initializeApp();
   }
 
