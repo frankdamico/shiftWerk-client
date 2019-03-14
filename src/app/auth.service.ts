@@ -24,5 +24,13 @@ export class AuthService {
           picture: user.imageUrl
         });
       })
+      .catch(err => console.error(err));
+  }
+  isLoggedIn(): Promise<Boolean> {
+    return this.nativeStorage.getItem('google_user')
+      .then((user) => {
+        return !!user.name;
+      })
+      .catch((err) => false);
   }
 }
