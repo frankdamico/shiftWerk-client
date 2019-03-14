@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,16 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 })
 export class HomePage {
   constructor(
-    private googlePlus: GooglePlus,
-  ){}
+    private nativeStorage: NativeStorage,
+    private auth: AuthService,
+  ) {}
   loginMessage = '';
-  googleLogin() {
-    this.googlePlus.login({}).then(res => {console.log(res); this.loginMessage = res}).catch(err => {console.error(err); this.loginMessage = err});
+  infoMessage = '';
+  getInfo(): void {
+    this.nativeStorage.getItem('google_user')
+      .then(user => {
+        this.infoMessage = user.name + ' ' + user.email + ' ' + user.picture;
+      })
+      .catch(err => this.infoMessage = err);
   }
 }
