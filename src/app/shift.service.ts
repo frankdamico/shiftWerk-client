@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import data from 'mockDataShift.json';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,5 @@ import { Injectable } from '@angular/core';
 export class ShiftService {
 
   constructor() { }
+  allShifts: Array<any> = data;
 }

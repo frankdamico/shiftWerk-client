@@ -5,18 +5,12 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Jobs for You</h3>
-  <div class-name=werkerJobs>
-    <ul>
-      <li>
-        <ion-card>
-          <a href>Job1 Date/Time | Position | Address</a>
-        </ion-card>
-      </li>
-      <li><a href>Job2 Date/Time |
-          Position | Address</a></li>
-      <li><a href>Job3 Date/Time |
-          Position | Address</a></li>
-    </ul>
-  </div>
+  <app-werker-home-main *ngIf="view == 'home'"></app-werker-home-main>
+  <app-werker-notifications *ngIf="view == 'notifications'"></app-werker-notifications>
+  <!-- <app-werker-profile *ngIf="view == 'profile'"></app-werker-profile> -->
+  <app-werker-history *ngIf="view == 'history'"></app-werker-history>
+  <app-werker-schedule *ngIf="view == 'schedule'"></app-werker-schedule>
 </ion-content>
+<ion-footer>
+  <app-user-navbar (NavClick)="onNavClick($event)"></app-user-navbar>
+</ion-footer>
