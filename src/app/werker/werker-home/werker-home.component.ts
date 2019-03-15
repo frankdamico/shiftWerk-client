@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ShiftService } from '../../shift.service';
 
 @Component({
-  selector: 'app-werker-home-main',
-  templateUrl: './werker-home-main.component.html',
-  styleUrls: ['./werker-home-main.component.scss'],
+  selector: 'app-werker-home',
+  templateUrl: './werker-home.component.html',
+  styleUrls: ['./werker-home.component.scss'],
 })
-export class WerkerHomeMainComponent implements OnInit {
+export class WerkerHomeComponent implements OnInit {
 
   constructor(
     private shiftService: ShiftService
