@@ -15,7 +15,7 @@ import { WerkerSettingsComponent } from '../werker-settings/werker-settings.comp
 import { WerkerScheduleComponent } from '../werker-schedule/werker-schedule.component';
 import { WerkerShiftSmallComponent } from '../werker-shift-small/werker-shift-small.component';
 import { WerkerShiftExpandedComponent } from '../werker-shift-expanded/werker-shift-expanded.component';
-import { UserNavbarComponent } from '../../user/user-navbar/user-navbar.component';
+import { WerkerNavbarComponent } from '../../werker/werker-navbar/werker-navbar.component';
 
 const routes: Routes = [
   {
@@ -42,7 +42,7 @@ const routes: Routes = [
     WerkerScheduleComponent,
     WerkerShiftSmallComponent,
     WerkerShiftExpandedComponent,
-    UserNavbarComponent
+    WerkerNavbarComponent
   ]
 })
 export class WerkerHomePageModule {}
