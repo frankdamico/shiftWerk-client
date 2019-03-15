@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
 import { ShiftService } from '../shift.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-werker',
@@ -10,15 +11,29 @@ import { ShiftService } from '../shift.service';
 export class WerkerPage implements OnInit {
 
   constructor(
-    private werkerService: WerkerService,
-    private shiftService: ShiftService
+    public werkerService: WerkerService,
+    public shiftService: ShiftService,
+    public loadingController: LoadingController
   ) { }
-  werker = {};
-  shifts = [];
+  werker: any;
+  shifts: any;
   view = 'home';
+  async getShifts() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.shiftService.getAllShifts()
+      .subscribe(res => {
+        console.log(res);
+        this.shifts = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
   ngOnInit() {
     this.werker = this.werkerService.getWerkerById(0);
-    this.shifts = this.shiftService.allShifts;
+    this.getShifts();
   }
 
   /** @method onNavClick
