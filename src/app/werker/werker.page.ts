@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
+import { ShiftService } from '../shift.service';
 
 @Component({
   selector: 'app-werker',
@@ -9,12 +10,15 @@ import { WerkerService } from 'src/app/werker.service';
 export class WerkerPage implements OnInit {
 
   constructor(
-    private werkerService: WerkerService
+    private werkerService: WerkerService,
+    private shiftService: ShiftService
   ) { }
   werker = {};
+  shifts = [];
   view = 'home';
   ngOnInit() {
     this.werker = this.werkerService.getWerkerById(0);
+    this.shifts = this.shiftService.allShifts;
   }
 
   /** @method onNavClick

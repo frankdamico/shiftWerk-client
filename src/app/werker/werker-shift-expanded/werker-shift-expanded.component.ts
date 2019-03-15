@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-werker-shift-expanded',
@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class WerkerShiftExpandedComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit() {}
+  @Input() shift: object;
+  ngOnInit() {
+    console.log(this.shift);
+  }
 
 }

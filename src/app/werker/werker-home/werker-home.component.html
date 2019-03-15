@@ -1,3 +1,9 @@
-<p>
-  werker-home-main works!
-</p>
+<ion-infinite-scroll>
+  <ion-infinite-scroll-content>
+    <ion-list>
+      <ion-item *ngFor="let shift of shifts">
+        <app-werker-shift-expanded [shift]="shift"></app-werker-shift-expanded>
+      </ion-item>
+    </ion-list>
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
