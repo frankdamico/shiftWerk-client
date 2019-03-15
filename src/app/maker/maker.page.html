@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content padding>
+  <app-maker-home [shifts]="shifts" *ngIf="view == 'home'"></app-maker-home>
+  <app-maker-unfilled-shifts [shifts]="shifts" *ngIf="view == 'home'"></app-maker-unfilled-shifts>
+  <app-maker-home [shifts]="shifts" *ngIf="view == 'home'"></app-maker-pending>
+
   <h3>Werkers for You</h3>
   <ul>
     <li>
