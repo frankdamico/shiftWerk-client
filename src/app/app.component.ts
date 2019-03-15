@@ -16,15 +16,16 @@ export class AppComponent {
     private statusBar: StatusBar,
     private auth: AuthService
   ) {
+    console.log('initializing');
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      return this.auth.login();
-    })
-    .then(() => {
-      console.log('success');
+    //   return this.auth.login();
+    // })
+    // .then(() => {
+      // console.log('success');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     }).catch(err => {
