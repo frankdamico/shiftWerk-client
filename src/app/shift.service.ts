@@ -18,13 +18,20 @@ export class ShiftService {
     private http: HttpClient
   ) { }
   /**
-   * @todo make network request for shifts from DB
-   * @todo change type signature to Array<Shift>
+   * @deprecated
    */
   allShifts: Array<any> = data;
-  private extractData(res: Response) {
+  /**
+   * @method extractData
+   * returns either response or empty object in case of no response
+   */
+  private extractData(res: Response): Response | object {
     return res || {};
   }
+  /**
+   * @method getAllShifts
+   * gets shifts from server, returning observable
+   */
   getAllShifts(): Observable<any> {
     return this.http.get(`${serverUrl}/shifts`, httpOptions).pipe(
       map(this.extractData),
