@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <app-werker-home *ngIf="view == 'home'"></app-werker-home>
+  <app-werker-home [shifts]="shifts" *ngIf="view == 'home'"></app-werker-home>
   <app-werker-notifications *ngIf="view == 'notifications'"></app-werker-notifications>
   <!-- <app-werker-profile *ngIf="view == 'profile'"></app-werker-profile> -->
   <app-werker-history *ngIf="view == 'history'"></app-werker-history>

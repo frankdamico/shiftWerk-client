@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ShiftService } from '../../shift.service';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-werker-home',
@@ -9,11 +8,10 @@ import { ShiftService } from '../../shift.service';
 export class WerkerHomeComponent implements OnInit {
 
   constructor(
-    private shiftService: ShiftService
   ) { }
-  shiftList: Array<any> = [];
+  @Input() shifts: Array<any>;
   ngOnInit() {
-    this.shiftList = this.shiftService.allShifts;
+    console.log(this.shifts);
   }
 
 }
