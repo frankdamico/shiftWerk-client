@@ -5,12 +5,12 @@
 </ion-header>
 
 <ion-content padding>
-  <app-werker-home-main *ngIf="view == 'home'"></app-werker-home-main>
+  <app-werker-home *ngIf="view == 'home'"></app-werker-home>
   <app-werker-notifications *ngIf="view == 'notifications'"></app-werker-notifications>
   <!-- <app-werker-profile *ngIf="view == 'profile'"></app-werker-profile> -->
   <app-werker-history *ngIf="view == 'history'"></app-werker-history>
   <app-werker-schedule *ngIf="view == 'schedule'"></app-werker-schedule>
 </ion-content>
 <ion-footer>
-  <app-user-navbar (NavClick)="onNavClick($event)"></app-user-navbar>
+  <app-werker-navbar (NavClick)="onNavClick($event)"></app-werker-navbar>
 </ion-footer>
