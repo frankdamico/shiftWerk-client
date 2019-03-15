@@ -11,7 +11,6 @@ export class WerkerHomeComponent implements OnInit {
   ) { }
   @Input() shifts: Array<any>;
   ngOnInit() {
-    console.log(this.shifts);
   }
 
 }
