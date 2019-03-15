@@ -18,6 +18,10 @@ export class WerkerPage implements OnInit {
   werker: any;
   shifts: any;
   view = 'home';
+  /**
+   * @method getShifts
+   * subscribes to {@link shiftService#getAllShifts}
+   */
   async getShifts() {
     const loading = await this.loadingController.create();
     await loading.present();
