@@ -16,7 +16,15 @@ export class WerkerHomePage implements OnInit {
   ngOnInit() {
     this.werker = this.werkerService.getWerkerById(0);
   }
-  onNavClick(view) {
+
+  /** @method onNavClick
+   * event listener passed to nav bar
+   * reassigns view to given value
+   * @todo establish possible values of view
+   *
+   * @param view - target view
+   */
+  onNavClick(view: string) {
     console.log(view);
     this.view = view;
   }
