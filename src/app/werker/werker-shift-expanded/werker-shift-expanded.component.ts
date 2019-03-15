@@ -10,7 +10,6 @@ export class WerkerShiftExpandedComponent implements OnInit {
   constructor() { }
   @Input() shift: object;
   ngOnInit() {
-    console.log(this.shift);
   }
 
 }
