@@ -1,0 +1,17 @@
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-werker-home',
+  templateUrl: './werker-home.component.html',
+  styleUrls: ['./werker-home.component.scss'],
+})
+export class WerkerHomeComponent implements OnInit {
+
+  constructor(
+  ) { }
+  @Input() shifts: Array<any>;
+  ngOnInit() {
+    console.log(this.shifts);
+  }
+
+}

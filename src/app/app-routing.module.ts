@@ -7,8 +7,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'new-user', loadChildren: './new-user/new-user.module#NewUserPageModule' },
   { path: 'page-not-found', loadChildren: './page-not-found/page-not-found.module#PageNotFoundPageModule' },
-  { path: 'werker-home', loadChildren: './werker/werker-home/werker-home.module#WerkerHomePageModule' },
-  { path: 'maker-home', loadChildren: './maker/maker-home/maker-home.module#MakerHomePageModule' },
+  { path: 'werker-home', loadChildren: './werker/werker.module#WerkerPageModule' },
+  { path: 'maker-home', loadChildren: './maker/maker.module#MakerPageModule' },
   { path: '**', redirectTo: 'page-not-found' },
 ];
 

@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MakerHomePage } from './maker-home.page';
+import { MakerPage } from './maker.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MakerHomePage
+    component: MakerPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MakerHomePage]
+  declarations: [MakerPage]
 })
-export class MakerHomePageModule {}
+export class MakerPageModule {}
