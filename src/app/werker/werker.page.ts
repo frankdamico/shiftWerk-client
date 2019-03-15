@@ -35,8 +35,27 @@ export class WerkerPage implements OnInit {
         loading.dismiss();
       });
   }
+  /**
+  * @method getWerker
+  * subscribes to {@link werkerService#getWerkerInfo}
+  */
+  async getWerker() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.werkerService.getWerkerInfo()
+      .subscribe(res => {
+        console.log(res);
+        // am i suppose to assign res to this.werker?
+        this.werker = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
   ngOnInit() {
-    this.werker = this.werkerService.getWerkerById(0);
+    this.werker = this.werkerService.getWerkerById(0); // double check do i still need this line since i built getWerker?
+    // this.getWerker();
     this.getShifts();
   }
 
