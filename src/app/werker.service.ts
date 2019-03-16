@@ -40,6 +40,7 @@ export class WerkerService {
   }
 
   getWerkerInfo(): Observable<any> {
+    console.log('woof');
     return this.http.get(`${serverUrl}/profile`, httpOptions)
       .pipe(catchError(err => throwError(err)))
   }

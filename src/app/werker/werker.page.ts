@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
+import data from 'mockDataShift.json';
 
 @Component({
   selector: 'app-werker',
@@ -28,7 +29,9 @@ export class WerkerPage implements OnInit {
     await this.shiftService.getAllShifts()
       .subscribe(res => {
         console.log(res);
-        this.shifts = res;
+        // uncomment out later to get this to work with real data
+        // this.shifts = res;
+        this.shifts = data;
         loading.dismiss();
       }, err => {
         console.error(err);
@@ -44,8 +47,8 @@ export class WerkerPage implements OnInit {
     await loading.present();
     await this.werkerService.getWerkerInfo()
       .subscribe(res => {
+        console.log('MEOW');
         console.log(res);
-        // am i suppose to assign res to this.werker?
         this.werker = res;
         loading.dismiss();
       }, err => {
@@ -54,8 +57,8 @@ export class WerkerPage implements OnInit {
       });
   }
   ngOnInit() {
-    this.werker = this.werkerService.getWerkerById(0); // double check do i still need this line since i built getWerker?
-    // this.getWerker();
+    // this.werker = this.werkerService.getWerkerById(0); // double check do i still need this line since i built getWerker?
+    this.getWerker();
     this.getShifts();
   }
 
