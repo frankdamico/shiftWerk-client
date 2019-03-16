@@ -40,7 +40,8 @@ export class WerkerService {
   }
 
   getWerkerInfo(): Observable<any> {
-    console.log('woof');
+    // I believe this is working, its hitting the end point but /profile endpoint
+    // needs to be completed to receive data;
     return this.http.get(`${serverUrl}/profile`, httpOptions)
       .pipe(catchError(err => throwError(err)))
   }
