@@ -35,7 +35,7 @@ const routes: Routes = [
     WerkerPage,
     WerkerHomeComponent,
     WerkerNotificationsComponent,
-    // WerkerProfileComponent,
+    WerkerProfileComponent,
     WerkerHistoryComponent,
     WerkerSearchComponent,
     WerkerSettingsComponent,
