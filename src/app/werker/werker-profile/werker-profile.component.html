@@ -1,25 +1,62 @@
 <p>werker-profile works!</p>
 <h3>Your Profile</h3>
+<ion-content>
 <form>
-  <ion-item enter-werker>
-    <ion-label>Name:</ion-label>
-    <ion-input placeholder="Enter first name"></ion-input><ion-input placeholder="and last name"></ion-input>
-    <p></p>
-    <ion-label>Email:</ion-label>
-    <ion-input placeholder="Enter email"></ion-input>
-    <p></p>
-    <ion-label>Phone:</ion-label>
-    <ion-input placeholder="Enter phone"></ion-input>
-    <!-- <p></p>
-    <Button>SAVE/EDIT</Button> -->
-  </ion-item>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Item 1</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Item 2</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Item 3</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Item 4</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Item 5</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
 
+  <ion-item enter-werker>
+    <ion-label>First Name:</ion-label>
+    <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="First name"></ion-input>
+      
+    <ion-label>Last Name:</ion-label>
+    <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Last name"></ion-input>
+
+    <ion-label>Email:</ion-label>
+    <ion-input [(ngModel)]="email" name="email"placeholder="Enter email"></ion-input>
+
+    <ion-label>Phone:</ion-label>
+    <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter phone"></ion-input>
+
+    <!-- <Button>SAVE/EDIT</Button> -->
+   </ion-item>
+  {{nameFirst}}
+  {{nameLast}}
+  {{email}}
+  {{phoneNumber}}
   <p></p>
   <ion-item enter-bio>
     <ion-label>Bio:</ion-label>
-    <p></p>
-    <ion-textarea placeholder="Enter short bio.  Include brief work experience and tell us a little about yourself."></ion-textarea> 
-      <textarea rows="4" placeholder="Enter short bio"></textarea>
+    <p></p><br>
+    <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea> 
+      <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-item>
 
   <p></p>
@@ -54,10 +91,11 @@
   <ion-item last-minute>
     <!-- Rounded switch -->
     <label class="switch">
-      <input type="checkbox">
+      <!-- <input type="checkbox"> -->
       <span class="slider round">
         <ion-label>Available Last-Minute</ion-label>
-        <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle>
+        <ion-toggle slot="end"></ion-toggle>
+        <!-- <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle> -->
       </span>
     </label>
   </ion-item>
@@ -79,7 +117,7 @@
   </ion-item>
   <p></p>
 
-  <ion-button>SAVE/EDIT PROFILE</ion-button>
+  <ion-button>SAVE CHANGES</ion-button>
   
   <div class-name=werkerFavs>
     <ul>
@@ -91,3 +129,4 @@
   </div>
 
 </form>
+</ion-content>

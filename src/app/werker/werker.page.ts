@@ -58,8 +58,9 @@ export class WerkerPage implements OnInit {
   }
   ngOnInit() {
     // double check do i still need this line since i built getWerker?
-    // this.werker = this.werkerService.getWerkerById(0);
-    this.getWerker();
+    this.werker = this.werkerService.getWerkerById(0);
+    console.log(this.werker);
+    // this.getWerker();
     this.getShifts();
   }
 
