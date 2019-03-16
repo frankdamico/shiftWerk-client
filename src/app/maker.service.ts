@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import data from 'mockDataMaker.json';
+import { makeBindingParser } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -7,20 +8,13 @@ import data from 'mockDataMaker.json';
 export class MakerService {
 
   constructor() { }
-  /**
-   * @todo make network request for makers from DB
-   * @todo change type signature to Array<Maker>
-   */
-  allMakers: Array<any> = data;
 
+  allMakers: Array<any> = data;
+  
   /** @method getMakerById
-   * gets maker from present data by id
-   * @todo make network request
-   * @todo return Promise<Maker>
-   *
-   * @param id - db-generated id
+   * gets Maker from database by id
    */
-  getMakerById(id: Number) {
-    return this.allMakers.find(maker => maker.id === id);
+  getMakerById(id: Number): Object {
+    return this.allMakers.find(maker => maker.id === id)
   }
 }
