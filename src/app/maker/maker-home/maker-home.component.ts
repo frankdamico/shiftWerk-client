@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-maker-home',
@@ -9,6 +9,7 @@ export class MakerHomeComponent implements OnInit {
 
   constructor() { }
 
+  @Input() shifts: Array<any>;
   ngOnInit() {}
 
 }
