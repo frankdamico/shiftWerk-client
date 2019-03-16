@@ -1,4 +1,16 @@
-<p>maker-search works!</p>
+<ion-searchbar (ionChange)="searchList($event)" debounce="750"></ion-searchbar>
+<ion-list>
+  <ion-item *ngFor="let position of positions">
+    {{ position }}
+  </ion-item>
+</ion-list>
+
+<!-- TODO: make this line work so we can have a matching icon -->
+<!-- <ion-button slot="end" (click)="searchList('search')" (ionInput)="searchList($event)"><ion-icon name="search" ></ion-icon></ion-button> -->
+
+
+
+<!-- <p>maker-search works!</p>
 <p>?!? append to maker-create-shift ?!?</p>
 
 -------------------------------------
@@ -33,7 +45,7 @@
   <p></p>
   <div class-name=makerFavs>
     <ul>
-      <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
+      v-- hrefs below - CHANGE to ionic or ang routerLink --v
       ---Should we forget about the above and 
       append the following to create shift? 
       as a list of favs followed by rando search?? 
@@ -48,6 +60,6 @@
         <li><a href>Werker5</a>  <button ion-button class-name="button-accept">INVITE</button></li>
         <li><a href>Werker6</a>  <button ion-button class-name="button-accept">INVITE</button></li>
       </ul>
-    </div>
+    </div> -->
 
 

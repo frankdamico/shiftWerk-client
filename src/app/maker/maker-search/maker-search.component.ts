@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-maker-search',
@@ -7,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MakerSearchComponent implements OnInit {
 
+  public searchTerm: string
   constructor() { }
-
+  
   ngOnInit() {}
 
+  /**
+   * @method searchList
+   * passes the search terms to the server service
+   */
+  searchList(event) {
+    // this.searchTerm = value;
+    console.log(event.detail.value);
+  }
 }
