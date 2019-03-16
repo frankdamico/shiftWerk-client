@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://localhost:4001';
+const serverUrl = 'http://localhost:4200';
 
 @Injectable({
   providedIn: 'root'
