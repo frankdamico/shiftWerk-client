@@ -5,7 +5,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   templateUrl: './maker-navbar.component.html',
   styleUrls: ['./maker-navbar.component.scss'],
 })
-export class WerkerNavbarComponent implements OnInit {
+export class MakerNavBarComponent implements OnInit {
 
   constructor() { }
   // @Output establishes event emitter to communicate with parent
