@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { GoogleAuthService } from 'ng-gapi';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,34 @@ export class AuthService {
   constructor(
     private googlePlus: GooglePlus,
     private nativeStorage: NativeStorage,
+    private googleAuth: GoogleAuthService,
+    private storage: Storage
   ) {}
+  public static STORAGE_KEY: string = 'accessToken';
+  private user;
   loggedIn: Boolean = false;
   _webClientId: String = '347712232584-9dv95ud3ilg9bk7vg8i0biqav62fh1q7.apps.googleusercontent.com';
+
+  public getToken(): Promise<string> {
+    return this.storage.get(AuthService.STORAGE_KEY);
+  }
+
+  public signIn(): void {
+    console.log('hi');
+    this.googleAuth.getAuth()
+      .subscribe((auth) => {
+        console.log(auth);
+        auth.signIn().then(res => {console.log(res); this.signInSuccess(res)}).catch(err => console.error(err));
+      });
+  }
+
+  signInSuccess(res) {
+    this.user = res;
+    console.log(res.getAuthResponse().access_token);
+    this.storage.set(
+      AuthService.STORAGE_KEY, res.getAuthResponse().access_token
+    );
+  }
 
   /** @method _onSuccessfulLogin
    * method to be called by {@link AuthService#login} on success

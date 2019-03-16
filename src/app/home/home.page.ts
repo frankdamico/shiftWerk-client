@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -10,5 +10,7 @@ export class HomePage {
   constructor(
     private auth: AuthService
   ) {}
-  infoMessage = 'Logged in!';
+  authorize() {
+    this.auth.signIn();
+  }
 }

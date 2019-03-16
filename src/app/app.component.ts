@@ -21,10 +21,9 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-    //   return this.auth.login();
+    this.platform.ready()
     // })
-    // .then(() => {
+    .then(() => {
       // console.log('success');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
