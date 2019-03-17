@@ -15,7 +15,10 @@ export class WerkerProfileComponent implements OnInit {
   public phoneNumber:number;
 
   constructor() { }
-
+  
+  onSave() {
+    console.log("I'm saving");
+  }
   ngOnInit() {}
 
 }

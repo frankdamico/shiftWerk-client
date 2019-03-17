@@ -54,8 +54,8 @@
   <p></p>
   <ion-item enter-bio>
     <ion-label>Bio:</ion-label>
-    <p></p><br>
-    <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea> 
+  <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+    <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
       <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-item>
 
@@ -117,7 +117,7 @@
   </ion-item>
   <p></p>
 
-  <ion-button>SAVE CHANGES</ion-button>
+  <ion-button (click)="onSave()">SAVE CHANGES</ion-button>
   
   <div class-name=werkerFavs>
     <ul>
