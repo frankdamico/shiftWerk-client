@@ -17,9 +17,11 @@ export class WerkerProfileComponent implements OnInit {
 
   constructor() { }
   
-  onChange(value) {
-    console.log(value);
-
+  werkerPosition(position) {
+    console.log(this.positions);
+    let index = this.positions.indexOf(position);
+    index >= 0 ? this.positions.splice(index, 1) : this.positions.push(position);
+    console.log(this.positions);
   }
   onSave() {
     console.log("I'm saving");
