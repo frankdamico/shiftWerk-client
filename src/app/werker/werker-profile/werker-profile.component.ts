@@ -18,14 +18,12 @@ export class WerkerProfileComponent implements OnInit {
 
   constructor() { }
   
-  toggleAvail() {
-    console.log('im available!');
+  lastMinAvail() {
+    this.availability = !this.availability;
   }
   werkerPosition(position) {
-    console.log(position);
     const index = this.positions.indexOf(position);
     index >= 0 ? this.positions.splice(index, 1) : this.positions.push(position);
-    console.log(this.positions);
   }
   onSave() {
     console.log("I'm saving");
