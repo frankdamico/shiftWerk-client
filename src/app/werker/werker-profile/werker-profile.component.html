@@ -68,7 +68,7 @@
         </ion-item>
         <ion-item>
           <ion-button>Server</ion-button>
-          <ion-toggle (click)="werkerPosition('Server')" slot="end"></ion-toggle>
+          <ion-toggle (click)="werkerPosition($event)" slot="end"></ion-toggle>
         </ion-item>
       <ion-item>
           <ion-button>Expeditor</ion-button>
@@ -88,7 +88,7 @@
       <!-- <input type="checkbox"> -->
       <span class="slider round">
         <ion-label>Available Last-Minute</ion-label>
-        <ion-toggle slot="end"></ion-toggle>
+        <ion-toggle (click)="toggleAvail()" slot="end"></ion-toggle>
         <!-- <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle> -->
       </span>
     </label>

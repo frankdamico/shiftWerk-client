@@ -13,13 +13,17 @@ export class WerkerProfileComponent implements OnInit {
   public nameLast:string;
   public email:string;
   public phoneNumber:number;
-  public positions: string[] = []
+  public positions:string[] = []
+  public availability:boolean = false;
 
   constructor() { }
   
+  toggleAvail() {
+    console.log('im available!');
+  }
   werkerPosition(position) {
-    console.log(this.positions);
-    let index = this.positions.indexOf(position);
+    console.log(position);
+    const index = this.positions.indexOf(position);
     index >= 0 ? this.positions.splice(index, 1) : this.positions.push(position);
     console.log(this.positions);
   }
