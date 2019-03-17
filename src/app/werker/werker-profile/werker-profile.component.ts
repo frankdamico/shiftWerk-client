@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { WerkerService } from 'src/app/werker.service';
 
 @Component({
   selector: 'app-werker-profile',
@@ -17,9 +18,12 @@ export class WerkerProfileComponent implements OnInit {
   public positions:string[] = [];
   public availability:boolean = false;
   public bio:string;
+  public url_photo:string;
+  public certifications: string[] = [];
 
   constructor(
-    public toastController: ToastController
+    public toastController: ToastController,
+    public werkerService: WerkerService
   ) { }
   
   async presentToast() {
@@ -40,7 +44,23 @@ export class WerkerProfileComponent implements OnInit {
     index === -1 ? this.positions.push(position) : this.positions.splice(index, 1);
   }
   saveSettings() {
-    console.log("I'm saving");
+    const settings = {
+      nameFirst: this.nameFirst,
+      nameLast: this.nameLast, 
+      email: this.email,
+      url_photo: this.url_photo,
+      bio: this.bio,
+      phoneNumber: this.phoneNumber,
+      availability: this.availability,
+      certifications: this.certifications,
+      positions: this.positions,
+    }
+    this.werkerService.updateProfileSettings(settings)
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.error(err);
+      });
     this.presentToast();
   }
   ngOnInit() {}
