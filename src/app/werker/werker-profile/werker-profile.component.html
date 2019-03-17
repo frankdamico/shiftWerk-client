@@ -65,24 +65,18 @@
       <ion-item>
         <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
         Select position(s):
-          <ion-button>Bartender</ion-button>
-          <ion-label></ion-label>
-          <ion-toggle slot="end"></ion-toggle>
         </ion-item>
         <ion-item>
-        <ion-button>Server</ion-button>
-        <ion-label></ion-label>
-        <ion-toggle slot="end"></ion-toggle>
-      </ion-item>
+          <ion-button>Server</ion-button>
+          <ion-toggle (click)="onChange('Server')" slot="end"></ion-toggle>
+        </ion-item>
       <ion-item>
           <ion-button>Expeditor</ion-button>
-        <ion-label></ion-label>
-        <ion-toggle slot="end"></ion-toggle>
+          <ion-toggle (click)="onChange('Expeditor')"slot="end"></ion-toggle>
       </ion-item>
       <ion-item>
-          <ion-button>Expeditor</ion-button>
-        <ion-label>Dishwasher</ion-label>
-        <ion-toggle slot="end"></ion-toggle>
+          <ion-button>Busser</ion-button>
+      <ion-toggle (click)="onChange('Busser')"slot="end"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-item>

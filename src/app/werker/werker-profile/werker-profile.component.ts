@@ -13,9 +13,14 @@ export class WerkerProfileComponent implements OnInit {
   public nameLast:string;
   public email:string;
   public phoneNumber:number;
+  public positions: string[] = []
 
   constructor() { }
   
+  onChange(value) {
+    console.log(value);
+
+  }
   onSave() {
     console.log("I'm saving");
   }
