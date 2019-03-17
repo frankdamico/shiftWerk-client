@@ -32,51 +32,63 @@
     </ion-row>
   </ion-grid> -->
 
-  <ion-item enter-werker>
-    <ion-label>First Name:</ion-label>
-    <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="First name"></ion-input>
-      
-    <ion-label>Last Name:</ion-label>
-    <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Last name"></ion-input>
-
-    <ion-label>Email:</ion-label>
-    <ion-input [(ngModel)]="email" name="email"placeholder="Enter email"></ion-input>
-
-    <ion-label>Phone:</ion-label>
-    <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter phone"></ion-input>
-
+  <!-- <ion-item enter-werker> -->
+    <ion-item>
+      <ion-label>First Name:</ion-label>
+      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="First name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name:</ion-label>
+      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Last name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email:</ion-label>
+      <ion-input [(ngModel)]="email" name="email"placeholder="Enter email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone:</ion-label>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter phone"></ion-input>
+    </ion-item>
     <!-- <Button>SAVE/EDIT</Button> -->
-   </ion-item>
+   <!-- </ion-item> -->
   {{nameFirst}}
   {{nameLast}}
   {{email}}
   {{phoneNumber}}
+  {{bio}}
   <p></p>
   <ion-item enter-bio>
     <ion-label>Bio:</ion-label>
-  <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Enter more information here..."></ion-textarea>
     <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
       <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-item>
 
-  <p></p>
   <ion-item enter-positions>
     <ion-list>
       <ion-item>
         <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
         Select position(s):
-        </ion-item>
-        <ion-item>
-          <ion-button>Server</ion-button>
-          <ion-toggle (click)="werkerPosition($event)" slot="end"></ion-toggle>
-        </ion-item>
-      <ion-item>
-          <ion-button>Expeditor</ion-button>
-          <ion-toggle (click)="werkerPosition('Expeditor')"slot="end"></ion-toggle>
       </ion-item>
       <ion-item>
-          <ion-button>Busser</ion-button>
-      <ion-toggle (click)="werkerPosition('Busser')"slot="end"></ion-toggle>
+        <ion-button>Server</ion-button>
+        <ion-toggle (click)="werkerPosition('Server')" slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-button>Expeditor</ion-button>
+        <ion-toggle (click)="werkerPosition('Expeditor')"slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-button>Busser</ion-button>
+        <ion-toggle (click)="werkerPosition('Busser')"slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-button>Hostess</ion-button>
+        <ion-toggle (click)="werkerPosition('Hostess')" slot="end"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-button>Bartender</ion-button>
+        <ion-toggle (click)="werkerPosition('Bartender')" slot="end"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-item>
@@ -95,23 +107,16 @@
   </ion-item>
   
   
-  <p></p>
-  <ion-item enter-photo>
-    <ion-input placeholder="Upload profile photo">
-      <div>[ PHOTO IMAGE ] <ion-button>ADD/CHANGE PHOTO</ion-button></div>
-    </ion-input>
-  </ion-item>
-  <p></p>
-  
-  <p></p>
-  <ion-item enter-certification>
-    <ion-input placeholder="Upload profile photo">
-      <div>[ CERTIFICATION IMAGE ] <ion-button>ADD/UPDATE Certification</ion-button></div>
-    </ion-input>
-  </ion-item>
-  <p></p>
 
-  <ion-button (click)="onSave()">SAVE CHANGES</ion-button>
+  <ion-item enter-photo>
+      <div>[ PHOTO IMAGE ] <ion-button>ADD/CHANGE PHOTO</ion-button></div>
+  </ion-item>
+  <ion-item enter-certification>
+      <div>[ CERTIFICATION IMAGE ] <ion-button>ADD/UPDATE Certification</ion-button></div>
+  </ion-item>
+
+
+  <ion-button (click)="saveSettings()">SAVE CHANGES</ion-button>
   
   <div class-name=werkerFavs>
     <ul>
