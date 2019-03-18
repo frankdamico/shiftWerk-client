@@ -20,7 +20,6 @@ import { MakerScheduleComponent } from './maker-schedule/maker-schedule.componen
 import { MakerSearchComponent } from './maker-search/maker-search.component';
 
 
-
 const routes: Routes = [
   {
     path: '',

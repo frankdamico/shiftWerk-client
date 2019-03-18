@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 import data from 'mockDataMaker.json';
 import { makeBindingParser } from '@angular/compiler';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 const serverUrl = "http://35.185.77.220:4000";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class MakerService {
 
-  constructor(
-    private http: HttpClient,
-  ) { }
-
+  constructor(private http: HttpClient) { }
+  /**
+   * @todo make network request for makers from DB
+   * @todo change type signature to Array<Maker>
+   */
   allMakers: Array<any> = data;
   werker: any;
 
@@ -40,4 +45,9 @@ export class MakerService {
         catchError(err => throwError(err))
       )
   }
+  getMakerInfo(): Observable<any> {
+    return this.http.get(`${serverUrl}/profile`, httpOptions)
+      .pipe(catchError(err => throwError(err)));
+  }
 }
+
