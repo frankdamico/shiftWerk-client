@@ -30,8 +30,8 @@ export class WerkerPage implements OnInit {
       .subscribe(res => {
         console.log(res);
         // uncomment out later to get this to work with real data
-        // this.shifts = res;
-        this.shifts = data;
+        this.shifts = res;
+        // this.shifts = data;
         loading.dismiss();
       }, err => {
         console.error(err);
