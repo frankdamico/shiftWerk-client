@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { GoogleAuthService } from 'ng-gapi';
 import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError, Subscription, forkJoin } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Werker, Maker } from './types';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://localhost:4001';
+const serverUrl = 'http://35.185.77.220:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -25,29 +23,25 @@ export class AuthService {
   public static STORAGE_KEY = 'accessToken';
   public static STORAGE_ID = 'idToken';
   public static USER = 'user';
-  private user: Werker | Maker;
+  public user: Werker | Maker;
   _webClientId: String = '347712232584-9dv95ud3ilg9bk7vg8i0biqav62fh1q7.apps.googleusercontent.com';
-
-  public getToken(): Promise<string> {
-    return this.storage.get(AuthService.STORAGE_KEY);
-  }
 
   public signIn(role: string): void {
     console.log('hi');
     this.googleAuth.getAuth()
-      .subscribe((auth) => {
-        auth.signIn().then(res => this.signInSuccess(res, role)).catch(err => console.error(err));
-      });
+    .subscribe((auth) => {
+      auth.signIn().then(res => this.signInSuccess(res, role)).catch(err => console.error(err));
+    });
   }
 
-  signInSuccess(res, role: string): Promise<any> {
+  private signInSuccess(res, role: string): Subscription {
     const token = res.getAuthResponse();
-    if (role === 'Maker') {
+    if (role === 'maker') {
       this.user = {
         type: 'Maker',
         name: res.w3.ig,
         email: res.w3.U3,
-        URL_photo: res.w3.Paa,
+        url_photo: res.w3.Paa,
       };
     } else {
       this.user = {
@@ -55,23 +49,60 @@ export class AuthService {
         name_first: res.w3.ofa,
         name_last: res.w3.wea,
         email: res.w3.U3,
-        URL_photo: res.w3.Paa,
+        url_photo: res.w3.Paa,
+        bio: '',
+        certifications: [],
+        positions: [],
+        shifts: []
       };
     }
     console.log(res);
-    return Promise.all([this.storage.set(
-      AuthService.STORAGE_KEY, res.getAuthResponse().access_token,
-    ), this.storage.set(
-      AuthService.STORAGE_ID, res.getAuthResponse().id_token,
-    ), this.storage.set(
-      AuthService.USER, this.user
-    )])
-    .then(() => this.saveLogin(res.getAuthResponse().id_token))
-    .catch(err => console.error(err));
+    return forkJoin(
+      this.storage.set(
+        AuthService.STORAGE_KEY, res.getAuthResponse().access_token,
+      ), this.storage.set(
+        AuthService.STORAGE_ID, res.getAuthResponse().id_token,
+      ), this.storage.set(
+        AuthService.USER, this.user
+      ))
+      .subscribe(() => this.saveLogin(role));
+      // .catch(err => console.error(err));
+      }
+
+  public saveLogin(role: string): Subscription {
+    const endpoint = role === 'werker' ? 'werkers' : 'makers';
+    return this.http.put(`${serverUrl}/${endpoint}`, this.user, httpOptions)
+    .pipe(catchError(err => throwError(err)))
+    .subscribe(res => {
+      console.log(res);
+      this.updateLocalUserInfo(res);
+    });
   }
 
-  saveLogin(id_token): Observable<any> {
-    return this.http.put(`${serverUrl}/login`, id_token, httpOptions)
+  public getLocalUserInfo(): Promise<Werker | Maker> {
+    return this.storage.get('USER');
+  }
+
+  public getToken(): Promise<string> {
+    return this.storage.get(AuthService.STORAGE_KEY);
+  }
+
+  public getServerUserInfo(localUser: Werker | Maker): Observable<any> {
+    const endpoint =  localUser.type === 'werker' ? 'werkers' : 'makers';
+    return this.http.get(`${serverUrl}/${endpoint}/${localUser.id}`, httpOptions)
+    .pipe(catchError(err => throwError(err)));
+  }
+
+  public async updateLocalUserInfo(values: Object): Promise<Werker | Maker> {
+    const user = await this.storage.get('USER');
+    this.user = user;
+    return this.storage.set(
+      AuthService.USER, Object.assign(user, values)
+      );
+  }
+
+  public updateServerUserInfo(user: Werker | Maker, values: Object): Observable<any> {
+    return this.http.patch(`${serverUrl}/settings`, Object.assign(user, values), httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -79,4 +110,11 @@ export class AuthService {
     return this.storage.get('STORAGE_ID')
       .then(token => !!token);
   }
+
+  public setUserInfo(role: string): Observable<any> {
+    return role === 'werker'
+      ? this.http.get(`${serverUrl}/werkers/1`)
+      : this.http.get(`${serverUrl}/makers/1`);
+  }
+
 }

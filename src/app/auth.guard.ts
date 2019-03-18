@@ -31,12 +31,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (isLogged) {
           return true;
         }
-        this.router.navigate(['new-user']);
+        this.router.navigate(['home']);
         return false;
       })
       .catch(err => {
         console.error(err);
-        this.router.navigate(['new-user']);
+        this.router.navigate(['home']);
         return false;
       });
   }
