@@ -10,7 +10,6 @@ const serverUrl = "http://35.185.77.220:4000";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-
 @Injectable({
   providedIn: 'root'
 })
