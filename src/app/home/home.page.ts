@@ -10,7 +10,7 @@ export class HomePage {
   constructor(
     private auth: AuthService
   ) {}
-  authorize() {
-    this.auth.signIn();
+  authorize(role: string) {
+    this.auth.signIn(role);
   }
 }
