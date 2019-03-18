@@ -5,8 +5,8 @@
   <div class-name="shift-description"><p>{{shift.description}}</p></div>
   <div class-name="invite-position">Looking for: Bartender</div>
   <p></p>
-  <ion-button class-name="button-accept">ACCEPT</ion-button>
-  <ion-button class-name="button-decline">DECLINE</ion-button>
+  <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">ACCEPT</ion-button>
+  <ion-button (click)="acceptOrDecline('declined')" class-name="button-decline">DECLINE</ion-button>
   <p></p>
   <div class-name="shift_maker-name">Posted by: Shift M. Aker</div>
   <p></p>    

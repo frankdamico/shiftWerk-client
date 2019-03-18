@@ -35,14 +35,20 @@ export class WerkerService {
     return res || {};
   }
 
+
   getWerkerById(id: Number): Object {
     return this.allWerkers.find(werker => werker.id === id);
+  }
+
+  updateProfileSettings(profileSettings): Observable<any> {
+    return this.http.patch(`${serverUrl}/settings`, profileSettings, httpOptions)
+    .pipe(catchError(err => throwError(err)));
   }
 
   getWerkerInfo(): Observable<any> {
     // I believe this is working, its hitting the end point but /profile endpoint
     // needs to be completed to receive data;
     return this.http.get(`${serverUrl}/profile`, httpOptions)
-      .pipe(catchError(err => throwError(err)))
+      .pipe(catchError(err => throwError(err)));
   }
 }
