@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import data from 'mockDataMaker.json';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { makeBindingParser } from '@angular/compiler';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+
+const serverUrl = "http://35.185.77.220:4000";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const serverUrl = 'http://localhost:4001';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,22 +22,28 @@ export class MakerService {
    * @todo change type signature to Array<Maker>
    */
   allMakers: Array<any> = data;
+  werker: any;
 
   /** @method getMakerById
-   * gets maker from present data by id
-   * @todo make network request
-   * @todo return Promise<Maker>
-   *
-   * @param id - db-generated id
+   * gets Maker from database by id
    */
+
   private extractData(res: Response): Response | object {
     return res || {};
   }
-  // private getMakerById(res: Response): Response | object {
-  //   return res || {};
-  // }
+
   getMakerById(id: Number): Object {
-    return this.allMakers.find(maker => maker.id === id);
+    return this.allMakers.find(maker => maker.id === id)
+  }
+  getWerkers(event): Observable < any > {
+    let params = new HttpParams();
+    console.log(event);
+    params = params.append('value', event);
+    return this.http.get(`${serverUrl}/werkers/search/${event}`, { params })
+      .pipe(
+        map(this.extractData),
+        catchError(err => throwError(err))
+      )
   }
   getMakerInfo(): Observable<any> {
     return this.http.get(`${serverUrl}/profile`, httpOptions)
