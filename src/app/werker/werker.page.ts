@@ -47,7 +47,6 @@ export class WerkerPage implements OnInit {
     await loading.present();
     await this.werkerService.getWerkerInfo()
       .subscribe(res => {
-        console.log('MEOW');
         console.log(res);
         this.werker = res;
         loading.dismiss();
