@@ -66,12 +66,36 @@ export class AuthService {
     ), this.storage.set(
       AuthService.USER, this.user
     )])
-    .then(() => this.saveLogin(res.getAuthResponse().id_token))
     .catch(err => console.error(err));
   }
 
-  saveLogin(id_token): Observable<any> {
-    return this.http.put(`${serverUrl}/login`, id_token, httpOptions)
+  saveLogin(): Observable<any> {
+    return this.http.put(`${serverUrl}/login`, this.user, httpOptions)
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  getLocalUserInfo(): Promise<Werker | Maker> {
+    return this.storage.get('USER');
+  }
+
+  getServerUserInfo(localUser: Werker | Maker): Observable<any> {
+    const endpoint =  localUser.type === 'Werker' ? 'werkers' : 'makers';
+    return this.http.get(`${serverUrl}/${endpoint}/${localUser.id}`, httpOptions)
+    .pipe(catchError(err => throwError(err)));
+  }
+
+  updateLocalUserInfo(values: Object): Promise<Werker | Maker> {
+    return this.storage.get('USER')
+      .then((user) => {
+        this.user = user;
+        return this.storage.set(
+          AuthService.USER, Object.assign(user, values)
+        );
+      });
+  }
+
+  updateServerUserInfo(user: Werker | Maker, values: Object): Observable<any> {
+    return this.http.patch(`${serverUrl}/settings`, Object.assign(user, values), httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -79,4 +103,5 @@ export class AuthService {
     return this.storage.get('STORAGE_ID')
       .then(token => !!token);
   }
+
 }
