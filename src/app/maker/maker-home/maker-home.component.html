@@ -1,61 +1,48 @@
-<p>maker-home works!</p>
-
-<div>
+<!-- <p>maker-home works!</p> -->
+<ion-content>
   <ion-infinite-scroll>
     <ion-infinite-scroll-content>
-      <div class-name=makerShifts-unfilled>
-        <h3>Shifts Unfilled</h3>
-        <ul>
-          <ion-item *ngFor="let shift of makerShifts-unfilled">
-            <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts>
-              <ion-card>  
-                <li><a href><h4>Easter Brunch</h4><p></p>
-                  4/6 filled | 04/21/10:0A - 12:00P</a></li><p></p>
-              </ion-card>
-              <ion-card>
-                <li><a href>Bachelorette Party<p></p>
-                  2/5 filled | 04/29 10:00P - 2:00A</a></li>    
-              </ion-card>
-            </ion-item>
-        </ul>
-      </div>
+
+        <ion-label><b>SHIFTS UNFILLED</b></ion-label>
+        <ion-list>
+          <!-- <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts> -->
+          <!-- <ion-item *ngFor="let shift of shifts"> -->
+            <ion-card><a href><h5>Easter Brunch</h5>
+                4/6 filled | 04/21/10:0A - 12:00P</a>
+            </ion-card>
+            <ion-card><a href><h5>Bachelorette Party</h5>
+                2/5 filled | 04/29 10:00P - 2:00A</a>  
+            </ion-card>
+          <!-- </ion-item> -->
+        </ion-list>
+
     </ion-infinite-scroll-content>
 
     <ion-infinite-scroll-content>
-      <div class-name=makerShifts-pending>
-        <h3>Shifts Pending</h3>
-        <ion-list>
-          <ul>
-            <ion-card>
-              <ion-item *ngFor="let shift of shifts">
-                <li><a href><h4>Birthday Party</h4><p></p>
-                  6/6 filled | 04/30 2:00P - 5:00P</a></li>
-              </ion-item>
-            </ion-card>
-            <ion-card>
-              <li><a href><h4>Anniversary Event</h4><p></p>
-                5/5 filled | 04/30 7:00P - 10:00P</a></li>
-            </ion-card>
-        </ul>
-        </ion-list>
-      </div>
+      <!-- <div class-name=makerShifts-pending> -->
+        <ion-list><ion-label><b>SHIFTS PENDING</b></ion-label>
+            <!-- <ion-item *ngFor="let shift of shifts"> -->
+              <ion-card><a href><h5>Birthday Party</h5><p></p>
+                6/6 filled | 04/30 2:00P - 5:00P</a>
+              </ion-card>
+              <ion-card><a href><h5>Anniversary Event</h5><p></p>
+                5/5 filled | 04/30 7:00P - 10:00P</a>
+              </ion-card>
+            <!-- </ion-item> -->
+          </ion-list>
+      <!-- </div> -->
     </ion-infinite-scroll-content>
 
     <ion-infinite-scroll-content>
-      <div class-name=makerShifts-History>
-        <h3>Shifts History</h3>
-        <ion-list>
-          <ul>
-            <ion-item>
-              <ion-card>
-                <li><a href><h4>St. Joseph's Alter - Catering</h4><p></p>
-                  4/6 filled | 03/19 10:00A - 2:00P</a></li>
-              </ion-card>
-            </ion-item>
-          </ul>
+      <!-- <div class-name=makerShifts-History> -->
+        <ion-list><ion-label><b>SHIFTS HISTORY</b></ion-label>
+          <ion-card><a href><h5>St. Joseph's Alter - Catering</h5><p></p>
+              4/6 filled | 03/19 10:00A - 2:00P</a>
+          </ion-card>
         </ion-list>
-      </div>
+      <!-- </div> -->
     </ion-infinite-scroll-content>
+
   </ion-infinite-scroll>
-</div>
+</ion-content>
   

@@ -6,6 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MakerPage } from './maker.page';
+import { MakerHomeComponent } from './maker-home/maker-home.component';
+
+import { MakerUnfilledShiftsComponent } from './maker-unfilled-shifts/maker-unfilled-shifts.component';
+import { MakerPendingShiftsComponent } from './maker-pending-shifts/maker-pending-shifts.component';
+
+import { MakerNavbarComponent } from './maker-navbar/maker-navbar.component';
 
 const routes: Routes = [
   {
@@ -21,6 +27,14 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MakerPage]
+  declarations: [
+    MakerPage,
+    MakerHomeComponent,
+
+    MakerUnfilledShiftsComponent,
+    MakerPendingShiftsComponent,
+
+    MakerNavbarComponent
+  ]
 })
 export class MakerPageModule {}
