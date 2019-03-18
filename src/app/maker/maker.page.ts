@@ -16,6 +16,7 @@ export class MakerPage implements OnInit {
     public loadingController: LoadingController
   ) { }
   maker: any;
+  searchRes: any;
   shifts: any;
   view = 'home';
   /**
@@ -40,7 +41,6 @@ export class MakerPage implements OnInit {
     this.maker = this.makerService.getMakerById(0);
     this.getShifts();
   }
-
 
   onNavClick(view: string) {
     console.log(view);

@@ -1,8 +1,9 @@
-<ion-list>
+<ion-searchbar (ionChange)="searchFunc($event)" (click)="onClick('search')"  debounce="750"></ion-searchbar>
+<!-- <ion-list>
   <ion-item *ngFor="let werker of werkers">
     {{ werker }}
   </ion-item>
-</ion-list>
+</ion-list> -->
 
 <!-- TODO: make this line work so we can have a matching icon -->
 <!-- <ion-button slot="end" (click)="searchList('search')" (ionInput)="searchList($event)"><ion-icon name="search" ></ion-icon></ion-button> -->

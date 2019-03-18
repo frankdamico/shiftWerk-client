@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Welcome Home!</ion-title>
-    <app-maker-search slot="end" (SearchClick)="searchList"></app-maker-search>
+    <app-maker-search-bar slot="end" (SearchClick)="searchList"></app-maker-search-bar>
   </ion-toolbar>
 </ion-header>
 
@@ -11,6 +11,7 @@
   <app-maker-profile *ngIf="view === 'profile'"></app-maker-profile>
   <app-maker-history *ngIf="view === 'history'"></app-maker-history>
   <app-maker-schedule *ngIf="view === schedule"></app-maker-schedule>
+  <app-maker-search *ngIf="view === search"></app-maker-search>
 </ion-content>
 <ion-footer>
   <app-maker-navbar (NavClick)="onNavClick($event)"></app-maker-navbar>
