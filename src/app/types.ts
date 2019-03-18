@@ -4,7 +4,7 @@ export interface Werker {
   name_first: string;
   name_last: string;
   email: string;
-  URL_photo: string;
+  url_photo: string;
   bio?: string;
   phone?: string;
   last_minute?: boolean;
@@ -33,7 +33,7 @@ export interface Maker {
   id?: number;
   name: string;
   email: string;
-  URL_photo: string;
+  url_photo: string;
   phone?: string;
   shifts?: Shift[];
 }
