@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MakerPage } from './maker.page';
 import { MakerHomeComponent } from './maker-home/maker-home.component';
-
+import { MakerProfileComponent } from './maker-profile/maker-profile.component'
 import { MakerUnfilledShiftsComponent } from './maker-unfilled-shifts/maker-unfilled-shifts.component';
 import { MakerPendingShiftsComponent } from './maker-pending-shifts/maker-pending-shifts.component';
 
@@ -30,6 +30,7 @@ const routes: Routes = [
   declarations: [
     MakerPage,
     MakerHomeComponent,
+    MakerProfileComponent,
 
     MakerUnfilledShiftsComponent,
     MakerPendingShiftsComponent,
