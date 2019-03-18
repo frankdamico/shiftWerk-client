@@ -3,24 +3,16 @@
     <ion-title>maker-home</ion-title>
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content padding>
-  <h3>Werkers for You</h3>
-  <ul>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-  </ul>
+  <app-maker-home [shifts]="shifts" *ngIf="view == 'home'"></app-maker-home>
+  <!-- <app-maker-notifications *ngIf="view == 'notifications'"></app-maker-notifications> -->
+  <app-maker-profile *ngIf="view == 'profile'"></app-maker-profile>
+  <app-maker-unfilled-shifts *ngIf="view == 'unfilled'"></app-maker-unfilled-shifts>
+  <app-maker-pending-shifts *ngIf="view == 'pending'"></app-maker-pending-shifts>
+  <!-- <app-maker-history *ngIf="view == 'history'"></app-maker-history> -->
 </ion-content>
+<ion-footer>
+  <app-maker-navbar (NavClick)="onNavClick($event)"></app-maker-navbar>
+</ion-footer>
+
