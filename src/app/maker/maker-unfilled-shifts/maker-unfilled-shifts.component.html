@@ -1,8 +1,20 @@
 <p>maker-unfilled-shifts works!</p>
-<ion-content makerShifts-unfilled>
+<div class-name="app-maker-unfilled-shifts">
+    <div class-name="shift-name">{{shift.name}}</div>
+    <div class-name="shift-address">{{shift.address}}</div>
+    <div class-name="shift-time_date">{{shift.time_date}}</div>
+    <div class-name="shift-description"><p>{{shift.description}}</p></div>
+    <div class-name="invite-position">Wekers Needed:
+      Bartender 6
+      Server 10
+      Magician 1
+    </div>
+    <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">INVITE WERKERS</ion-button>
+  </div>
+  
+<!-- <ion-content makerShifts-unfilled>
   <ion-title><h3>Shifts Unfilled</h3></ion-title>
   <ion-list>
-    <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
     <ion-item>
       <ion-card><a href><h4>Easter Brunch</h4><p></p>
         4/6 filled | 04/21/10:0A - 12:00P</a>
@@ -15,4 +27,4 @@
       </ion-card>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content> -->

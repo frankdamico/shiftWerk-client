@@ -1,19 +1,21 @@
-<!-- <p>maker-home works!</p> -->
 <ion-content>
   <ion-infinite-scroll>
-    <ion-infinite-scroll-content>
 
+    <ion-infinite-scroll-content>
+      <!-- <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts> -->
+      <!-- <ion-item *ngFor="let shift of shifts"> -->
+        
         <ion-label><b>SHIFTS UNFILLED</b></ion-label>
         <ion-list>
-          <!-- <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts> -->
-          <!-- <ion-item *ngFor="let shift of shifts"> -->
+            <!-- <ion-item *ngFor="let shift of shifts">
+              <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts>
+            </ion-item> -->
             <ion-card><a href><h5>Easter Brunch</h5>
                 4/6 filled | 04/21/10:0A - 12:00P</a>
             </ion-card>
             <ion-card><a href><h5>Bachelorette Party</h5>
                 2/5 filled | 04/29 10:00P - 2:00A</a>  
             </ion-card>
-          <!-- </ion-item> -->
         </ion-list>
 
     </ion-infinite-scroll-content>
