@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const serverUrl = "http://35.185.77.220";
+const serverUrl = "http://35.185.77.220:4000";
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +32,9 @@ export class MakerService {
   }
   getWerkers(event): Observable < any > {
     let params = new HttpParams();
+    console.log(event);
     params = params.append('value', event);
-    return this.http.get(`${serverUrl}/shifts`, { params })
+    return this.http.get(`${serverUrl}/werkers/search/${event}`, { params })
       .pipe(
         map(this.extractData),
         catchError(err => throwError(err))

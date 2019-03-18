@@ -39,6 +39,7 @@ export class MakerPage implements OnInit {
   
   ngOnInit() {
     this.maker = this.makerService.getMakerById(0);
+    console.log(this.maker);
     this.getShifts();
   }
 

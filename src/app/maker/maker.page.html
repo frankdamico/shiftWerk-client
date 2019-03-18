@@ -10,8 +10,8 @@
   <app-maker-notifications *ngIf="view === 'notifications'"></app-maker-notifications>
   <app-maker-profile *ngIf="view === 'profile'"></app-maker-profile>
   <app-maker-history *ngIf="view === 'history'"></app-maker-history>
-  <app-maker-schedule *ngIf="view === schedule"></app-maker-schedule>
-  <app-maker-search *ngIf="view === search"></app-maker-search>
+  <app-maker-schedule *ngIf="view === 'schedule'"></app-maker-schedule>
+  <app-maker-search *ngIf="view === 'search'"></app-maker-search>
 </ion-content>
 <ion-footer>
   <app-maker-navbar (NavClick)="onNavClick($event)"></app-maker-navbar>

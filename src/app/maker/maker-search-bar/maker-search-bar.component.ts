@@ -20,11 +20,17 @@ export class MakerSearchBarComponent implements OnInit {
   
   ngOnInit() {
   }
-  searchFunc = (event) => this.werkers = [this.makerService.getWerkers(event)];
-
+  searchFunc = (event) => {
+    this.makerService.getWerkers(event).subscribe(werkers => {
+      console.log(event);
+      this.werkers = werkers;
+      console.log(werkers);
+    })
+  };
   
   onClick(view: string) {
     this.view = 'search';
-    this.makerSearchComponent.setWerkers(this.werkers);
+    this.makerSearchComponent.setWerkers(this.werkers)
+
   }
 }

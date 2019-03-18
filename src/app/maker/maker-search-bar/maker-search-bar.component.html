@@ -1,13 +1,18 @@
-<ion-searchbar (ionChange)="searchFunc($event)" (click)="onClick('search')"  debounce="750"></ion-searchbar>
-<!-- <ion-list>
+<!-- <ion-searchbar (ionChange)="searchFunc($event)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
+<ion-list>
   <ion-item *ngFor="let werker of werkers">
-    {{ werker }}
+    {{ werker.name }}
   </ion-item>
 </ion-list> -->
 
 <!-- TODO: make this line work so we can have a matching icon -->
-<!-- <ion-button slot="end" (click)="searchList('search')" (ionInput)="searchList($event)"><ion-icon name="search" ></ion-icon></ion-button> -->
-
+<ion-button slot="end" (click)="searchFunc(searchTerm)" (ionInput)="searchFunc($event)"><ion-icon name="search" ></ion-icon></ion-button>
+<ion-input [(ngModel)]="searchTerm" searchTerm="searchTerm"></ion-input>
+<ion-list>
+  <ion-item *ngFor="let werker of werkers">
+    {{ werker.name_first }}
+  </ion-item>
+</ion-list>
 
 
 <!-- <p>maker-search works!</p>

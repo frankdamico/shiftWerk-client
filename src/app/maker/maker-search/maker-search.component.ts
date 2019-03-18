@@ -20,8 +20,7 @@ export class MakerSearchComponent implements OnInit {
   }
   
   setWerkers = (werkers) => {
-    console.log('setweks')
+    console.log(werkers);
     this.werkers = werkers;
   }
-  
 }
