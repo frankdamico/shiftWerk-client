@@ -5,22 +5,22 @@ import { ShiftService } from 'src/app/shift.service';
 import { Maker } from 'src/app/types';
 
 @Component({
-  selector: 'app-maker-unfilled-shifts',
-  templateUrl: './maker-unfilled-shifts.component.html',
-  styleUrls: ['./maker-unfilled-shifts.component.scss'],
+  selector: 'app-maker-unfilled-shift',
+  templateUrl: './maker-unfilled-shift.component.html',
+  styleUrls: ['./maker-unfilled-shift.component.scss'],
 })
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MakerUnfilledShiftsComponent implements OnInit {
+export class MakerUnfilledShiftComponent implements OnInit {
 
   constructor(
     public makerService: MakerService,
     public shiftService: ShiftService
   ) { }
-  @Input() shifts: Array<any>;
+  @Input() shift: object;
 
   ngOnInit() {
     this.shiftService.getAllShifts();

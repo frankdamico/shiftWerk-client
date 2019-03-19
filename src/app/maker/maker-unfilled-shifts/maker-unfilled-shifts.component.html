@@ -1,17 +1,24 @@
-<p>maker-unfilled-shifts works!</p>
+<p>maker-unfilled-shifts -> maker-unfilled-shift</p>
 <div class-name="app-maker-unfilled-shifts">
-    <div class-name="shift-name">{{shift.name}}</div>
-    <div class-name="shift-address">{{shift.address}}</div>
-    <div class-name="shift-time_date">{{shift.time_date}}</div>
-    <div class-name="shift-description"><p>{{shift.description}}</p></div>
-    <div class-name="invite-position">Wekers Needed:
-      Bartender 6
-      Server 10
-      Magician 1
-    </div>
-    <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">INVITE WERKERS</ion-button>
-  </div>
+  <ion-list>
+    <ion-item *ngFor="let shift of shifts">
+      <app-maker-unfilled-shift [shift]="shift"></app-maker-unfilled-shift>
+    </ion-item>
+  </ion-list>
+
+  <!-- <div class-name="shift-name">{{shift.name}}</div>
+  <div class-name="shift-address">{{shift.address}}</div>
+  <div class-name="shift-time_date">{{shift.time_date}}</div>
+  <div class-name="shift-description"><p>{{shift.description}}</p></div>
+  <div class-name="invite-position">Wekers Needed:
+    Bartender 6
+    Server 10
+    Magician 1
+  </div> -->
   
+  <!-- <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">INVITE WERKERS</ion-button> -->
+</div>
+
 <!-- <ion-content makerShifts-unfilled>
   <ion-title><h3>Shifts Unfilled</h3></ion-title>
   <ion-list>
