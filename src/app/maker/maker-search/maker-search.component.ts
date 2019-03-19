@@ -14,11 +14,18 @@ export class MakerSearchComponent implements OnInit {
   werkers: any
   view = 'search'
   constructor(
+    private makerService: MakerService,
   ) { }
   
   ngOnInit() {
   }
   
+  searchFunc = (event) => {
+    this.makerService.getWerkers(event).subscribe(werkers => {
+      this.werkers = werkers;
+    })
+  }
+
   setWerkers = (werkers) => {
     console.log(werkers);
     this.werkers = werkers;
