@@ -30,4 +30,8 @@ export class MakerSearchComponent implements OnInit {
     console.log(werkers);
     this.werkers = werkers;
   }
+
+  goToProfile = () => {
+    console.log('wentToProfile');
+  }
 }
