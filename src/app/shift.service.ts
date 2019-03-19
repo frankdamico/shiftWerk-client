@@ -38,6 +38,10 @@ export class ShiftService {
       catchError(err => throwError(err))
     );
   }
+  /**
+   * @function sends a query with specific search terms
+   * @param {event} the search terms taken in by the search bar, returns an observable
+   */
   getShiftsByTerm(event): Observable<any> {
     let params = new HttpParams();
     console.log(event);

@@ -26,11 +26,6 @@ export class MakerSearchComponent implements OnInit {
     })
   }
 
-  setWerkers = (werkers) => {
-    console.log(werkers);
-    this.werkers = werkers;
-  }
-
   goToProfile = () => {
     console.log('wentToProfile');
   }
