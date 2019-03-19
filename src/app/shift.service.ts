@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import data from 'mockDataShift.json';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -37,5 +37,15 @@ export class ShiftService {
       map(this.extractData),
       catchError(err => throwError(err))
     );
+  }
+  getShiftsByTerm(event): Observable<any> {
+    let params = new HttpParams();
+    console.log(event);
+    params = params.append('value', event);
+    return this.http.get(`${serverUrl}/shifts/search/${event}`, { params })
+      .pipe(
+        map(this.extractData),
+        catchError(err => throwError(err))
+      )
   }
 }
