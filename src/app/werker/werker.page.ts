@@ -16,13 +16,17 @@ export class WerkerPage implements OnInit {
     public shiftService: ShiftService,
     public loadingController: LoadingController
   ) { }
+  view = 'home';
   werker: any;
   shifts: any;
-  view = 'home';
+  upcomingShifts: any;
+  pastShifts: any;
+  invitedShifts: any;
   /**
    * @method getShifts
    * subscribes to {@link shiftService#getAllShifts}
    */
+
   async getShifts() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -36,6 +40,45 @@ export class WerkerPage implements OnInit {
       }, err => {
         console.error(err);
         loading.dismiss();
+      });
+  }
+
+  // TODO NEED TO TEST
+  async getInvitedShifts() {
+    await this.shiftService.getInvitedShifts()
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        // this.invitedShifts = res;
+        this.invitedShifts = data;
+      }, err => {
+        console.error(err);
+      });
+  }
+
+  // TODO NEED TO TEST
+  async getUpcomingShifts() {
+    await this.shiftService.getUpcomingShifts()
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        // this.upcomingShifts = res;
+        this.upcomingShifts = data;
+      }, err => {
+        console.error(err);
+      });
+  }
+
+  // TODO NEED TO TEST
+  async getPastShifts() {
+    await this.shiftService.getPastShifts()
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        // this.pastShifts = res;
+        this.pastShifts = data;
+      }, err => {
+        console.error(err);
       });
   }
   /**
@@ -58,9 +101,13 @@ export class WerkerPage implements OnInit {
   ngOnInit() {
     // double check do i still need this line since i built getWerker?
     this.werker = this.werkerService.getWerkerById(0);
-    console.log(this.werker);
     // this.getWerker();
     this.getShifts();
+
+    // uncomment out later to get shifts for components
+    this.getInvitedShifts();
+    this.getPastShifts();
+    this.getUpcomingShifts();
   }
 
   /** @method onNavClick

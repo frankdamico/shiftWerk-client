@@ -33,10 +33,37 @@ export class ShiftService {
    * gets shifts from server, returning observable
    */
   getAllShifts(): Observable<any> {
+    // might need to refactor to this endpoint later
+    //GET /werkers/:werkerId/shifts/all
     return this.http.get(`${serverUrl}/shifts`, httpOptions).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
     );
+  }
+
+  // TODO TEST TO MAKE SURE IT WORKS
+  getUpcomingShifts(): Observable<any> {
+    // /werkers/:werkerId/shifts/upcoming
+    return this.http.get(`${serverUrl}/shifts`).pipe(
+      map(this.extractData),
+      catchError(err => throwError(err))
+    )
+  }
+  // TODO TEST TO MAKE SURE IT WORKS
+  getPastShifts(): Observable<any> {
+    //werkers/:werkerId/shifts/past
+    return this.http.get(`${serverUrl}/shifts`).pipe(
+      map(this.extractData),
+      catchError(err => throwError(err))
+    )
+  }
+  // TODO TEST TO MAKE SURE IT WORKS
+  getInvitedShifts(): Observable<any> {
+    // /werkers/:werkerId/shifts/invited
+    return this.http.get(`${serverUrl}/shifts`).pipe(
+      map(this.extractData),
+      catchError(err => throwError(err))
+    )
   }
   /**
    * @function sends a query with specific search terms
