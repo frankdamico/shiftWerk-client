@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import data from 'mockDataShift.json';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -40,6 +40,7 @@ export class ShiftService {
       catchError(err => throwError(err))
     );
   }
+<<<<<<< HEAD
 
   // TODO TEST TO MAKE SURE IT WORKS
   getUpcomingShifts(): Observable<any> {
@@ -64,5 +65,20 @@ export class ShiftService {
       map(this.extractData),
       catchError(err => throwError(err))
     )
+=======
+  /**
+   * @function sends a query with specific search terms
+   * @param {event} the search terms taken in by the search bar, returns an observable
+   */
+  getShiftsByTerm(event): Observable<any> {
+    let params = new HttpParams();
+    console.log(event);
+    params = params.append('value', event);
+    return this.http.get(`${serverUrl}/shifts/search/${event}`, { params })
+      .pipe(
+        map(this.extractData),
+        catchError(err => throwError(err))
+      )
+>>>>>>> ae3ec85c0724f4054605f22025243dc8bfcf2cc5
   }
 }

@@ -2,48 +2,23 @@
   <ion-infinite-scroll>
 
     <ion-infinite-scroll-content>
-      <!-- <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts> -->
-      <!-- <ion-item *ngFor="let shift of shifts"> -->
-        
-        <ion-label><b>SHIFTS UNFILLED</b></ion-label>
-        <ion-list>
-            <!-- <ion-item *ngFor="let shift of shifts">
-              <app-maker-unfilled-shifts [shift]="shift"></app-maker-unfilled-shifts>
-            </ion-item> -->
-            <ion-card><a href><h5>Easter Brunch</h5>
-                4/6 filled | 04/21/10:0A - 12:00P</a>
-            </ion-card>
-            <ion-card><a href><h5>Bachelorette Party</h5>
-                2/5 filled | 04/29 10:00P - 2:00A</a>  
-            </ion-card>
-        </ion-list>
+      <ion-label><b>SHIFTS UNFILLED</b></ion-label>
+      <app-maker-unfilled-shifts [shifts]="shifts"></app-maker-unfilled-shifts>
 
-    </ion-infinite-scroll-content>
+      <ion-label><b>SHIFTS PENDING</b></ion-label>
+      <app-maker-pending-shifts [shifts]="shifts"></app-maker-pending-shifts>
+    </ion-infinite-scroll-content>  
 
-    <ion-infinite-scroll-content>
-      <!-- <div class-name=makerShifts-pending> -->
-        <ion-list><ion-label><b>SHIFTS PENDING</b></ion-label>
-            <!-- <ion-item *ngFor="let shift of shifts"> -->
-              <ion-card><a href><h5>Birthday Party</h5><p></p>
-                6/6 filled | 04/30 2:00P - 5:00P</a>
-              </ion-card>
-              <ion-card><a href><h5>Anniversary Event</h5><p></p>
-                5/5 filled | 04/30 7:00P - 10:00P</a>
-              </ion-card>
-            <!-- </ion-item> -->
-          </ion-list>
-      <!-- </div> -->
-    </ion-infinite-scroll-content>
 
-    <ion-infinite-scroll-content>
-      <!-- <div class-name=makerShifts-History> -->
+    <!-- <ion-infinite-scroll-content>
+      <div class-name=makerShifts-History> 
         <ion-list><ion-label><b>SHIFTS HISTORY</b></ion-label>
           <ion-card><a href><h5>St. Joseph's Alter - Catering</h5><p></p>
               4/6 filled | 03/19 10:00A - 2:00P</a>
           </ion-card>
         </ion-list>
-      <!-- </div> -->
-    </ion-infinite-scroll-content>
+      </div>
+    </ion-infinite-scroll-content> -->
 
   </ion-infinite-scroll>
 </ion-content>

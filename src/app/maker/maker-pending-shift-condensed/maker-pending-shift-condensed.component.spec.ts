@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MakerSearchBarPage } from './maker-search-bar.page';
+import { MakerPendingShiftCondensedPage } from './maker-pending-shift-condensed.page';
 
-describe('MakerSearchPage', () => {
-  let component: MakerSearchBarPage;
-  let fixture: ComponentFixture<MakerSearchBarPage>;
+describe('MakerPendingShiftCondensedPage', () => {
+  let component: MakerPendingShiftCondensedPage;
+  let fixture: ComponentFixture<MakerPendingShiftCondensedPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MakerSearchBarPage ],
+      declarations: [ MakerPendingShiftCondensedPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MakerSearchBarPage);
+    fixture = TestBed.createComponent(MakerPendingShiftCondensedPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
