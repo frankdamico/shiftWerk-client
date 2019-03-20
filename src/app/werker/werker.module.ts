@@ -16,6 +16,9 @@ import { WerkerScheduleComponent } from './werker-schedule/werker-schedule.compo
 import { WerkerShiftSmallComponent } from './werker-shift-small/werker-shift-small.component';
 import { WerkerShiftExpandedComponent } from './werker-shift-expanded/werker-shift-expanded.component';
 import { WerkerNavbarComponent } from './werker-navbar/werker-navbar.component';
+import { WerkerPastShiftsComponent } from './werker-past-shifts/werker-past-shifts.component';
+import { WerkerInvitedShiftsComponent } from './werker-invited-shifts/werker-invited-shifts.component';
+import { WerkerUpcomingShiftsComponent } from './werker-upcoming-shifts/werker-upcoming-shifts.component';
 
 const routes: Routes = [
   {
@@ -42,7 +45,10 @@ const routes: Routes = [
     WerkerScheduleComponent,
     WerkerShiftSmallComponent,
     WerkerShiftExpandedComponent,
-    WerkerNavbarComponent
+    WerkerNavbarComponent,
+    WerkerPastShiftsComponent,
+    WerkerInvitedShiftsComponent,
+    WerkerUpcomingShiftsComponent,
   ]
 })
 export class WerkerPageModule {}
