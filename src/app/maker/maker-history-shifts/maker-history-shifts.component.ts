@@ -41,6 +41,7 @@ export class MakerHistoryShiftsComponent implements OnInit {
   //   this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   // }
   ngOnInit() {
-    this.shiftService.getAllShifts();
+    // this.shiftService.getAllShifts();
+    console.log(this.shifts);
   }
 }
