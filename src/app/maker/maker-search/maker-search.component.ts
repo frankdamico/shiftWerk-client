@@ -26,6 +26,10 @@ export class MakerSearchComponent implements OnInit {
     })
   }
 
+  setWerkers = () => {
+    
+  }
+
   goToProfile = () => {
     console.log('wentToProfile');
   }

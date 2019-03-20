@@ -14,7 +14,11 @@ export class WerkerSearchComponent implements OnInit {
 
   shifts: any;
   view = 'search'
-  ngOnInit() {}
+  ngOnInit() {
+    this.shiftService.getAllShifts().subscribe(shifts => {
+      this.shifts = shifts;
+    });
+  }
 
   searchFunc = (event) => {
     this.shiftService.getShiftsByTerm(event).subscribe(shifts => {

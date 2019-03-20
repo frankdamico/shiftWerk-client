@@ -27,6 +27,10 @@ export class MakerSearchBarComponent implements OnInit {
       console.log(werkers);
     })
   };
+
+  setWerkers =()=> {
+    
+  }
   
   onClick(view: string) {
     this.view = 'search';
