@@ -16,13 +16,17 @@ export class WerkerPage implements OnInit {
     public shiftService: ShiftService,
     public loadingController: LoadingController
   ) { }
+  view = 'home';
   werker: any;
   shifts: any;
-  view = 'home';
+  upcomingShifts: any;
+  pastShifts: any;
+  invitedShifts: any;
   /**
    * @method getShifts
    * subscribes to {@link shiftService#getAllShifts}
    */
+
   async getShifts() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -38,6 +42,21 @@ export class WerkerPage implements OnInit {
         loading.dismiss();
       });
   }
+
+  // TODO NEED TO TEST
+  async getInvitedShifts() {
+    await this.shiftService.getInvitedShifts()
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        // this.invitedShifts = res;
+        this.invitedShifts = data;
+        console.log(this.invitedShifts, 'invite')
+      }, err => {
+        console.error(err);
+      });
+  }
+
   /**
   * @method getWerker
   * subscribes to {@link werkerService#getWerkerInfo}
@@ -58,9 +77,12 @@ export class WerkerPage implements OnInit {
   ngOnInit() {
     // double check do i still need this line since i built getWerker?
     this.werker = this.werkerService.getWerkerById(0);
-    console.log(this.werker);
     // this.getWerker();
     this.getShifts();
+
+    // uncomment out later to get shifts for components
+    this.getInvitedShifts();
+
   }
 
   /** @method onNavClick
