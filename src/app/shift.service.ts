@@ -49,5 +49,13 @@ export class ShiftService {
       catchError(err => throwError(err))
     )
   }
+  // TODO TEST TO MAKE SURE IT WORKS
+  getPastShifts(): Observable<any> {
+    //werkers/:werkerId/shifts/past
+    return this.http.get(`${serverUrl}/shifts`).pipe(
+      map(this.extractData),
+      catchError(err => throwError(err))
+    )
+  }
 
 }
