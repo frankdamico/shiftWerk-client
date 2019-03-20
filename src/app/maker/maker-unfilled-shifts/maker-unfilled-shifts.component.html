@@ -1,18 +1,15 @@
 <!-- <p>maker-unfilled-shifts -> maker-unfilled-shift</p> -->
 <ion-infinite-scroll threshold="100px" >
-    <ion-infinite-scroll-content>
-      <div class-name="app-maker-unfilled-shifts">
-        <ion-list>
-          <ion-item *ngFor="let shift of shifts">
-            <app-maker-unfilled-shift-condensed [shift]="shift"></app-maker-unfilled-shift-condensed>
-            <!-- <app-maker-unfilled-shift [shift]="shift"></app-maker-unfilled-shift> -->
-          </ion-item>
-        </ion-list>
-
-        <!-- Move to maker-unfilled-shift-expanded -->
-        <!-- <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">INVITE WERKERS</ion-button> -->
-      </div>
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <ion-infinite-scroll-content>
+    <div class-name="app-maker-unfilled-shifts">
+      <ion-list>
+        <ion-item *ngFor="let shift of shifts">
+          <app-maker-unfilled-shift-condensed [shift]="shift"></app-maker-unfilled-shift-condensed>
+        </ion-item>
+      </ion-list>
+      <!-- <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">INVITE WERKERS</ion-button> -->
+    </div>
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
 
 
