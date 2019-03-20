@@ -10,7 +10,6 @@ import { MakerHomeComponent } from './maker-home/maker-home.component';
 import { MakerNavBarComponent } from './maker-navbar/maker-navbar.component';
 import { MakerPositionsComponent } from './maker-positions/maker-positions.component';
 import { MakerProfileComponent } from './maker-profile/maker-profile.component';
-import { MakerSearchBarComponent} from './maker-search-bar/maker-search-bar.component';
 import { MakerSettingsComponent} from './maker-settings/maker-settings.component';
 import { MakerUnfilledShiftsComponent} from './maker-unfilled-shifts/maker-unfilled-shifts.component';
 import { MakerCreateShiftComponent } from './maker-create-shift/maker-create-shift.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
     MakerNavBarComponent,
     MakerPositionsComponent,
     MakerProfileComponent,
-    MakerSearchBarComponent,
     MakerSettingsComponent,
     MakerUnfilledShiftsComponent,
     MakerCreateShiftComponent,

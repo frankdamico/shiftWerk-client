@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MakerSearchBarComponent } from '../maker-search-bar/maker-search-bar.component'
 import { MakerService } from 'src/app/maker.service';
 
 @Component({
