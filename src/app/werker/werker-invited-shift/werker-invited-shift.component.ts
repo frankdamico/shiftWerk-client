@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-werker-invited-shift',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class WerkerInvitedShiftComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  invitedShift: Array<any>;
 
   ngOnInit() {}
 

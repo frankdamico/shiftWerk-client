@@ -1,4 +1,10 @@
 <h1>
-  werker-invited-shifts works!
+  werker-invited-SHIFTS works!
 </h1>
+      <ion-item *ngFor="let invitedShift of invitedShifts">
+        <app-werker-invited-shift [invitedShift]="invitedShift"></app-werker-invited-shift>
+      </ion-item>
 
+            <!-- <ion-item *ngFor="let shift of shifts">
+                    <app-werker-shift-expanded [shift]="shift"></app-werker-shift-expanded>
+                  </ion-item> -->

@@ -1,14 +1,14 @@
 <ion-infinite-scroll>
   <ion-infinite-scroll-content>
     <ion-list>
-      <ion-item *ngFor="let shift of shifts">
+      <!-- <ion-item *ngFor="let shift of shifts">
         <app-werker-shift-expanded [shift]="shift"></app-werker-shift-expanded>
+      </ion-item> -->
+      <ion-item>
+        <app-werker-invited-shifts [invitedShifts]="invitedShifts"></app-werker-invited-shifts>
       </ion-item>
         <ion-item>
           <app-werker-upcoming-shifts [upcomingShifts]="upcomingShifts"></app-werker-upcoming-shifts>
-        </ion-item>
-        <ion-item>
-          <app-werker-invited-shifts [invitedShifts]="invitedShifts"></app-werker-invited-shifts>
         </ion-item>
     </ion-list>
   </ion-infinite-scroll-content>
