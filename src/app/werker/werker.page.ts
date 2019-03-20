@@ -71,7 +71,19 @@ export class WerkerPage implements OnInit {
       });
   }
 
- 
+  // TODO NEED TO TEST
+  async getPastShifts() {
+    await this.shiftService.getPastShifts()
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        // this.pastShifts = res;
+        this.pastShifts = data;
+        console.log(this.pastShifts, 'past')
+      }, err => {
+        console.error(err);
+      });
+  }
   /**
   * @method getWerker
   * subscribes to {@link werkerService#getWerkerInfo}
@@ -97,7 +109,7 @@ export class WerkerPage implements OnInit {
 
     // uncomment out later to get shifts for components
     this.getInvitedShifts();
-
+    this.getPastShifts();
     this.getUpcomingShifts();
   }
 
