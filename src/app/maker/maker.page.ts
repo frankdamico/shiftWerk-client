@@ -19,7 +19,6 @@ export class MakerPage implements OnInit {
   maker: any;
   shifts: any;
   view: any;
-  // view: 'home';
 
   async getShifts() {
     const loading = await this.loadingController.create();

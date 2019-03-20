@@ -6,6 +6,7 @@
  
 <ion-content padding>
   <app-maker-home [shifts]="shifts" *ngIf="view === 'home'"></app-maker-home>
+  <app-maker-unfilled-shifts [shifts]="shifts" *ngIf="view === 'unfilled'"></app-maker-unfilled-shifts>
   <app-maker-notifications *ngIf="view === 'notifications'"></app-maker-notifications>
   <app-maker-profile *ngIf="view === 'profile'"></app-maker-profile>
   <app-maker-history *ngIf="view === 'history'"></app-maker-history>
@@ -16,26 +17,3 @@
   <app-maker-navbar (NavClick)="onNavClick($event)"></app-maker-navbar>
 </ion-footer>
 
-
-
-
-<!-- <ion-content padding>
-  <h3>Werkers for You</h3>
-  <ul>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-    <li>
-      <ion-card>
-        Werker details...
-      </ion-card>
-    </li>
-  </ul>
-</ion-content> -->
