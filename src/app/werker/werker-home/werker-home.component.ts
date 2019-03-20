@@ -9,7 +9,12 @@ export class WerkerHomeComponent implements OnInit {
 
   constructor(
   ) { }
-  @Input() shifts: Array<any>;
+  @Input() 
+  shifts: Array<any>;
+  @Input()
+  upcomingShifts: Array<any>;
+  @Input()
+  invitedShifts: Array<any>;
   ngOnInit() {
   }
 
