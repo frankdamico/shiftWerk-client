@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content padding>
-  <app-werker-home [shifts]="shifts" *ngIf="view == 'home'"></app-werker-home>
+  <app-werker-home 
+  [shifts]="shifts" 
+  [upcomingShifts]="upcomingShifts"
+  [invitedShifts]="invitedShifts" 
+  *ngIf="view == 'home'"></app-werker-home>
   <app-werker-notifications [shifts]="shifts" *ngIf="view == 'notifications'"></app-werker-notifications>
   <app-werker-profile *ngIf="view == 'profile'"></app-werker-profile>
   <app-werker-history *ngIf="view == 'history'"></app-werker-history>
@@ -14,3 +18,4 @@
 <ion-footer>
   <app-werker-navbar (NavClick)="onNavClick($event)"></app-werker-navbar>
 </ion-footer>
+
