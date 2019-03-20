@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShiftService } from 'src/app/shift.service'
 
 @Component({
   selector: 'app-werker-search',
@@ -7,8 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WerkerSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private shiftService: ShiftService
+  ) { }
 
-  ngOnInit() {}
+  shifts: any;
+  view = 'search'
+  ngOnInit() {
+    this.shiftService.getAllShifts().subscribe(shifts => {
+      this.shifts = shifts;
+    });
+  }
 
+  searchFunc = (event) => {
+    this.shiftService.getShiftsByTerm(event).subscribe(shifts => {
+      this.shifts = shifts;
+    })
+  }
+
+  goToShift = () => {
+    console.log('wentToShift');
+  }
 }
+

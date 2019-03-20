@@ -1,89 +1,11 @@
+<ion-searchbar [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
 <ion-list>
-  <ion-item *ngFor="let werker of werkers">
-    {{ werker }}
+  <ion-item *ngFor="let werker of werkers" (click)="goToProfile()">
+    <button ion-button full>
+      {{ werker.name_first }}
+    </button>
   </ion-item>
 </ion-list>
 
-<!-- TODO: make this line work so we can have a matching icon -->
-<!-- <ion-button slot="end" (click)="searchList('search')" (ionInput)="searchList($event)"><ion-icon name="search" ></ion-icon></ion-button> -->
-
-
-
-<!-- <p>maker-search works!</p>
-<p>?!? append to maker-create-shift ?!?</p>
-
--------------------------------------
-
-
-<h3>Invite Werkers</h3>
-<ion-card class-name="shift-expanded">
-  <div class-name="shift-name">Shift Name</div>
-  <div class-name="shift-address">123 Street, City, ST 70111</div>
-  <div class-name="shift-time_date">08/21/19 7:00P - 12:30A</div>
-  <div class-name="shift-description"><p>Description: Catering private party for company anniversary. - Black dress clothes.</p></div>
-  [ Maybe a list of shift positions | filled# | needed# ] 
-</ion-card>
-
-  <ion-content padding>
-      <h3>Werkers for You</h3>
-      <ul>
-        <li>
-          <ion-card>
-            Werker details...<button ion-button class-name="button-accept">INVITE</button></li>
-          </ion-card>
-        </li>
-        <li>
-          <ion-card>
-            Werker details...<button ion-button class-name="button-accept">INVITE</button></li>
-          </ion-card>
-        </li>
-        <li>
-          <ion-card>
-            Werker details...<button ion-button class-name="button-accept">INVITE</button></li>
-          </ion-card>
-        </li>
-      </ul>
-    </ion-content>
-  
-  <!-- <div class-name="shift-positions">
-    <p></p>
-    <select name="Positions">
-      <option value="server">Server</option>
-      <option value="bartender">Bartender</option>
-      <option value="dishwasher">Dishwasher</option>
-      <option value="magician">Magician</option>
-    </select>
-    <select name="Needed">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-    <select name="Filled">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-  </div> -->
-  <p></p>
-  <div class-name=makerFavs>
-    <ul><h4>Your favs:</h4>
-      <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
-      ---Should we forget about the above and 
-      append the following to create shift? 
-      as a list of favs followed by rando search?? 
-      <li><a href>Fav1 Werker1</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-      <li><a href>Fav2 Werker2</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-      <li><a href>Fav3 Werker3</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-    </ul>
-  </div>
-  <div class-name=werkerSearch>
-      <ul>
-        <li><a href>Werker4</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-        <li><a href>Werker5</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-        <li><a href>Werker6</a>  <button ion-button class-name="button-accept">INVITE</button></li>
-      </ul>
-    </div> -->
 
 
