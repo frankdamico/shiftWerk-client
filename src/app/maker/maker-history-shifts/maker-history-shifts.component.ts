@@ -9,9 +9,9 @@ import { ShiftService } from 'src/app/shift.service';
   styleUrls: ['./maker-history-shifts.component.scss'],
 })
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 
 export class MakerHistoryShiftsComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class MakerHistoryShiftsComponent implements OnInit {
 
   @Input() shifts: Array<any>;
 
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  // @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   // loadData(event) {
   //   setTimeout(() => {

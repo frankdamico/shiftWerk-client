@@ -1,15 +1,16 @@
-<!-- <p>maker-pending-shifts works!</p> -->
-<ion-infinite-scroll threshold="100px" >
-  <ion-infinite-scroll-content>
-    <div class-name="app-maker-pending-shifts">
-      <ion-list>
-        <ion-item *ngFor="let shift of shifts">
-          <app-maker-pending-shift-condensed [shift]="shift"></app-maker-pending-shift-condensed>
-        </ion-item>
-      </ion-list>
-      <!-- <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">SEND UPDATE to WERKERS</ion-button> -->
-    </div>
-  </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+<div class-name="app-maker-pending-shifts">
+  <ion-card>
+    <ion-infinite-scroll threshold="100px" >
+      <ion-infinite-scroll-content>
+        <ion-list>
+          <ion-item *ngFor="let shift of shifts">
+            <app-maker-pending-shift-condensed [shift]="shift"></app-maker-pending-shift-condensed>
+          </ion-item>
+        </ion-list>
+        <!-- <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">SEND UPDATE to WERKERS</ion-button> -->
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-card>
+</div>
 
 

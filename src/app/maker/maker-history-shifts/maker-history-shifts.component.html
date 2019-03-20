@@ -1,12 +1,15 @@
-<ion-infinite-scroll threshold="100px" >
-  <ion-infinite-scroll-content>
-    <div class-name="app-maker-history-shifts">
-      <ion-list>
-        <ion-item *ngFor="let shift of shifts">
-          <app-maker-history-shift-condensed [shift]="shift"></app-maker-history-shift-condensed>
-        </ion-item>
-      </ion-list>
-    </div>
-  </ion-infinite-scroll-content>
-</ion-infinite-scroll>
-<ion-button href="/maker-home">RATE WERKERS</ion-button>
+<h3>History</h3>
+<div class-name="app-maker-history-shifts">
+  <ion-infinite-scroll threshold="100px" >
+    <ion-infinite-scroll-content>
+
+        <ion-list>
+          <ion-item *ngFor="let shift of shifts">
+            <app-maker-history-shift-condensed [shift]="shift"></app-maker-history-shift-condensed>
+          </ion-item>
+        </ion-list>
+        
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ion-button href="/maker-home">RATE WERKERS</ion-button>
+</div>
