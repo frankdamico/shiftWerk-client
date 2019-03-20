@@ -1,3 +1,15 @@
-<p>
-  maker-history works!
-</p>
+<ion-infinite-scroll threshold="100px" >
+  <ion-infinite-scroll-content>
+    <div class-name="app-maker-history">
+      <!-- <ion-list> -->
+        <!-- <ion-label><b>SHIFTS HISTORY</b></ion-label> -->
+        <!-- <ion-item *ngFor="let shift of shifts"> -->
+          <app-maker-history-shifts [shifts]="shifts"></app-maker-history-shifts>
+        <!-- </ion-item> -->
+      <!-- </ion-list> -->
+      <!-- <ion-button (click)="rate('rate')" class-name="button-rate">RATE WERKERS</ion-button> -->
+    </div>
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
