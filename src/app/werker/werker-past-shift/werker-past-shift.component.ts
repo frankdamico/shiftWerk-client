@@ -11,7 +11,7 @@ export class WerkerPastShiftComponent implements OnInit {
 
   ngOnInit() {}
 
-  @Input()
+  // @Input()
   // pastShifts: Array<any>;
   // upcomingShifts: Array<any>;
   // invitedShifts: Array<any>;
