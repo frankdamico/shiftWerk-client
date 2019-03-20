@@ -26,8 +26,8 @@ export class MakerPage implements OnInit {
     await this.shiftService.getAllShifts()
       .subscribe(res => {
         console.log(res);
-        // this.shifts = res; // uncomment to access live data
-        this.shifts = data; // mock data
+        this.shifts = res; // uncomment to access live data
+        // this.shifts = data; // mock data
         loading.dismiss();
       }, err => {
         console.error(err);

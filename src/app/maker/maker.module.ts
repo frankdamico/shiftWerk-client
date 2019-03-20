@@ -18,6 +18,8 @@ import { MakerPendingShiftsComponent } from './maker-pending-shifts/maker-pendin
 import { MakerPendingShiftCondensedComponent } from './maker-pending-shift-condensed/maker-pending-shift-condensed.component';
 import { MakerCreateShiftComponent } from './maker-create-shift/maker-create-shift.component';
 import { MakerHistoryComponent } from './maker-history/maker-history.component';
+import { MakerHistoryShiftsComponent } from './maker-history-shifts/maker-history-shifts.component';
+import { MakerHistoryShiftCondensedComponent } from './maker-history-shift-condensed/maker-history-shift-condensed.component';
 import { MakerNotificationsComponent } from './maker-notifications/maker-notifications.component';
 import { MakerScheduleComponent } from './maker-schedule/maker-schedule.component';
 import { MakerSearchComponent } from './maker-search/maker-search.component';
@@ -51,6 +53,8 @@ const routes: Routes = [
     MakerPendingShiftCondensedComponent,
     MakerCreateShiftComponent,
     MakerHistoryComponent,
+    MakerHistoryShiftsComponent,
+    MakerHistoryShiftCondensedComponent,
     MakerNotificationsComponent,
     MakerScheduleComponent,
     MakerSearchComponent,

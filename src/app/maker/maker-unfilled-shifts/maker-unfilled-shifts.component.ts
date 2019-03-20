@@ -19,6 +19,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
     public makerService: MakerService,
     public shiftService: ShiftService
   ) { }
+  
   @Input() shifts: Array<any>;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 

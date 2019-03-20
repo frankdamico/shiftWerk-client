@@ -1,17 +1,12 @@
-<ion-content makerShifts-history>
-  <ion-title><h3>Shifts History</h3></ion-title>
-    <ion-list>
-
-      <!--v hrefs below - CHANGE to function calls v-->
-      <ion-item><ion-card><a href><h4>Anniversary Brunch</h4><p></p>
-        6/6 filled | 02/21/10:0A - 12:00P</a>
-      </ion-card></ion-item>
-        <p></p>
-      <ion-item><ion-card><a href><h4>Mayoral Fundraising Party</h4><p></p>
-        5/5 filled | 02/29 10:00P - 2:00A</a>
-      </ion-card></ion-item>
-    </ion-list>
-  <!--v href below - CHANGE to click event to RATE WERKERS v-->
-  <!-- <ion-button (click)="onClick('      ')">RATE WERKERS</ion-button> -->
-  <ion-button href="/maker-home">RATE WERKERS</ion-button>
-</ion-content>
+<ion-infinite-scroll threshold="100px" >
+  <ion-infinite-scroll-content>
+    <div class-name="app-maker-history-shifts">
+      <ion-list>
+        <ion-item *ngFor="let shift of shifts">
+          <app-maker-history-shift-condensed [shift]="shift"></app-maker-history-shift-condensed>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+<ion-button href="/maker-home">RATE WERKERS</ion-button>
