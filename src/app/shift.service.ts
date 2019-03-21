@@ -56,7 +56,9 @@ export class ShiftService {
    * @function submitShift creates a new shift
    * @param {shiftBody} the proper information needed to create the shift
    */
-  submitShift(): Observable<any> {
+  submitShift(formData): Observable<any> {
+    console.log(formData);
+    return;
     return this.http.put(`${serverUrl}/shifts`, { } ).pipe(
       catchError(error => throwError(error))
     )

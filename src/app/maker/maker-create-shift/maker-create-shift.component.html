@@ -1,7 +1,9 @@
 <h3>Create a Shift</h3>
 
 <form #f="ngForm" (ngSubmit)="submit(f)">
-<ion-card enter-maker>
+    <ion-button type="submit">Submit Shift</ion-button>
+    <ion-button (click)="addPosition()">Add Position</ion-button>
+<ion-card class="form" enter-maker>
     <ion-input [(ngModel)]="shiftName" name="shiftName" placeholder="Enter shift name"> Shift Name: </ion-input>
   <p></p>
     Date: <ion-datetime [(ngModel)]="shiftStart" name="shiftStart" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for date & time"></ion-datetime>
@@ -16,8 +18,6 @@
     <ion-input [(ngModel)]="paymentAmnt" name="paymentAmnt" placeholder="Payment Amount"></ion-input>
     <ion-input [(ngModel)]="paymentType" name="paymentType" placeholder="Payment Type"></ion-input>
   <p></p>
-  <ion-button type="submit">Submit Shift</ion-button>
-  <ion-button (click)="addPosition()">Add Position</ion-button>
 </ion-card>
 </form>
 
