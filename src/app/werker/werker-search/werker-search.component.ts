@@ -14,7 +14,7 @@ export class WerkerSearchComponent implements OnInit {
 
 
   constructor(
-    private shiftService: ShiftService
+    private shiftService: ShiftService,
   ) { }
   
   
