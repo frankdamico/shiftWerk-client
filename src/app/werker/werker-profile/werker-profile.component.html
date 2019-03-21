@@ -1,64 +1,29 @@
-<h3>Your Profile</h3>
-<ion-content>
+<h3>Profile</h3>
+<ion-card enter-werker>
 <form>
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 1</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 2</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 3</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 4</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 5</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
   <!-- <ion-item enter-werker> -->
-    <ion-item>
-      <ion-label>First Name:</ion-label>
-      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="First name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Last Name:</ion-label>
-      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Last name"></ion-input>
-    </ion-item>
-    <ion-item>
+    <ion-card>
+      <ion-label>Name:</ion-label>
+      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="David"></ion-input>
+      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Lum"></ion-input>
+    </ion-card>
+    <p></p>
+
+    <ion-card>
       <ion-label>Email:</ion-label>
-      <ion-input [(ngModel)]="email" name="email"placeholder="Enter email"></ion-input>
-    </ion-item>
+      <ion-input [(ngModel)]="email" name="email"placeholder="davidL@lavid.org"></ion-input>
+    </ion-card>
+    <p></p>
+
     <ion-item>
       <ion-label>Phone:</ion-label>
-      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter phone"></ion-input>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="214-444-5555"></ion-input>
     </ion-item>
-    <!-- <Button>SAVE/EDIT</Button> -->
-   <!-- </ion-item> -->
-  <!-- {{nameFirst}}
-  {{nameLast}}
-  {{email}}
-  {{phoneNumber}}
-  {{bio}} -->
-  <p></p>
+    <p></p>
+
   <ion-item enter-bio>
     <ion-label>Bio:</ion-label>
-  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Enter more information here..."></ion-textarea>
+  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Just a small town boy who loves bartending!"></ion-textarea>
     <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
       <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-item>
@@ -116,15 +81,6 @@
 
 
   <ion-button (click)="saveSettings()">SAVE CHANGES</ion-button>
-  
-  <div class-name=werkerFavs>
-    <ul>
-      <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
-      <!-- <li><a href>Fav1 Maker1</a></li>
-      <li><a href>Fav2 Maker2</a></li>
-      <li><a href>Fav3 Maker3</a></li> -->
-    </ul>
-  </div>
 
 </form>
-</ion-content>
+</ion-card>

@@ -1,9 +1,6 @@
-<h3>
-  werker-upcoming-shift works!
-</h3>
-
 <div class-name="werker-shift-expanded">
-  <div class-name="shift-name">{{upcomingShift.name}}</div>
+  <ion-card-title class-name="shift-name">{{upcomingShift.name}}</ion-card-title>
+  <!-- <div class-name="shift-name">{{upcomingShift.name}}</div> -->
   <div class-name="shift-address">{{upcomingShift.address}}</div>
   <div class-name="shift-time_date">{{upcomingShift.time_date}}</div>
   <div class-name="shift-description">
@@ -11,8 +8,8 @@
   </div>
   <div class-name="invite-position">Looking for: Bartender</div>
   <p></p>
-  <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">ACCEPT</ion-button>
-  <ion-button (click)="acceptOrDecline('declined')" class-name="button-decline">DECLINE</ion-button>
+  <ion-button (click)="accept('accepted')" class-name="button-accept">ACCEPT</ion-button>
+  <ion-button (click)="decline('declined')" class-name="button-decline">DECLINE</ion-button>
   <p></p>
   <div class-name="shift_maker-name">Posted by: Shift M. Aker</div>
   <p></p>

@@ -23,6 +23,7 @@ import { MakerHistoryShiftCondensedComponent } from './maker-history-shift-conde
 import { MakerNotificationsComponent } from './maker-notifications/maker-notifications.component';
 import { MakerScheduleComponent } from './maker-schedule/maker-schedule.component';
 import { MakerSearchComponent } from './maker-search/maker-search.component';
+import { MatExpansionModule } from '@angular/material';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MatExpansionModule,
     CommonModule,
     FormsModule,
     IonicModule,
