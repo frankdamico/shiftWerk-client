@@ -9,7 +9,7 @@ import { ShiftService } from 'src/app/shift.service'
 export class WerkerSearchComponent implements OnInit {
 
   constructor(
-    private shiftService: ShiftService
+    private shiftService: ShiftService,
   ) { }
 
   shifts: any;
