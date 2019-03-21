@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-maker-profile',
@@ -7,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MakerProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public toastController: ToastController
+
+  ) { }
+
+  async presentToast(answer) {
+    const toast = await this.toastController.create({
+      message: `Profile ${answer}...Thanks!`,
+      duration: 2000,
+      color: "primary",
+      position: "top"
+    });
+    toast.present();
+  }
+
+  update(answer) {
+    this.presentToast(answer);
+  }
 
   ngOnInit() {}
 
