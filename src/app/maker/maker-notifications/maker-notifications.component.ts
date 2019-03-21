@@ -14,10 +14,10 @@ export class MakerNotificationsComponent implements OnInit {
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
-      message: `Invitation ${answer}d`,
+      message: `Invitation ${answer}`,
       duration: 2000,
-      color: "primary",
-      position: "top"
+      color: 'primary',
+      position: 'top'
     });
     toast.present();
   }
