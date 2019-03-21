@@ -16,7 +16,7 @@
   </mat-expansion-panel> -->
 
 <ion-list>
-  <ion-item (click)="expandItem(shift)" *ngFor="let shift of shifts" (click)="goToShift()">
+  <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -29,7 +29,7 @@
   
     {{shift.description}}<br><br>
     {{shift.address}}
-  
+  <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
   </mat-expansion-panel>
     
      <!-- <button ion-button full>

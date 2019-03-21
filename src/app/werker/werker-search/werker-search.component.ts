@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service'
-import { MatExpansionModule } from '@angular/material/expansion';
 import data from 'mockDataShift.json';
 
 
@@ -26,17 +25,11 @@ export class WerkerSearchComponent implements OnInit {
       this.shifts = data;
     });
   }
-  expandItem(item) {
 
-    // this.shifts.forEach(shift => {
-    //   if (item.id === shift.id) {
-    //     item.expanded = true;
-    //   }
-    // })
-
+  applyForShift(shift) {
+    console.log(shift);
   }
-
-
+  
   searchFunc = (event) => {
     this.shiftService.getShiftsByTerm(event).subscribe(shifts => {
       this.shifts = shifts;
