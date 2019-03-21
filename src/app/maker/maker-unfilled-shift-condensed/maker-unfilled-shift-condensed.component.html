@@ -1,14 +1,13 @@
-<!-- <p>maker-history-shift-condensed</p> -->
 <!-- !!! NEEDS TO DISPLAY POSITIONS !!! -->
-
-<div class-name="app-maker-history-shift-condensed">
+<div class-name="app-maker-unfilled-shift-condensed">
   <p></p>
-  <ion-card>
+  <ion-card width="100%" padding="5px">
     <ion-card-title>4/6 FILLED</ion-card-title>
     <div><em><b>2 needed</b></em></div>
     <div class-name="shift-name"><b>{{shift.name}}</b></div>
     <div class-name="shift-address">{{shift.address}}</div>
     <div class-name="shift-time_date">{{shift.time_date}}</div>
+    <ion-button href="/shifts/:shiftId/invite" expand="block" color="tertiary">Invite Werkers</ion-button>
   </ion-card> 
   <p></p>
 </div>

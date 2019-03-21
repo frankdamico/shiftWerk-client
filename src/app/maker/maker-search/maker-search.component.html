@@ -1,3 +1,4 @@
+<h3>Search</h3>
 <ion-searchbar [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
 <ion-list>
   <ion-item *ngFor="let werker of werkers" (click)="goToProfile()">

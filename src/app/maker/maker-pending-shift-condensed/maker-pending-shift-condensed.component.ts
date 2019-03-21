@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from 'src/app/shift.service';
 
@@ -9,9 +9,9 @@ import { ShiftService } from 'src/app/shift.service';
   styleUrls: ['./maker-pending-shift-condensed.component.scss'],
 })
 
-// @Injectable({
-//   providedIn: 'root'
-// })
+@Injectable({
+  providedIn: 'root'
+})
 
 export class MakerPendingShiftCondensedComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class MakerPendingShiftCondensedComponent implements OnInit {
     public makerService: MakerService,
     public shiftService: ShiftService
   ) { }
+
   @Input() shift: object;
 
   ngOnInit() {
