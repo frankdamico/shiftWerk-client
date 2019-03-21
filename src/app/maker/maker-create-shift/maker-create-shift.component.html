@@ -1,6 +1,29 @@
-<p>maker-create-shift works!</p>
 <h3>Create a Shift</h3>
-<form maker-create-shift>
+
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <ion-button type="submit">Submit Shift</ion-button>
+    <ion-button (click)="addPosition()">Add Position</ion-button>
+<ion-card class="form" enter-maker>
+    <ion-input [(ngModel)]="shiftName" name="shiftName" placeholder="Enter shift name"> Shift Name: </ion-input>
+  <p></p>
+    Date: <ion-datetime [(ngModel)]="shiftStart" name="shiftStart" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for date & time"></ion-datetime>
+  <p></p>
+    Ending time:<ion-datetime [(ngModel)]="shiftEnd" name="shiftEnd" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for ending time"></ion-datetime>
+  <p></p>
+    <ion-input [(ngModel)]="shiftDesc" name="shiftDesc" placeholder="Enter a short description">Description: </ion-input>
+  <p></p>
+    <ion-label>Position:</ion-label>
+    <ion-input [(ngModel)]="position" name="position" placeholder="Enter a single position"></ion-input>
+    <ion-input [(ngModel)]="quantity" name="quantity" placeholder="Quantity"></ion-input>
+    <ion-input [(ngModel)]="paymentAmnt" name="paymentAmnt" placeholder="Payment Amount"></ion-input>
+    <ion-input [(ngModel)]="paymentType" name="paymentType" placeholder="Payment Type"></ion-input>
+  <p></p>
+</ion-card>
+</form>
+
+
+
+<!-- <form maker-create-shift>
   <ion-item enter-shift-name>
     <ion-label>Event:</ion-label>
     <ion-input placeholder="Enter event name"></ion-input>
@@ -11,7 +34,6 @@
       <ion-label>Date/Time</ion-label>
       <ion-datetime display-format="MMM DD, YYYY HH:mm"></ion-datetime>
       <ion-input placeholder="Enter date/time/duration"></ion-input>
-      <!-- <input placeholder="Enter date/time/duration"></input> -->
       <input type="date" id="shift-date" name="shift-date"
       min="2019-01-01" max="2099-12-31">
       <input type="time" id="shift-time" name="shift-time">
@@ -50,14 +72,12 @@
     </select>
 
     <ion-button>CREATE SHIFT</ion-button>
-    <!-- invite workers -->
     ---------------------------------
     <div class-name=makerFavs>
       <ul>
-        <!--v hrefs below - CHANGE to ionic or ang routerLink v-->
         <li><a href>Fav1 Werker1</a></li>
         <li><a href>Fav2 Werker2</a></li>
         <li><a href>Fav3 Werker3</a></li>
       </ul>
-  </div>
+  </div> -->
 
