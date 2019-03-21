@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const serverUrl = "http://35.185.77.220:4000";
+const serverUrl = 'http://35.185.77.220:4000';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -54,7 +54,7 @@ export class MakerService {
       .pipe(catchError(err => throwError(err)));
   }
   getHistory(id: number): Observable<any> {
-    return this.http.get(`${serverUrl}/makers/${id}/shifts/history`)
+    return this.http.get(`${serverUrl}/makers/${id}/fulfilled/history`)
       .pipe(catchError(err => throwError(err)));
   }
 }

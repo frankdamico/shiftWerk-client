@@ -63,11 +63,11 @@ export class ShiftService {
     return this.http.get(`${serverUrl}/shifts`).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
-    )
+    );
   }
   /**
-   * @function sends a query with specific search terms
-   * @param {event} the search terms taken in by the search bar, returns an observable
+   * sends a query with specific search terms
+   * @param event the search terms taken in by the search bar, returns an observable
    */
   getShiftsByTerm(event): Observable<any> {
     let params = new HttpParams();
@@ -77,6 +77,6 @@ export class ShiftService {
       .pipe(
         map(this.extractData),
         catchError(err => throwError(err))
-      )
+      );
   }
 }
