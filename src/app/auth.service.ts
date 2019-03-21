@@ -117,4 +117,8 @@ export class AuthService {
       : this.http.get(`${serverUrl}/makers/1`);
   }
 
+  public getDefaultUser(role: string): Observable<any> {
+    return this.http.get(`${serverUrl}/${role}/1`)
+      .pipe(catchError(err => throwError(err)));
+  }
 }

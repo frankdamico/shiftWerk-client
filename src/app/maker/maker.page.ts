@@ -3,6 +3,7 @@ import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
 import data from 'mockDataShift.json';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-maker',
@@ -14,10 +15,12 @@ export class MakerPage implements OnInit {
   constructor(
     public makerService: MakerService,
     public shiftService: ShiftService,
+    public authService: AuthService,
     public loadingController: LoadingController
   ) { }
   maker: any;
   shifts: any;
+  applications: any;
   view: any;
 
   async getShifts() {
@@ -37,7 +40,7 @@ export class MakerPage implements OnInit {
   async getMaker() {
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.makerService.getMakerInfo()
+    await this.authService.getDefaultUser('makers')
       .subscribe(res => {
         console.log('MEOW');
         console.log(res);
@@ -49,8 +52,23 @@ export class MakerPage implements OnInit {
       });
   }
 
+  async getApplications() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getApplications(this.maker.id)
+      .subscribe(res => {
+        console.log(res);
+        this.applications = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
   ngOnInit() {
-    this.maker = this.makerService.getMakerById(0);
+    this.getMaker()
+      .then(() => this.getApplications());
     console.log(this.maker);
     this.getShifts();
     this.view = 'home';
