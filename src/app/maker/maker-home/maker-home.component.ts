@@ -9,7 +9,8 @@ export class MakerHomeComponent implements OnInit {
 
   constructor() { }
 
-  @Input() shifts: Array<any>;
+  @Input() unfulfilled: Array<any>;
+  @Input() fulfilled: Array<any>;
   ngOnInit() {}
 
 }

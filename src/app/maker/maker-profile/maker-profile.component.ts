@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-maker-profile',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MakerProfileComponent implements OnInit {
 
   constructor() { }
+  @Input() maker: any;
 
   ngOnInit() {}
 
