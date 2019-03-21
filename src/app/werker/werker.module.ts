@@ -21,7 +21,11 @@ import { WerkerPastShiftComponent} from './werker-past-shift/werker-past-shift.c
 import { WerkerInvitedShiftsComponent } from './werker-invited-shifts/werker-invited-shifts.component';
 import { WerkerInvitedShiftComponent } from './werker-invited-shift/werker-invited-shift.component';
 import { WerkerUpcomingShiftsComponent } from './werker-upcoming-shifts/werker-upcoming-shifts.component';
-import { WerkerUpcomingShiftComponent} from './werker-upcoming-shift/werker-upcoming-shift.component';
+import { WerkerUpcomingShiftComponent } from './werker-upcoming-shift/werker-upcoming-shift.component';
+import { WerkerSearchExpandedComponent } from './werker-search-expanded/werker-search-expanded.component';
+import { WerkerSearchCondensedComponent} from './werker-search-condensed/werker-search-condensed.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -32,6 +36,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MatExpansionModule,
+    // BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -55,6 +61,8 @@ const routes: Routes = [
     WerkerInvitedShiftComponent,
     WerkerUpcomingShiftsComponent,
     WerkerUpcomingShiftComponent,
+    WerkerSearchExpandedComponent,
+    WerkerSearchCondensedComponent,
   ]
 })
 export class WerkerPageModule {}
