@@ -3,7 +3,7 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
     <ion-button type="submit">Submit Shift</ion-button>
     <ion-button (click)="addPosition()">Add Position</ion-button>
-<ion-card class="form" enter-maker>
+<ion-card class="form" enter-maker color="light" padding="5px">
     <ion-input [(ngModel)]="shiftName" name="shiftName" placeholder="Enter shift name"> Shift Name: </ion-input>
   <p></p>
     Date: <ion-datetime [(ngModel)]="shiftStart" name="shiftStart" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for date & time"></ion-datetime>
