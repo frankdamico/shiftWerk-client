@@ -64,6 +64,7 @@ export class WerkerPage implements OnInit {
         // uncomment out later to get this to work with real data
         // this.upcomingShifts = res;
         this.upcomingShifts = data;
+
       }, err => {
         console.error(err);
       });
@@ -76,7 +77,8 @@ export class WerkerPage implements OnInit {
         console.log(res);
         // uncomment out later to get this to work with real data
         // this.pastShifts = res;
-        this.pastShifts = data;
+        this.pastShifts = data.slice(-3);
+        console.log(this.pastShifts, 'past')
       }, err => {
         console.error(err);
       });

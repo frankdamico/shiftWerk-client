@@ -11,9 +11,9 @@ export class WerkerProfileComponent implements OnInit {
 
   // grabs input from HTML
   // if i need the value use this.nameFirst
-  public nameFirst:string;
-  public nameLast:string;
-  public email:string;
+  public nameFirst:string = "David";
+  public nameLast:string = "Lum";
+  public email:string ;
   public phoneNumber:number;
   public positions:string[] = [];
   public availability:boolean = false;
