@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-werker-history',
@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WerkerHistoryComponent implements OnInit {
 
+  @Input()
+  pastShifts: Array<Object>;
+
   constructor() { }
 
   ngOnInit() {}
 
+  rateShift(shift) {
+    console.log(shift);
+  }
 }
