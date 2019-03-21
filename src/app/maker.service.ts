@@ -48,5 +48,9 @@ export class MakerService {
     return this.http.get(`${serverUrl}/profile`, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
+  getApplications(id): Observable<any> {
+    return this.http.get(`${serverUrl}/makers/${id}/applications`)
+      .pipe(catchError(err => throwError(err)));
+  }
 }
 
