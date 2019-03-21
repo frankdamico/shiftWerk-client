@@ -1,3 +1,16 @@
-<p>
-  NO WERKER HISTORY
-</p>
+<ion-list>
+  <ion-item *ngFor="let pastShift of pastShifts">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ pastShift.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- This is a summary of the content -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      {{pastShift.description}}<br><br>
+      {{pastShift.address}}
+      <ion-button (click)="rateShift(pastShift)" size="default" expand="block" color="primary">RATE</ion-button>
+    </mat-expansion-panel>
