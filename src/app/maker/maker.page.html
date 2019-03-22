@@ -5,11 +5,11 @@
 </ion-header>
  
 <ion-content padding>
-  <app-maker-home [shifts]="shifts" *ngIf="view === 'home'"></app-maker-home>
-  <app-maker-unfilled-shifts [shifts]="shifts" *ngIf="view === 'unfilled'"></app-maker-unfilled-shifts>
-  <app-maker-notifications *ngIf="view === 'notifications'"></app-maker-notifications>
-  <app-maker-profile *ngIf="view === 'profile'"></app-maker-profile>
-  <app-maker-history-shifts [shifts]="shifts" *ngIf="view === 'history'"></app-maker-history-shifts>
+  <app-maker-home [unfulfilled]="unfulfilled" [fulfilled]="upcomingFulfilled" *ngIf="view === 'home'"></app-maker-home>
+  <app-maker-unfilled-shifts [shifts]="unfulfilled" *ngIf="view === 'unfilled'"></app-maker-unfilled-shifts>
+  <app-maker-notifications [applications]="applications" *ngIf="view === 'notifications'"></app-maker-notifications>
+  <app-maker-profile [maker]="maker" *ngIf="view === 'profile'"></app-maker-profile>
+  <app-maker-history-shifts [shifts]="history" *ngIf="view === 'history'"></app-maker-history-shifts>
   <app-maker-schedule *ngIf="view === 'schedule'"></app-maker-schedule>
   <app-maker-search *ngIf="view === 'search'"></app-maker-search>
   <app-maker-create-shift *ngIf="view === 'createShift'"></app-maker-create-shift>
