@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import data from 'mockDataMaker.json';
 import { makeBindingParser } from '@angular/compiler';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const serverUrl = "http://35.185.77.220:4000";
+const serverUrl = 'http://35.185.77.220:4000';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,8 +19,6 @@ export class MakerService {
    * @todo make network request for makers from DB
    * @todo change type signature to Array<Maker>
    */
-  allMakers: Array<any> = data;
-  werker: any;
 
   /** @method getMakerById
    * gets Maker from database by id
@@ -29,10 +26,6 @@ export class MakerService {
 
   private extractData(res: Response): Response | object {
     return res || {};
-  }
-
-  getMakerById(id: Number): Object {
-    return this.allMakers.find(maker => maker.id === id)
   }
   getWerkers(event): Observable < any > {
     let params = new HttpParams();
@@ -42,14 +35,26 @@ export class MakerService {
       .pipe(
         map(this.extractData),
         catchError(err => throwError(err))
-      )
+      );
   }
-  getMakerInfo(): Observable<any> {
-    return this.http.get(`${serverUrl}/profile`, httpOptions)
+  getMakerInfo(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/makers/${id}`, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
-  getApplications(id): Observable<any> {
+  getApplications(id: number): Observable<any> {
     return this.http.get(`${serverUrl}/makers/${id}/applications`)
+      .pipe(catchError(err => throwError(err)));
+  }
+  getUpcomingFulfilledShifts(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/makers/${id}/fulfilled/upcoming`)
+      .pipe(catchError(err => throwError(err)));
+  }
+  getUnfulfilledShifts(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/makers/${id}/unfulfilled`)
+      .pipe(catchError(err => throwError(err)));
+  }
+  getHistory(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/makers/${id}/fulfilled/history`)
       .pipe(catchError(err => throwError(err)));
   }
 }
