@@ -118,7 +118,8 @@ export class AuthService {
   }
 
   public getDefaultUser(role: string): Observable<any> {
-    return this.http.get(`${serverUrl}/${role}/1`)
+    //currently set to 5 because there is no 1
+    return this.http.get(`${serverUrl}/${role}/5`)
       .pipe(catchError(err => throwError(err)));
   }
 }
