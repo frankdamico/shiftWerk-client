@@ -4,26 +4,55 @@
   <!-- <ion-item enter-werker> -->
     <ion-card color="light" padding="5px">
       <ion-label>Name:</ion-label>
-      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="David"></ion-input>
-      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Lum"></ion-input>
+      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="Enter First Name"></ion-input>
+      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Enter Last Name"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="5px">
       <ion-label>Email:</ion-label>
-      <ion-input [(ngModel)]="email" name="email"placeholder="davidL@lavid.org"></ion-input>
+      <ion-input [(ngModel)]="email" name="email"placeholder="Enter E-mail"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="5px">
       <ion-label>Phone:</ion-label>
-      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="214-444-5555"></ion-input>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter Phone Number"></ion-input>
+          <a button icon-start ion-button full (click)="callNum()">
+            <ion-icon name="call"></ion-icon>
+            <i class="icon ion-ios-telephone"></i>
+          </a>
     </ion-card>
     <p></p>
 
+
+
+
+    <!-- <ion-icon\\\ (click)="callNum()" name="call"></ion-icon>
+    <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Enter phone"></ion-input>
+    <a button icon-start ion-button full (click)="callNum()">
+      <ion-icon name="call"></ion-icon>
+      <i class="icon ion-ios-telephone"></i>
+    </a>
+    </ion-item>
+    <Button>SAVE/EDIT</Button>
+    </ion-item>
+   {{nameFirst}}
+      {{nameLast}}
+      {{email}}
+      {{phoneNumber}}
+      {{bio}}
+    <p></p>
+    <ion-item enter-bio> -->
+
+
+
+
+
+
   <ion-card enter-bio color="light" padding="5px">
     <ion-label>Bio:</ion-label>
-  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Just a small town boy who loves bartending!"></ion-textarea>
+  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
     <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
       <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-card>
