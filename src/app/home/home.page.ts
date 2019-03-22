@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router
@@ -19,5 +19,11 @@ export class HomePage {
         this.auth.user = res;
         this.router.navigateByUrl(`${role}-home`);
       });
+  }
+  tryLogin(role: string) {
+    this.auth.signIn(role)
+      .subscribe();
+  }
+  ngOnInit() {
   }
 }
