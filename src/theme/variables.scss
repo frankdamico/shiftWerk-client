@@ -11,24 +11,24 @@
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: rgb(127, 107, 148);
+  --ion-color-primary-tint: rgb(210, 61, 230);
 
   /** secondary **/
-  --ion-color-secondary: #0cd1e8;
+  --ion-color-secondary: #2ec4b6;
   --ion-color-secondary-rgb: 12, 209, 232;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #0bb8cc;
-  --ion-color-secondary-tint: #24d6ea;
+  --ion-color-secondary-shade: #225550;
+  --ion-color-secondary-tint: #58e9e9;
 
   /** tertiary **/
-  --ion-color-tertiary: #7044ff;
+  --ion-color-tertiary: #e2ffa8;
   --ion-color-tertiary-rgb: 112, 68, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #633ce0;
-  --ion-color-tertiary-tint: #7e57ff;
+  --ion-color-tertiary-shade: #486809;
+  --ion-color-tertiary-tint: #a6bb7b;
 
   /** success **/
   --ion-color-success: #10dc60;
@@ -39,12 +39,12 @@
   --ion-color-success-tint: #28e070;
 
   /** warning **/
-  --ion-color-warning: #ffce00;
+  --ion-color-warning: #ff6666;
   --ion-color-warning-rgb: 255, 206, 0;
   --ion-color-warning-contrast: #ffffff;
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: #e0b500;
-  --ion-color-warning-tint: #ffd31a;
+  --ion-color-warning-shade: #642626;
+  --ion-color-warning-tint: #f39e9e;
 
   /** danger **/
   --ion-color-danger: #f04141;
@@ -77,4 +77,13 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  // --ion-font-family: 'Raleway';
 };
+ 
+// @font-face {
+//   font-family: 'Raleway';
+//   font-style: normal;
+//   font-weight: normal;
+//   src: '../assets/fonts/Raleway.ttf';
+// }
