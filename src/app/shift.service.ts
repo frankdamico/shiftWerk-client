@@ -58,9 +58,9 @@ export class ShiftService {
     )
   }
   // TODO TEST TO MAKE SURE IT WORKS
-  getInvitedShifts(): Observable<any> {
-    // /werkers/:werkerId/shifts/invited
-    return this.http.get(`${serverUrl}/shifts`).pipe(
+  getInvitedShifts(werkerId): Observable<any> {
+    // /werkers/:werkerId/invitations
+    return this.http.get(`${serverUrl}/werkers/${werkerId}/invitations`).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
     );
