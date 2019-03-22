@@ -24,6 +24,7 @@ import { MakerNotificationsComponent } from './maker-notifications/maker-notific
 import { MakerNotificationComponent } from './maker-notification/maker-notification.component';
 import { MakerScheduleComponent } from './maker-schedule/maker-schedule.component';
 import { MakerSearchComponent } from './maker-search/maker-search.component';
+import { MatExpansionModule } from '@angular/material';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MatExpansionModule,
     CommonModule,
     FormsModule,
     IonicModule,

@@ -15,7 +15,7 @@ const serverUrl = 'http://35.185.77.220:4000';
 export class ShiftService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
   /**
    * @deprecated
@@ -78,5 +78,16 @@ export class ShiftService {
         map(this.extractData),
         catchError(err => throwError(err))
       );
+  }
+  /**
+   * @function submitShift creates a new shift
+   * @param {shiftBody} the proper information needed to create the shift
+   */
+  submitShift(formData): Observable<any> {
+    console.log(formData);
+    return;
+    return this.http.put(`${serverUrl}/shifts`, { } ).pipe(
+      catchError(error => throwError(error))
+    )
   }
 }

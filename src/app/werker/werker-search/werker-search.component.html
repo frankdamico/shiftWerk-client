@@ -1,4 +1,5 @@
-<ion-searchbar [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
+<h3>Search Shifts</h3>
+<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
   debounce="750"></ion-searchbar>
 
   <!-- <mat-expansion-panel>
@@ -19,7 +20,7 @@
   <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title color="light">
        {{ shift.name }}
       </mat-panel-title>
       <mat-panel-description>
