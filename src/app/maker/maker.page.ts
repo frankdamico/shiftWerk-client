@@ -42,7 +42,8 @@ export class MakerPage implements OnInit {
   async getMaker() {
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.authService.getDefaultUser('makers')
+    // makers id is 1
+    await this.authService.getDefaultUser('makers', 1)
       .subscribe(res => {
         console.log('MEOW');
         console.log(res);
