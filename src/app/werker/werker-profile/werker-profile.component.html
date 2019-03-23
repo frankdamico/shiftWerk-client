@@ -22,39 +22,21 @@
             <ion-icon name="call"></ion-icon>
             <i class="icon ion-ios-telephone"></i>
           </a>
-    </ion-card>
+        </ion-card>
+    <ion-card color="light" padding="5px">
+      <ion-label>Photo</ion-label>
+      <!-- <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter Phone Number"></ion-input> -->
+            <a button icon-start ion-button full (click)="openCamera()">
+              <ion-icon name="camera"></ion-icon>
+              <i class="icon ion-ios-telephone"></i>
+            </a>
+        </ion-card>
+
     <p></p>
-
-
-
-
-    <!-- <ion-icon\\\ (click)="callNum()" name="call"></ion-icon>
-    <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Enter phone"></ion-input>
-    <a button icon-start ion-button full (click)="callNum()">
-      <ion-icon name="call"></ion-icon>
-      <i class="icon ion-ios-telephone"></i>
-    </a>
-    </ion-item>
-    <Button>SAVE/EDIT</Button>
-    </ion-item>
-   {{nameFirst}}
-      {{nameLast}}
-      {{email}}
-      {{phoneNumber}}
-      {{bio}}
-    <p></p>
-    <ion-item enter-bio> -->
-
-
-
-
-
 
   <ion-card enter-bio color="light" padding="5px">
     <ion-label>Bio:</ion-label>
   <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
-    <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
-      <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
   </ion-card>
 
   <!-- <ion-card color="light" padding="5px"> -->
