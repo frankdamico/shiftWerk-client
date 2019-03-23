@@ -62,18 +62,18 @@ export class WerkerPage implements OnInit {
   }
 
   // TODO NEED TO TEST
-  // async getUpcomingShifts() {
-  //   await this.shiftService.getUpcomingShifts()
-  //     .subscribe(res => {
-  //       console.log(res);
-  //       // uncomment out later to get this to work with real data
-  //       // this.upcomingShifts = res;
-  //       this.upcomingShifts = data.slice(2, 5);
+  async getUpcomingShifts(werkerId) {
+    await this.shiftService.getUpcomingShifts(werkerId, 'upcoming')
+      .subscribe(res => {
+        console.log(res);
+        // uncomment out later to get this to work with real data
+        this.upcomingShifts = res;
+        // this.upcomingShifts = data.slice(2, 5);
 
-  //     }, err => {
-  //       console.error(err);
-  //     });
-  // }
+      }, err => {
+        console.error(err);
+      });
+  }
 
   // TODO NEED TO TEST
   // async getPastShifts() {
@@ -95,11 +95,13 @@ export class WerkerPage implements OnInit {
   async getWerker() {
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.authService.getDefaultUser('werkers')
+    // werkers id is currently set to 5
+    await this.authService.getDefaultUser('werkers', 5)
       .subscribe(res => {
         console.log(res);
         this.werker = res;
         this.getInvitedShifts(this.werker.id);
+        this.getUpcomingShifts(this.werker.id);
         loading.dismiss();
       }, err => {
         console.error(err);
@@ -109,7 +111,8 @@ export class WerkerPage implements OnInit {
   ngOnInit() {
     // double check do i still need this line since i built getWerker?
     // this.werker = this.werkerService.getWerkerById(0);
-    this.getWerker();
+    this.getWerker()
+
     // this.getShifts();
 
     // uncomment out later to get shifts for components
