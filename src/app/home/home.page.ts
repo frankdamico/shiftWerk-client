@@ -14,9 +14,15 @@ export class HomePage implements OnInit {
   ) {}
   login(role: string) {
     this.auth.login(role)
-      .subscribe();
+      .subscribe(res => this.router.navigate([`${role}-home`]), err => console.error(err));
   }
   tryLogin(role: string) {
+    this.auth.checkLogin()
+      .subscribe(res => console.log(res), err => console.error(err));
+  }
+  logout() {
+    this.auth.signOut()
+      .subscribe(auth => console.log(auth), err => console.error(err));
   }
   ngOnInit() {
   }

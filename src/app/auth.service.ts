@@ -9,7 +9,7 @@ import { Werker, Maker } from './types';
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://localhost:4000';
+const serverUrl = 'http://35.185.77.220:4000';
 const localUrl = 'http://localhost:4000';
 
 @Injectable({
@@ -196,7 +196,7 @@ export class AuthService {
    * @param role - either 'werkers' or 'makers'
    */
   public getDefaultUser(role: string): Observable<any> {
-    return this.http.get(`${serverUrl}/${role}/5`)
+    return this.http.get(`${serverUrl}/${role}/2`)
       .pipe(catchError(err => throwError(err)));
   }
 }
