@@ -20,6 +20,11 @@
           {{ werker.email }}
         </ion-item>
         <ion-item text-wrap color="light"><ion-label text-wrap>Phone: </ion-label>
+          
+          <a button icon-start ion-button full (click)="callNum()">
+            <ion-icon name="call"></ion-icon>
+            <i class="icon ion-ios-telephone"></i>
+          </a>
           {{ werker.phone }}
         </ion-item>
         <ion-item enter-bio text-wrap color="light"><ion-label text-wrap>Bio: </ion-label>
@@ -33,7 +38,7 @@
               <ion-item color="light">
                 <ion-button>Server</ion-button>
                 <!-- <ion-toggle (click)="werkerPosition('Server')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
 
               </ion-item>
               <ion-item color="light">
@@ -51,7 +56,7 @@
               <ion-item color="light">
                 <ion-button>Bartender</ion-button>
                 <!-- <ion-toggle (click)="werkerPosition('Bartender')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
 
               </ion-item>
             </ion-list>
