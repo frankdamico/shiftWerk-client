@@ -1,8 +1,10 @@
-<ion-card width="100%" color="light" padding="5px">
-  <ion-card-title><h2>New Werker application!</h2></ion-card-title>
-  <div><h3><b><em>Shift:</em> {{application.name}}</b></h3></div>
-  <div><h4><em>Werker:</em><b>{{application.name_first}} {{application.name_last}}</b></h4></div>
-  <div><h4><em>Position:</em><b>{{application.position}}</b></h4></div>
-<ion-button (click)="accept('accepted')" expand="block" color="secondary">Accept</ion-button>  
-<ion-button (click)="decline('declined')" expand="block" color="tertiary">Decline</ion-button>  
+<ion-card maker-notification color="warning" width="100%">
+  <ion-card width="100%" color="light" padding="2px">
+    <ion-card-title><h2>New Werker application!</h2></ion-card-title>
+    <div><h3><b><em>Shift:</em> {{application.name}}</b></h3></div>
+    <div><h4><em>Werker:</em><b>{{application.name_first}} {{application.name_last}}</b></h4></div>
+    <div><h4><em>Position:</em><b>{{application.position}}</b></h4></div>
+  <ion-button (click)="accept('accepted')" expand="block" color="primary">Accept</ion-button>  
+  <ion-button (click)="decline('declined')" expand="block" color="warning">Decline</ion-button>  
+  </ion-card>
 </ion-card>
