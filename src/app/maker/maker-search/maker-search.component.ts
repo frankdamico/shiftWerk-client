@@ -49,8 +49,12 @@ export class MakerSearchComponent implements OnInit {
     })
   }
 
-  setWerkers = () => {
+  favorite = () => {
+    console.log('faved');
+  }
 
+  text = () => {
+    console.log('texting')
   }
 
   goToProfile = () => {
