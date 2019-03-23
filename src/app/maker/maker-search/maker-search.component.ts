@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-// import { ShiftService } from 'src/app/shift.service'
+import { RatingComponent } from 'src/app/rating/rating.component'
 import { MakerService } from 'src/app/maker.service';
 import { ToastController } from '@ionic/angular';
 
@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
   selector: 'app-maker-search',
   templateUrl: './maker-search.component.html',
   styleUrls: ['./maker-search.component.scss'],
+  providers: [RatingComponent],
 })
 
 
@@ -17,7 +18,8 @@ export class MakerSearchComponent implements OnInit {
   view = 'search';
   constructor(
     private makerService: MakerService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private rating: RatingComponent
   ) { }
 
   async presentToast(answer) {
@@ -60,4 +62,5 @@ export class MakerSearchComponent implements OnInit {
   goToProfile = () => {
     console.log('wentToProfile');
   }
+  
 }

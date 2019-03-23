@@ -25,6 +25,7 @@ import { MakerNotificationComponent } from './maker-notification/maker-notificat
 import { MakerScheduleComponent } from './maker-schedule/maker-schedule.component';
 import { MakerSearchComponent } from './maker-search/maker-search.component';
 import { MatExpansionModule } from '@angular/material';
+import { RatingComponent } from '../rating/rating.component';
 
 
 const routes: Routes = [
@@ -63,6 +64,7 @@ const routes: Routes = [
     MakerNotificationsComponent,
     MakerScheduleComponent,
     MakerSearchComponent,
+    RatingComponent,
   ]
 })
 export class MakerPageModule {}
