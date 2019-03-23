@@ -23,11 +23,12 @@ export class MakerCreateShiftComponent implements OnInit {
 
   ngOnInit() {
     this.sForm = new FormGroup({
-      shiftName: new FormControl(),
-      shiftAdd: new FormControl(),
-      shiftStart: new FormControl(),
-      shiftEnd: new FormControl(),
-      shiftDesc: new FormControl(),
+      name: new FormControl(),
+      address: new FormControl(),
+      time_date: new FormControl(),
+      duration: new FormControl(),
+      // shiftEnd: new FormControl(),
+      description: new FormControl(),
       positions: new FormArray([])
     });
   }
@@ -38,10 +39,10 @@ export class MakerCreateShiftComponent implements OnInit {
 
   addPosition() {
     this.position = new FormGroup({
-      [`positionNeeded${this.count}`]: new FormControl(),
-      [`quantity${this.count}`]: new FormControl(),
-      [`paymentAmnt${this.count}`]: new FormControl(),
-      [`paymentType${this.count}`]: new FormControl(),
+      [`position${this.count}`]: new FormControl(),
+      // [`quantity${this.count}`]: new FormControl(),
+      [`payment_amnt${this.count}`]: new FormControl(),
+      [`payment_type${this.count}`]: new FormControl(),
     })
     this.positions.push(this.position);
     this.count++;
@@ -54,11 +55,10 @@ export class MakerCreateShiftComponent implements OnInit {
 
   submit = () => {
     console.log('submitting');
-    this.view = 'search';
     console.log(this.sForm.value);
-    // this.shiftService.submitShift(f.value).subscribe(response => {
-    //   console.log(response);
-    //   }
-    // )
+    this.shiftService.submitShift(this.sForm.value).subscribe(response => {
+      console.log(response);
+      }
+    )
   }
 }
