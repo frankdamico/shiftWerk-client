@@ -2,7 +2,7 @@
 
 <ion-button (click)="submit()" (ngSubmit)="submit()" type="submit">Submit Shift</ion-button>
 <ion-button (click)="addPosition()">Add Position</ion-button>
-<ion-card>
+<ion-card color="tertiary">
   <form [formGroup]="sForm">
   <ion-input [(ngModel)]="name" formControlName="name" placeholder="Enter the Event Name">Shift Name:</ion-input>
   <ion-input [(ngModel)]="address" formControlName="address" placeholder="Enter the event location">Address:</ion-input>
@@ -22,5 +22,6 @@
     </div>
   </div>
   </form>
+  </ion-card>
 
 

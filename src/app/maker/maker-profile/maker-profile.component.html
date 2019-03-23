@@ -1,12 +1,12 @@
 <h3>Profile</h3>
 <ion-card enter-maker>
 <form>
-    <ion-card color="light" padding="5px" padding="5px"><ion-thumbnail item-right>
-        <ion-img padding="5px" src="../../assets/fd.png"></ion-img>
-    </ion-thumbnail>
-      <ion-label>Name:</ion-label>
-      <ion-input placeholder="Frank"></ion-input>
-      <ion-input placeholder="D'Amico"></ion-input>
+
+    <ion-card color="light" padding="5px" padding="5px">
+      <ion-thumbnail><ion-img padding="5px" src="../../assets/fd.png"></ion-img>
+      </ion-thumbnail>
+      <ion-label>Name:</ion-label><ion-input placeholder="Frank D'Amico"></ion-input>
+          <!-- <ion-input placeholder="D'Amico"></ion-input> -->
     </ion-card>
     <p></p>
 
@@ -24,19 +24,17 @@
 
     <ion-card color="light" padding="5px">
         <ion-label>Bio:</ion-label>
-        <ion-textarea padding="
-        5px" placeholder="Server for 5 years in fine dining and for catering company.  Bartender for special events. Currently attending mime school because i like it quiet."></ion-textarea> 
+        <ion-textarea placeholder="Server for 5 years in fine dining and for catering company.  Bartender for special events. Currently attending mime school because i like it quiet."></ion-textarea> 
       </ion-card>  
 
-      <ion-input placeholder="">
+      <!-- <ion-input placeholder=""> -->
         <!-- <div>[ XXXXX <div></div> PHOTO <div></div>XXXXX <div></div> IMAGE <div></div> XXXXX ] <div></div><ion-button size="small" color="secondary">ADD/CHANGE PHOTO</ion-button></div> -->
-      </ion-input>
-
+      <!-- </ion-input> -->
+      <ion-button color="secondary" (click)="update('UPDATED')" class-name="button-update">SAVE/UPDATE PROFILE</ion-button>
     </form>
   </ion-card>
   
   <!-- <ion-button expand="block">SAVE/EDIT MAKER PROFILE</ion-button> -->
-  <ion-button color="secondary" (click)="update('UPDATED')" class-name="button-update">SAVE/UPDATE PROFILE</ion-button>
 
   
 
