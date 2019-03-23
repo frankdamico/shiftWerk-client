@@ -13,9 +13,7 @@ import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
-
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
-
   shifts: any;
 
   constructor(
@@ -25,6 +23,7 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
   ) { }
 
   @Input() shift: object;
+  @Input() unfilled: Array<any>;
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
