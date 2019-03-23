@@ -8,6 +8,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
 const serverUrl = 'http://35.185.77.220:4000';
+// const serverUrl = 'http://localhost:4001';
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +43,9 @@ export class ShiftService {
   }
 
   // TODO TEST TO MAKE SURE IT WORKS
-  getUpcomingShifts(): Observable<any> {
-    // /werkers/:werkerId/shifts/upcoming
-    return this.http.get(`${serverUrl}/shifts`).pipe(
+  getUpcomingShifts(werkerId, histOrUpcoming): Observable<any> {
+    // /werkers/:werkerId/shifts/:histOrUpcoming
+    return this.http.get(`${serverUrl}/werkers/${werkerId}/shifts/${histOrUpcoming}`).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
     )
@@ -57,10 +58,9 @@ export class ShiftService {
       catchError(err => throwError(err))
     )
   }
-  // TODO TEST TO MAKE SURE IT WORKS
-  getInvitedShifts(): Observable<any> {
-    // /werkers/:werkerId/shifts/invited
-    return this.http.get(`${serverUrl}/shifts`).pipe(
+
+  getInvitedShifts(werkerId): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${werkerId}/invitations`).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
     );
@@ -83,10 +83,19 @@ export class ShiftService {
    * @function submitShift creates a new shift
    * @param {shiftBody} the proper information needed to create the shift
    */
-  submitShift(formData): Observable<any> {
-    console.log(formData);
-    return;
-    return this.http.put(`${serverUrl}/shifts`, { } ).pipe(
+  submitShift(formData, makerId): Observable<any> {
+
+    const submittedShift = {
+      MakerId: makerId,
+      name: formData.name,
+      duration: formData.duration,
+      description: formData.description,
+      address: formData.address,
+      time_date: formData.time_date,
+      positions: formData.positions,
+    }
+
+    return this.http.put(`${serverUrl}/shifts`, JSON.stringify(submittedShift), httpOptions).pipe(
       catchError(error => throwError(error))
     )
   }
