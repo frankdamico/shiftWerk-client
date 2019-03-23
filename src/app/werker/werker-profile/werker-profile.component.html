@@ -1,105 +1,101 @@
-<h3>Your Profile</h3>
-<ion-content>
+<h3>Profile</h3>
+<ion-card enter-werker>
 <form>
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 1</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 2</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 3</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 4</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>Item 5</ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
   <!-- <ion-item enter-werker> -->
-    <ion-item>
-      <ion-label>First Name:</ion-label>
-      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="First name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Last Name:</ion-label>
-      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Last name"></ion-input>
-    </ion-item>
-    <ion-item>
+    <ion-card color="light" padding="5px">
+      <ion-label>Name:</ion-label>
+      <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="Enter First Name"></ion-input>
+      <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Enter Last Name"></ion-input>
+    </ion-card>
+    <p></p>
+
+    <ion-card color="light" padding="5px">
       <ion-label>Email:</ion-label>
-      <ion-input [(ngModel)]="email" name="email"placeholder="Enter email"></ion-input>
-    </ion-item>
-    <ion-item>
+      <ion-input [(ngModel)]="email" name="email"placeholder="Enter E-mail"></ion-input>
+    </ion-card>
+    <p></p>
+
+    <ion-card color="light" padding="5px">
       <ion-label>Phone:</ion-label>
-      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter phone"></ion-input>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter Phone Number"></ion-input>
+          <a button icon-start ion-button full (click)="callNum()">
+            <ion-icon name="call"></ion-icon>
+            <i class="icon ion-ios-telephone"></i>
+          </a>
+    </ion-card>
+    <p></p>
+
+
+
+
+    <!-- <ion-icon\\\ (click)="callNum()" name="call"></ion-icon>
+    <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Enter phone"></ion-input>
+    <a button icon-start ion-button full (click)="callNum()">
+      <ion-icon name="call"></ion-icon>
+      <i class="icon ion-ios-telephone"></i>
+    </a>
     </ion-item>
-    <!-- <Button>SAVE/EDIT</Button> -->
-   <!-- </ion-item> -->
-  <!-- {{nameFirst}}
-  {{nameLast}}
-  {{email}}
-  {{phoneNumber}}
-  {{bio}} -->
-  <p></p>
-  <ion-item enter-bio>
+    <Button>SAVE/EDIT</Button>
+    </ion-item>
+   {{nameFirst}}
+      {{nameLast}}
+      {{email}}
+      {{phoneNumber}}
+      {{bio}}
+    <p></p>
+    <ion-item enter-bio> -->
+
+
+
+
+
+
+  <ion-card enter-bio color="light" padding="5px">
     <ion-label>Bio:</ion-label>
-  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Enter more information here..."></ion-textarea>
+  <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
     <!-- <ion-textarea placeholder="Enter short bio. Include brief work experience and tell us a little about yourself."></ion-textarea>  -->
       <!-- <textarea rows="4" placeholder="Enter short bio"></textarea> -->
-  </ion-item>
+  </ion-card>
 
+  <!-- <ion-card color="light" padding="5px"> -->
   <ion-item enter-positions>
-    <ion-list>
-      <ion-item>
+    <ion-list color="light" padding="5px">
+      <ion-item color="light">
         <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
         Select position(s):
       </ion-item>
-      <ion-item>
+        <ion-item color="light">
         <ion-button>Server</ion-button>
-        <ion-toggle (click)="werkerPosition('Server')" slot="end"></ion-toggle>
+        <ion-toggle (click)="werkerPosition('Server')" slot="end" checked="true"></ion-toggle>
       </ion-item>
-      <ion-item>
+      <ion-item color="light">
         <ion-button>Expeditor</ion-button>
         <ion-toggle (click)="werkerPosition('Expeditor')"slot="end"></ion-toggle>
       </ion-item>
-      <ion-item>
+      <ion-item color="light">
         <ion-button>Busser</ion-button>
         <ion-toggle (click)="werkerPosition('Busser')"slot="end"></ion-toggle>
       </ion-item>
-      <ion-item>
-        <ion-button>Hostess</ion-button>
+      <ion-item color="light">
+        <ion-button>Hosting</ion-button>
         <ion-toggle (click)="werkerPosition('Hostess')" slot="end"></ion-toggle>
       </ion-item>
-      <ion-item>
+      <ion-item color="light">
         <ion-button>Bartender</ion-button>
-        <ion-toggle (click)="werkerPosition('Bartender')" slot="end"></ion-toggle>
+        <ion-toggle (click)="werkerPosition('Bartender')" checked="true" slot="end"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-item>
+<!-- </ion-card> -->
 
   <p></p>
-  <ion-item last-minute>
+  <ion-item last-minute color="light" padding="5px">
     <!-- Rounded switch -->
     <label class="switch">
       <!-- <input type="checkbox"> -->
       <span class="slider round">
         <ion-label>Available Last-Minute</ion-label>
-        <ion-toggle (click)="lastMinAvail()" slot="end"></ion-toggle>
+        <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle>
         <!-- <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle> -->
       </span>
     </label>
@@ -116,15 +112,6 @@
 
 
   <ion-button (click)="saveSettings()">SAVE CHANGES</ion-button>
-  
-  <div class-name=werkerFavs>
-    <ul>
-      <!-- v-- hrefs below - CHANGE to ionic or ang routerLink --v -->
-      <!-- <li><a href>Fav1 Maker1</a></li>
-      <li><a href>Fav2 Maker2</a></li>
-      <li><a href>Fav3 Maker3</a></li> -->
-    </ul>
-  </div>
 
 </form>
-</ion-content>
+</ion-card>

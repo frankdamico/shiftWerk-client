@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
-import data from 'mockDataShift.json';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-maker',
@@ -14,11 +14,16 @@ export class MakerPage implements OnInit {
   constructor(
     public makerService: MakerService,
     public shiftService: ShiftService,
+    public authService: AuthService,
     public loadingController: LoadingController
   ) { }
   maker: any;
-  shifts: any;
+  shifts: [];
+  applications: any;
   view: any;
+  upcomingFulfilled: any;
+  unfulfilled: any;
+  history: any;
 
   async getShifts() {
     const loading = await this.loadingController.create();
@@ -26,8 +31,8 @@ export class MakerPage implements OnInit {
     await this.shiftService.getAllShifts()
       .subscribe(res => {
         console.log(res);
-        // this.shifts = res; // uncomment to access live data
-        this.shifts = data; // mock data
+        this.shifts = res; // uncomment to access live data
+        // this.shifts = data; // mock data
         loading.dismiss();
       }, err => {
         console.error(err);
@@ -37,7 +42,7 @@ export class MakerPage implements OnInit {
   async getMaker() {
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.makerService.getMakerInfo()
+    await this.authService.getDefaultUser('makers')
       .subscribe(res => {
         console.log('MEOW');
         console.log(res);
@@ -49,10 +54,71 @@ export class MakerPage implements OnInit {
       });
   }
 
+  async getApplications() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getApplications(this.maker.id)
+      .subscribe(res => {
+        console.log(res);
+        this.applications = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getUpcomingFulfilled() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getUpcomingFulfilledShifts(this.maker.id)
+      .subscribe(res => {
+        console.log('fulfilled', res);
+        this.upcomingFulfilled = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getUnfulfilled() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getUnfulfilledShifts(this.maker.id)
+      .subscribe(res => {
+        console.log('unfulfilled', res);
+        this.unfulfilled = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getHistory() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getHistory(this.maker.id)
+      .subscribe(res => {
+        console.log('history', res);
+        this.history = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
   ngOnInit() {
-    this.maker = this.makerService.getMakerById(0);
-    console.log(this.maker);
-    this.getShifts();
+    this.getMaker()
+      .then(() => this.getApplications())
+      .then(() => this.getUpcomingFulfilled())
+      .then(() => this.getUnfulfilled())
+      .then(() => this.getHistory())
+      .then(() => {
+        console.log(this.maker);
+      });
     this.view = 'home';
   }
   onNavClick(view: string) {

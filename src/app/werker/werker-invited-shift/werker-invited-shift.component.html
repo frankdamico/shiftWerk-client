@@ -1,0 +1,16 @@
+<div class-name="werker-shift-expanded">
+    <ion-card-title class-name="shift-name">{{invitedShift.name}}</ion-card-title>
+    <!-- <div class-name="shift-name">{{invitedShift.name}}</div> -->
+    <div class-name="shift-address">{{invitedShift.address}}</div>
+    <div class-name="shift-time_date">{{invitedShift.time_date}}</div>
+    <div class-name="shift-description">
+      <p>{{invitedShift.description}}</p>
+    </div>
+    <div class-name="invite-position">Looking for: Bartender</div>
+    <p></p>
+    <ion-button (click)="accept('accepted')" class-name="button-accept">ACCEPT</ion-button>
+    <ion-button (click)="decline('declined')" class-name="button-decline">DECLINE</ion-button>
+    <p></p>
+    <div class-name="shift_maker-name">Posted by: Shift M. Aker</div>
+  <p></p>
+</div>

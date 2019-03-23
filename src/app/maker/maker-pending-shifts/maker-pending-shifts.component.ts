@@ -22,7 +22,6 @@ export class MakerPendingShiftsComponent implements OnInit {
   @Input() shifts: Array<any>;
 
   ngOnInit() {
-    this.shiftService.getAllShifts();
   }
 
 }

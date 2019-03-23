@@ -1,49 +1,42 @@
-<h3>Your Maker Profile</h3>
-<!-- <form> -->
-  <ion-card enter-maker>
-    <ion-card>
+<h3>Profile</h3>
+<ion-card enter-maker>
+<form>
+    <ion-card color="light" padding="5px" padding="5px"><ion-thumbnail item-right>
+        <ion-img padding="5px" src="../../assets/fd.png"></ion-img>
+    </ion-thumbnail>
       <ion-label>Name:</ion-label>
-      <ion-input placeholder="Enter first name"></ion-input>
-      <ion-input placeholder="and last name"></ion-input>
+      <ion-input placeholder="Frank"></ion-input>
+      <ion-input placeholder="D'Amico"></ion-input>
     </ion-card>
     <p></p>
 
-    <ion-card>
+    <ion-card color="light" padding="5px" padding="5px">
       <ion-label>Email:</ion-label>
-      <ion-input placeholder="Enter email"></ion-input>
+      <ion-input placeholder="frankieD123@hawtmale.com"></ion-input>
     </ion-card>
     <p></p>
 
-    <ion-card>
+    <ion-card color="light" padding="5px">
       <ion-label>Phone:</ion-label>
-      <ion-input placeholder="Enter phone"></ion-input>
+      <ion-input placeholder="504-550-1812"></ion-input>
     </ion-card>
     <p></p>
 
-    <ion-card>
+    <ion-card color="light" padding="5px">
         <ion-label>Bio:</ion-label>
-        <ion-textarea placeholder="Enter short bio.  Include brief work experience and tell us a little about yourself."></ion-textarea> 
+        <ion-textarea padding="
+        5px" placeholder="Server for 5 years in fine dining and for catering company.  Bartender for special events. Currently attending mime school because i like it quiet."></ion-textarea> 
       </ion-card>  
 
-  </ion-card>
-  
-  <ion-card enter-photo>
-    <ion-input placeholder="">
-      <div>[ XXXXX <div></div> PHOTO <div></div>XXXXX <div></div> IMAGE <div></div> XXXXX ] <div></div><ion-button>ADD/CHANGE PHOTO</ion-button></div>
-    </ion-input>
-  </ion-card>
-  
-  <!-- <ion-button>SAVE/EDIT</ion-button> -->
-  <ion-button>SAVE/EDIT MAKER PROFILE</ion-button>
-  
-  <!-- <div class-name=makerFavs>
-      <ul>
-        <li><a href>Fav1 Werker1</a></li>
-        <li><a href>Fav2 Werker2</a></li>
-        <li><a href>Fav3 Werker3</a></li>
-      </ul>
-    </div>
-  </div> -->
+      <ion-input placeholder="">
+        <!-- <div>[ XXXXX <div></div> PHOTO <div></div>XXXXX <div></div> IMAGE <div></div> XXXXX ] <div></div><ion-button size="small" color="secondary">ADD/CHANGE PHOTO</ion-button></div> -->
+      </ion-input>
 
-<!-- </form> -->
+    </form>
+  </ion-card>
+  
+  <!-- <ion-button expand="block">SAVE/EDIT MAKER PROFILE</ion-button> -->
+  <ion-button color="secondary" (click)="update('UPDATED')" class-name="button-update">SAVE/UPDATE PROFILE</ion-button>
+
+  
 

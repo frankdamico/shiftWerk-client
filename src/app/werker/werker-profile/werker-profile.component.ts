@@ -11,10 +11,11 @@ export class WerkerProfileComponent implements OnInit {
 
   // grabs input from HTML
   // if i need the value use this.nameFirst
-  public nameFirst:string;
-  public nameLast:string;
+  public nameFirst:string = "David";
+  public nameLast:string = "Lum";
   public email:string;
-  public phoneNumber:number;
+  // need to figure out how to format input from 1231231234 to 123-123-1234
+  public phoneNumber:any = '123-123-1234'; 
   public positions:string[] = [];
   public availability:boolean = false;
   public bio:string;
@@ -23,7 +24,8 @@ export class WerkerProfileComponent implements OnInit {
 
   constructor(
     public toastController: ToastController,
-    public werkerService: WerkerService
+    public werkerService: WerkerService,
+
   ) { }
   
   async presentToast() {
@@ -36,6 +38,11 @@ export class WerkerProfileComponent implements OnInit {
     toast.present();
   }
 
+  callNum() {
+    setTimeout(() => {
+      window.open(`tel:${this.phoneNumber}`, '_system');
+    }, 100);
+  }
   lastMinAvail() {
     this.availability = !this.availability;
   }

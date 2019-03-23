@@ -1,9 +1,72 @@
-<ion-searchbar [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
+<h3>Search Werkers</h3>
+<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
 <ion-list>
   <ion-item *ngFor="let werker of werkers" (click)="goToProfile()">
-    <button ion-button full>
-      {{ werker.name_first }}
-    </button>
+
+    <!-- <ion-card width="100%" padding="5px">
+      {{ werker.url }}
+    </ion-card> -->
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title color="light">
+            {{ werker.name_first }} {{ werker.name_last }}
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ion-item text-wrap color="light"><ion-label text-wrap>Email: </ion-label> 
+          {{ werker.email }}
+        </ion-item>
+        <ion-item text-wrap color="light"><ion-label text-wrap>Phone: </ion-label>
+          {{ werker.phone }}
+        </ion-item>
+        <ion-item enter-bio text-wrap color="light"><ion-label text-wrap>Bio: </ion-label>
+          {{ werker.bio }}
+        </ion-item>
+        <ion-item enter-positions color="light">
+            <ion-list>
+              <ion-item color="light">
+                Werker position(s):
+              </ion-item>
+              <ion-item color="light">
+                <ion-button>Server</ion-button>
+                <!-- <ion-toggle (click)="werkerPosition('Server')" slot="end" checked="true"></ion-toggle> -->
+                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+
+              </ion-item>
+              <ion-item color="light">
+                <ion-button fill="outline">Expeditor</ion-button>
+                <!-- <ion-toggle (click)="werkerPosition('Expeditor')"slot="end"></ion-toggle> -->
+              </ion-item>
+              <ion-item color="light">
+                <ion-button fill="outline">Busser</ion-button>
+                <!-- <ion-toggle (click)="werkerPosition('Busser')"slot="end"></ion-toggle> -->
+              </ion-item>
+              <ion-item color="light">
+                <ion-button fill="outline">Hosting</ion-button>
+                <!-- <ion-toggle (click)="werkerPosition('Hostess')" slot="end"></ion-toggle> -->
+              </ion-item>
+              <ion-item color="light">
+                <ion-button>Bartender</ion-button>
+                <!-- <ion-toggle (click)="werkerPosition('Bartender')" slot="end" checked="true"></ion-toggle> -->
+                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+
+              </ion-item>
+            </ion-list>
+          </ion-item>
+          <p></p>
+          <ion-item last-minute color="light">
+            <label class="switch">
+              <span class="slider round">
+                <ion-label>Available Last-Minute:</ion-label> YES!
+                <!-- <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle> -->
+              </span>
+            </label>
+          </ion-item>
+    </mat-expansion-panel>
+    
   </ion-item>
 </ion-list>
 

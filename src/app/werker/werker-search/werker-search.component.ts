@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service'
+import data from 'mockDataShift.json';
+
 
 @Component({
   selector: 'app-werker-search',
@@ -8,18 +10,26 @@ import { ShiftService } from 'src/app/shift.service'
 })
 export class WerkerSearchComponent implements OnInit {
 
+  shifts: any;
+
+
   constructor(
     private shiftService: ShiftService,
   ) { }
+  
+  
 
-  shifts: any;
-  view = 'search'
   ngOnInit() {
     this.shiftService.getAllShifts().subscribe(shifts => {
-      this.shifts = shifts;
+      // this.shifts = shifts;
+      this.shifts = data;
     });
   }
 
+  applyForShift(shift) {
+    console.log(shift);
+  }
+  
   searchFunc = (event) => {
     this.shiftService.getShiftsByTerm(event).subscribe(shifts => {
       this.shifts = shifts;

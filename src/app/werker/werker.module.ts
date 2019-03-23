@@ -16,6 +16,14 @@ import { WerkerScheduleComponent } from './werker-schedule/werker-schedule.compo
 import { WerkerShiftSmallComponent } from './werker-shift-small/werker-shift-small.component';
 import { WerkerShiftExpandedComponent } from './werker-shift-expanded/werker-shift-expanded.component';
 import { WerkerNavbarComponent } from './werker-navbar/werker-navbar.component';
+import { WerkerPastShiftsComponent } from './werker-past-shifts/werker-past-shifts.component';
+import { WerkerPastShiftComponent} from './werker-past-shift/werker-past-shift.component';
+import { WerkerInvitedShiftsComponent } from './werker-invited-shifts/werker-invited-shifts.component';
+import { WerkerInvitedShiftComponent } from './werker-invited-shift/werker-invited-shift.component';
+import { WerkerUpcomingShiftsComponent } from './werker-upcoming-shifts/werker-upcoming-shifts.component';
+import { WerkerUpcomingShiftComponent } from './werker-upcoming-shift/werker-upcoming-shift.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -26,6 +34,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MatExpansionModule,
+    // BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -42,7 +52,13 @@ const routes: Routes = [
     WerkerScheduleComponent,
     WerkerShiftSmallComponent,
     WerkerShiftExpandedComponent,
-    WerkerNavbarComponent
+    WerkerNavbarComponent,
+    WerkerPastShiftsComponent,
+    WerkerPastShiftComponent,
+    WerkerInvitedShiftsComponent,
+    WerkerInvitedShiftComponent,
+    WerkerUpcomingShiftsComponent,
+    WerkerUpcomingShiftComponent,
   ]
 })
 export class WerkerPageModule {}

@@ -1,9 +1,73 @@
-<ion-searchbar [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
+<h3>Search Shifts</h3>
+<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
   debounce="750"></ion-searchbar>
+
+  <!-- <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        This is the expansion title
+      </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  
+    <p>This is the primary content of the panel.</p>
+  
+  </mat-expansion-panel> -->
+
 <ion-list>
   <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
-    <button ion-button full>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title color="light">
+       {{ shift.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <!-- This is a summary of the content -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  
+    {{shift.description}}<br><br>
+    {{shift.address}}
+  <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
+  </mat-expansion-panel>
+    
+     <!-- <button ion-button full>
       {{ shift.name }}
-    </button>
-  </ion-item>
+    </button>  -->
+   </ion-item>
 </ion-list>
+
+<!-- <ion-list>
+  <button detail-none (click)="expandItem(shift)" ion-item *ngFor="let shift of shifts">
+      {{shift.name}}
+      <app-werker-search-expanded 
+      [expandHeight]="expandHeight"
+      [expanded]="expanded" 
+      [shift]="shift">
+    </app-werker-search-expanded>
+
+    <!- <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded">
+      Hello people
+    </expandable> -->
+    <!-- <button ion-button clear item-end>View</button>
+  </button>
+</ion-list> --> 
+
+<!-- 
+<-- <div class-name="werker-shift-expanded">
+  <div class-name="shift-name">{{upcomingShift.name}}</div>
+  <div class-name="shift-address">{{upcomingShift.address}}</div>
+  <div class-name="shift-time_date">{{upcomingShift.time_date}}</div>
+  <div class-name="shift-description">
+    <p>{{upcomingShift.description}}</p>
+  </div>
+  <div class-name="invite-position">Looking for: Bartender</div>
+  <p></p>
+  <ion-button (click)="acceptOrDecline('accepted')" class-name="button-accept">ACCEPT</ion-button>
+  <ion-button (click)="acceptOrDecline('declined')" class-name="button-decline">DECLINE</ion-button>
+  <p></p>
+  <div class-name="shift_maker-name">Posted by: Shift M. Aker</div>
+  <p></p>
+</div> --> 
