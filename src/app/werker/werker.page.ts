@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
-import data from 'mockDataShift.json';
+import { AuthService } from '../auth.service';
+import { concatMap, tap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-werker',
@@ -13,6 +15,7 @@ export class WerkerPage implements OnInit {
 
   constructor(
     public werkerService: WerkerService,
+    public authService: AuthService,
     public shiftService: ShiftService,
     public loadingController: LoadingController
   ) { }
@@ -22,94 +25,31 @@ export class WerkerPage implements OnInit {
   upcomingShifts: any;
   pastShifts: any;
   invitedShifts: any;
-  /**
-   * @method getShifts
-   * subscribes to {@link shiftService#getAllShifts}
-   */
 
-  async getShifts() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.shiftService.getAllShifts()
-      .subscribe(res => {
-        console.log(res);
-        // uncomment out later to get this to work with real data
-        // this.shifts = res;
-        this.shifts = data;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
-
-  // TODO NEED TO TEST
-  async getInvitedShifts() {
-    await this.shiftService.getInvitedShifts()
-      .subscribe(res => {
-        console.log(res);
-        // uncomment out later to get this to work with real data
-        // this.invitedShifts = res;
-        this.invitedShifts = data;
-      }, err => {
-        console.error(err);
-      });
-  }
-
-  // TODO NEED TO TEST
-  async getUpcomingShifts() {
-    await this.shiftService.getUpcomingShifts()
-      .subscribe(res => {
-        console.log(res);
-        // uncomment out later to get this to work with real data
-        // this.upcomingShifts = res;
-        this.upcomingShifts = data;
-
-      }, err => {
-        console.error(err);
-      });
-  }
-
-  // TODO NEED TO TEST
-  async getPastShifts() {
-    await this.shiftService.getPastShifts()
-      .subscribe(res => {
-        console.log(res);
-        // uncomment out later to get this to work with real data
-        // this.pastShifts = res;
-        this.pastShifts = data.slice(-3);
-        console.log(this.pastShifts, 'past')
-      }, err => {
-        console.error(err);
-      });
-  }
-  /**
-  * @method getWerker
-  * subscribes to {@link werkerService#getWerkerInfo}
-  */
-  async getWerker() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.werkerService.getWerkerInfo()
-      .subscribe(res => {
-        console.log(res);
-        this.werker = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
   ngOnInit() {
-    // double check do i still need this line since i built getWerker?
-    this.werker = this.werkerService.getWerkerById(0);
-    // this.getWerker();
-    this.getShifts();
-
-    // uncomment out later to get shifts for components
-    this.getInvitedShifts();
-    this.getPastShifts();
-    this.getUpcomingShifts();
+    this.loadingController.create()
+      .then(loading => {
+        loading.present();
+        this.authService.getDefaultUser('werkers')
+          .pipe(
+            tap(werker => this.werker = werker),
+            concatMap(werker => forkJoin(
+              this.werkerService.getAllAvailableShifts(werker.id),
+              this.werkerService.getUpcomingShifts(werker.id),
+              this.werkerService.getInvitations(werker.id),
+              this.werkerService.getHistory(werker.id)
+            ))
+          ).subscribe(([available, upcoming, invited, history]) => {
+            this.shifts = available;
+            this.upcomingShifts = upcoming;
+            this.invitedShifts = invited;
+            this.pastShifts = history;
+            loading.dismiss();
+          }, err => {
+            console.error(err);
+            loading.dismiss();
+          });
+      });
   }
 
   /** @method onNavClick
