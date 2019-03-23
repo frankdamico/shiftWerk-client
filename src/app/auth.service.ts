@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { GoogleAuthService } from 'ng-gapi';
 import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, forkJoin, from } from 'rxjs';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { Observable, throwError, from, forkJoin, of } from 'rxjs';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Werker, Maker } from './types';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://35.185.77.220:4000';
+const serverUrl = 'http://localhost:4000';
+const localUrl = 'http://localhost:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +40,25 @@ export class AuthService {
         concatMap(res => res.signIn()),
         concatMap(res => this.signInSuccess(res, role)),
         concatMap(() => this.getToken()),
-        concatMap(token => this.saveLogin(token, role))
+        concatMap(token => this.saveLogin(token, role)),
+        catchError(err => throwError(err))
       );
+  }
+
+  public checkLogin(): Observable<boolean> {
+    return forkJoin(
+      this.getToken(),
+      this.getLocalUserInfo()
+    ).pipe(
+        concatMap(([token, user]) => {console.log(user, token); return user ? of(true) : this.verifyUser(token, user.type);}),
+        map(res => res !== 'bad credentials'),
+        catchError(err => of(true))
+      );
+  }
+
+  public signOut(): Observable<any> {
+    this.storage.clear();
+    return this.googleAuth.getAuth();
   }
 
   /**
@@ -61,7 +79,6 @@ export class AuthService {
    * @param role - either 'werker' or 'maker'
    */
   private signInSuccess(res, role: string): Observable<any> {
-    alert(JSON.stringify(res));
     const token = res.getAuthResponse();
     if (role === 'maker') {
       this.user = {
@@ -83,7 +100,6 @@ export class AuthService {
         shifts: []
       };
     }
-    alert(JSON.stringify(this.user));
     return from(Promise.all([
       this.storage.set(
         AuthService.STORAGE_KEY, token.access_token
@@ -107,23 +123,28 @@ export class AuthService {
   private saveLogin(token: string, role: string): Observable<any> {
     console.log(token);
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, token, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}`, { access_token: token }, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
   /**
    * gets user from local storage
    */
-  private getLocalUserInfo(): Observable<Werker | Maker> {
-    return from(this.storage.get('USER'))
-      .pipe(catchError(err => throwError(err)));
+  public getLocalUserInfo(): Observable<Werker | Maker> {
+    return from(this.storage.get(AuthService.USER))
+      .pipe(
+        tap(user => this.user = user),
+        catchError(err => throwError(err))
+      );
   }
 
   /**
    * gets access token from local storage
    */
   private getToken(): Observable<string> {
-    return from(this.storage.get(AuthService.STORAGE_KEY));
+    return from(this.storage.get(AuthService.STORAGE_KEY))
+      .pipe(catchError(err => throwError(err))
+    );
   }
 
   /**
@@ -137,7 +158,12 @@ export class AuthService {
    * @param role - either 'werker' or 'maker'
    */
   private verifyUser(token: string, role: string): Observable<any> {
-    return this.http.put('/login', token, httpOptions);
+    const endpoint = role === 'werker' ? 'werkers' : 'makers';
+    console.log(JSON.stringify(token));
+    return this.http.put(`${serverUrl}/${endpoint}/login`, { access_token: token }, httpOptions)
+      .pipe(
+        catchError(err => throwError(err))
+      );
   }
 
   /**
@@ -148,7 +174,10 @@ export class AuthService {
   private updateLocalUserInfo(values: Object): Observable<any> {
     return from(this.storage.set(
       AuthService.USER, Object.assign(this.user, values)
-      ));
+      ))
+      .pipe(
+        catchError(err => throwError(err))
+      );
   }
 
   /**
@@ -164,7 +193,7 @@ export class AuthService {
   /**
    * gets a default user for demonstration purposes
    *
-   * @param role - either 'werker' or 'maker'
+   * @param role - either 'werkers' or 'makers'
    */
   public getDefaultUser(role: string): Observable<any> {
     return this.http.get(`${serverUrl}/${role}/5`)
