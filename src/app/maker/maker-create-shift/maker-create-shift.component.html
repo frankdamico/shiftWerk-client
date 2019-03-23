@@ -6,7 +6,7 @@
   <form [formGroup]="sForm">
   <ion-input [(ngModel)]="name" formControlName="name" placeholder="Enter the Event Name">Shift Name:</ion-input>
   <ion-input [(ngModel)]="address" formControlName="address" placeholder="Enter the event location">Address:</ion-input>
-  <ion-input [(ngModel)]="duration" formControlName="duration" placeholder="How long will the event last?">Address:</ion-input>
+  <ion-input [(ngModel)]="duration" formControlName="duration" placeholder="How long will the event last?">Duration:</ion-input>
   Start:<ion-datetime [(ngModel)]="time_date" formControlName="time_date" placeholder="Enter the event start"
     display-format="MMM DD, YYYY h:mm a" min="2019"></ion-datetime>
   <!-- End:<ion-datetime [(ngModel)]="shiftEnd" formControlName="shiftEnd" placeholder="Enter the event end" 
