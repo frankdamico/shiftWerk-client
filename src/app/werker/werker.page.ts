@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
-import data from 'mockDataShift.json';
 import { AuthService } from '../auth.service';
 import { concatMap, tap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';

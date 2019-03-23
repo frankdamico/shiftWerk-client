@@ -196,7 +196,9 @@ export class AuthService {
    * @param role - either 'werkers' or 'makers'
    */
   public getDefaultUser(role: string): Observable<any> {
-    return this.http.get(`${serverUrl}/${role}/3`)
-      .pipe(catchError(err => throwError(err)));
+    if (role === 'makers') {
+      return this.http.get(`${serverUrl}/makers/2`);
+    }
+    return this.http.get(`${serverUrl}/werkers/5`);
   }
 }
