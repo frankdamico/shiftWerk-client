@@ -1,83 +1,26 @@
 <h3>Create a Shift</h3>
 
-<form #f="ngForm" (ngSubmit)="submit(f)">
-    <ion-button type="submit">Submit Shift</ion-button>
-    <ion-button (click)="addPosition()">Add Position</ion-button>
-<ion-card class="form" enter-maker color="light" padding="5px">
-    <ion-input [(ngModel)]="shiftName" name="shiftName" placeholder="Enter shift name"> Shift Name: </ion-input>
-  <p></p>
-    Date: <ion-datetime [(ngModel)]="shiftStart" name="shiftStart" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for date & time"></ion-datetime>
-  <p></p>
-    Ending time:<ion-datetime [(ngModel)]="shiftEnd" name="shiftEnd" display-format="MMM DD, YYYY h:mm a" min="2019" placeholder="Click for ending time"></ion-datetime>
-  <p></p>
-    <ion-input [(ngModel)]="shiftDesc" name="shiftDesc" placeholder="Enter a short description">Description: </ion-input>
-  <p></p>
-    <ion-label>Position:</ion-label>
-    <ion-input [(ngModel)]="position" name="position" placeholder="Enter a single position"></ion-input>
-    <ion-input [(ngModel)]="quantity" name="quantity" placeholder="Quantity"></ion-input>
-    <ion-input [(ngModel)]="paymentAmnt" name="paymentAmnt" placeholder="Payment Amount"></ion-input>
-    <ion-input [(ngModel)]="paymentType" name="paymentType" placeholder="Payment Type"></ion-input>
-  <p></p>
-</ion-card>
-</form>
+<ion-button (click)="submit()" (ngSubmit)="submit()" type="submit">Submit Shift</ion-button>
+<ion-button (click)="addPosition()">Add Position</ion-button>
+<ion-card>
+  <form [formGroup]="sForm">
+  <ion-input [(ngModel)]="name" formControlName="name" placeholder="Enter the Event Name">Shift Name:</ion-input>
+  <ion-input [(ngModel)]="address" formControlName="address" placeholder="Enter the event location">Address:</ion-input>
+  <ion-input [(ngModel)]="duration" formControlName="duration" placeholder="How long will the event last?">Address:</ion-input>
+  Start:<ion-datetime [(ngModel)]="time_date" formControlName="time_date" placeholder="Enter the event start"
+    display-format="MMM DD, YYYY h:mm a" min="2019"></ion-datetime>
+  <!-- End:<ion-datetime [(ngModel)]="shiftEnd" formControlName="shiftEnd" placeholder="Enter the event end" 
+    display-format="MMM DD, YYYY h:mm a" min="2019"></ion-datetime> -->
+  <ion-input [(ngModel)]="description" formControlName="description" placeholder="Enter a a short description">Description:</ion-input>
+  <div formArrayName="positions">
+    <div *ngFor="let position of positions.controls; let i=index" [formGroupName]="i">
+      <ion-input formControlName="position{{i}}" placeholder="Enter position name">Position:</ion-input>
+      <!-- <ion-input formControlName="quantity{{i}}" placeholder="Enter quantity">Quantity:</ion-input> -->
+      <ion-input formControlName="payment_amnt{{i}}" placeholder="Enter payment Amount">Payment Amount:</ion-input>
+      <ion-input formControlName="payment_type{{i}}" placeholder="PayPal? Cash? Vemno?">Payment Type:</ion-input>
+      <ion-button (click)="deletePosition()">Delete Position</ion-button>
+    </div>
+  </div>
+  </form>
 
-
-
-<!-- <form maker-create-shift>
-  <ion-item enter-shift-name>
-    <ion-label>Event:</ion-label>
-    <ion-input placeholder="Enter event name"></ion-input>
-        <input placeholder="Enter event name"/>
-    <p></p>
-
-    <ion-item enter-shift-date-time>
-      <ion-label>Date/Time</ion-label>
-      <ion-datetime display-format="MMM DD, YYYY HH:mm"></ion-datetime>
-      <ion-input placeholder="Enter date/time/duration"></ion-input>
-      <input type="date" id="shift-date" name="shift-date"
-      min="2019-01-01" max="2099-12-31">
-      <input type="time" id="shift-time" name="shift-time">
-    </ion-item>
-    <p></p>
-    <ion-label>Duration:</ion-label>
-    <ion-input placeholder="Duration"></ion-input>
-      <input placeholder="Duration"/>
-  </ion-item>
-
-  <p></p>
-  <ion-select shift-description>
-    <ion-label>Description:</ion-label>
-    <p></p>
-    <ion-textarea placeholder="Enter description: Formal party at private residence. White dress shirt required."></ion-textarea> 
-      <textarea rows="5" placeholder="Enter event description  "></textarea>
-  </ion-select>
-    <p></p>
-    <select name="Positions">
-      <option value="server">Server</option>
-      <option value="bartender">Bartender</option>
-      <option value="dishwasher">Dishwasher</option>
-      <option value="magician">Magician</option>
-    </select>
-    <select name="Needed">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-    <select name="Filled">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-
-    <ion-button>CREATE SHIFT</ion-button>
-    ---------------------------------
-    <div class-name=makerFavs>
-      <ul>
-        <li><a href>Fav1 Werker1</a></li>
-        <li><a href>Fav2 Werker2</a></li>
-        <li><a href>Fav3 Werker3</a></li>
-      </ul>
-  </div> -->
 
