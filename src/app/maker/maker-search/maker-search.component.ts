@@ -11,7 +11,8 @@ import { ToastController } from '@ionic/angular';
 
 
 export class MakerSearchComponent implements OnInit {
-
+  public phoneNumber:any = '123-123-1234'; 
+  public positions:string[] = [];
   werkers: any;
   view = 'search';
   constructor(
@@ -27,6 +28,11 @@ export class MakerSearchComponent implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+  callNum() {
+    setTimeout(() => {
+      window.open(`tel:${this.phoneNumber}`, '_system');
+    }, 100);
   }
 
   invite(answer) {

@@ -16,6 +16,8 @@ import { ToastController } from '@ionic/angular';
 
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
 
+  shifts: any;
+
   constructor(
     public makerService: MakerService,
     public shiftService: ShiftService,
