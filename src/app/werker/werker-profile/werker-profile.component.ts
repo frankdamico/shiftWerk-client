@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 
 @Component({
   selector: 'app-werker-profile',
@@ -25,6 +27,7 @@ export class WerkerProfileComponent implements OnInit {
   constructor(
     public toastController: ToastController,
     public werkerService: WerkerService,
+    private camera: Camera,
 
   ) { }
   
@@ -38,6 +41,57 @@ export class WerkerProfileComponent implements OnInit {
     toast.present();
   }
 
+  openCamera() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
+  }
+  openGallery() {
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
+    
+
+    // this.camera.getPicture(options).then((imageData) => {
+    //   // imageData is either a base64 encoded string or a file URI
+    //   // If it's base64 (DATA_URL):
+    //   let base64Image = 'data:image/jpeg;base64,' + imageData;
+    // }, (err) => {
+    //   // Handle error
+    // });
+  }
+  uploadImage() {
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
+
+
+    // this.camera.getPicture(options).then((imageData) => {
+    //   // imageData is either a base64 encoded string or a file URI
+    //   // If it's base64 (DATA_URL):
+    //   let base64Image = 'data:image/jpeg;base64,' + imageData;
+    // }, (err) => {
+    //   // Handle error
+    // });
+
+  }
   callNum() {
     setTimeout(() => {
       window.open(`tel:${this.phoneNumber}`, '_system');

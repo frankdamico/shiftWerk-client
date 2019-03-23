@@ -12,6 +12,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular';
+import { Cloudinary } from 'cloudinary-core';
+import { Camera } from '@ionic-native/camera/ngx';
 
 
 import {
@@ -50,9 +53,11 @@ const gapiClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig,
     }),
+    // CloudinaryModule.forRoot({ Cloudinary }, { cloud_name: ‘Your name’ } as CloudinaryConfiguration),
     IonicStorageModule.forRoot(),
   ],
   providers: [
+    Camera,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

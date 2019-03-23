@@ -91,4 +91,8 @@
     <plugin name="cordova-plugin-nativestorage" spec="2.3.2" />
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-camera" spec="4.0.3" />
 </widget>
+<edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+    <string>Used to take pictures</string>
+</edit-config>

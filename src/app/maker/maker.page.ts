@@ -27,6 +27,92 @@ export class MakerPage implements OnInit {
   unfulfilled: any;
   history: any;
 
+  async getShifts() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.shiftService.getAllShifts()
+      .subscribe(res => {
+        console.log(res);
+        this.shifts = res; // uncomment to access live data
+        // this.shifts = data; // mock data
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+  async getMaker() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    // makers id is 1
+    await this.authService.getDefaultUser('makers', 1)
+      .subscribe(res => {
+        console.log('MEOW');
+        console.log(res);
+        this.maker = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getApplications() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getApplications(this.maker.id)
+      .subscribe(res => {
+        console.log(res);
+        this.applications = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getUpcomingFulfilled() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getUpcomingFulfilledShifts(this.maker.id)
+      .subscribe(res => {
+        console.log('fulfilled', res);
+        this.upcomingFulfilled = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getUnfulfilled() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getUnfulfilledShifts(this.maker.id)
+      .subscribe(res => {
+        console.log('unfulfilled', res);
+        this.unfulfilled = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
+  async getHistory() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.makerService.getHistory(this.maker.id)
+      .subscribe(res => {
+        console.log('history', res);
+        this.history = res;
+        loading.dismiss();
+      }, err => {
+        console.error(err);
+        loading.dismiss();
+      });
+  }
+
   ngOnInit() {
     this.loadingController.create()
       .then(loading => {

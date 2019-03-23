@@ -12,7 +12,7 @@
   <app-maker-history-shifts [shifts]="history" *ngIf="view === 'history'"></app-maker-history-shifts>
   <app-maker-schedule *ngIf="view === 'schedule'"></app-maker-schedule>
   <app-maker-search *ngIf="view === 'search'"></app-maker-search>
-  <app-maker-create-shift *ngIf="view === 'createShift'"></app-maker-create-shift>
+  <app-maker-create-shift [maker]="maker" *ngIf="view === 'createShift'"></app-maker-create-shift>
 </ion-content>
 <ion-footer>
   <app-maker-navbar (NavClick)="onNavClick($event)"></app-maker-navbar>

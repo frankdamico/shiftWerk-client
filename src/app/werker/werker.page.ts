@@ -15,9 +15,9 @@ export class WerkerPage implements OnInit {
 
   constructor(
     public werkerService: WerkerService,
-    public authService: AuthService,
     public shiftService: ShiftService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public authService: AuthService,
   ) { }
   view = 'home';
   werker: any;
