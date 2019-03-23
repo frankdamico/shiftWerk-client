@@ -21,6 +21,9 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   ) { }
 
   @Input() shifts: Array<any>;
+  // unfilled: Array<any>;
+  // unfulfulled: Array<any>;
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   loadData(event) {
@@ -42,6 +45,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
 
   ngOnInit() {
     this.shiftService.getUpcomingShifts();
+    // this.makerService.getUnfulfilledShifts();
   }
 
 }

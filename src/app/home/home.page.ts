@@ -7,17 +7,23 @@ import { Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router
   ) {}
-  authorize(role: string) {
-    this.auth.setUserInfo(role)
-      .subscribe(res => {
-        console.log(res);
-        this.auth.user = res;
-        this.router.navigateByUrl(`${role}-home`);
-      });
+  login(role: string) {
+    this.auth.login(role)
+      .subscribe(res => this.router.navigate([`${role}-home`]), err => console.error(err));
+  }
+  tryLogin(role: string) {
+    this.auth.checkLogin()
+      .subscribe(res => console.log(res), err => console.error(err));
+  }
+  logout() {
+    this.auth.signOut()
+      .subscribe(auth => console.log(auth), err => console.error(err));
+  }
+  ngOnInit() {
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-// import { ShiftService } from 'src/app/shift.service'
+import { RatingComponent } from 'src/app/rating/rating.component'
 import { MakerService } from 'src/app/maker.service';
 import { ToastController } from '@ionic/angular';
 
@@ -7,16 +7,19 @@ import { ToastController } from '@ionic/angular';
   selector: 'app-maker-search',
   templateUrl: './maker-search.component.html',
   styleUrls: ['./maker-search.component.scss'],
+  providers: [RatingComponent],
 })
 
 
 export class MakerSearchComponent implements OnInit {
-
+  public phoneNumber:any = '123-123-1234'; 
+  public positions:string[] = [];
   werkers: any;
   view = 'search';
   constructor(
     private makerService: MakerService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private rating: RatingComponent
   ) { }
 
   async presentToast(answer) {
@@ -27,6 +30,11 @@ export class MakerSearchComponent implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+  callNum() {
+    setTimeout(() => {
+      window.open(`tel:${this.phoneNumber}`, '_system');
+    }, 100);
   }
 
   invite(answer) {
@@ -43,11 +51,16 @@ export class MakerSearchComponent implements OnInit {
     })
   }
 
-  setWerkers = () => {
+  favorite = () => {
+    console.log('faved');
+  }
 
+  text = () => {
+    console.log('texting')
   }
 
   goToProfile = () => {
     console.log('wentToProfile');
   }
+  
 }

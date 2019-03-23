@@ -1,15 +1,44 @@
-<!-- !!! NEEDS TO DISPLAY POSITIONS !!! -->
 <div class-name="app-maker-unfilled-shift-condensed">
-  <p></p>
-  <ion-card width="100%" padding="5px" color="light">
-    <ion-card-title>4/6 FILLED</ion-card-title>
-    <div><em><b>2 needed</b></em></div>
-    <div class-name="shift-name"><b>{{shift.name}}</b></div>
-    <div class-name="shift-address">{{shift.address}}</div>
-    <div class-name="shift-time_date">{{shift.time_date}}</div>
-    <!-- <ion-button href="/shifts/:shiftId/invite" expand="block" color="tertiary">Invite Werkers</ion-button> -->
-    <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE to WERKERS</ion-button>
+  
+  <ion-card maker-notification color="warning">
 
-  </ion-card> 
-  <p></p>
+    
+  <mat-expansion-panel multi="false">
+    
+      <mat-expansion-panel-header>
+        <mat-panel-title color="warning" >
+                <ion-icon name="alert" color="warning"></ion-icon>
+                <ion-label><b>{{shift.name}} </b>
+                <div class-name="shift-time_date"> {{shift.time_date | date:'MMM dd, yyyy h:mm a'}}</div>
+                </ion-label>
+        </mat-panel-title>
+      </mat-expansion-panel-header >
+
+      
+      <ion-item text-wrap color="light">
+        <ion-label text-wrap><b>Address:</b> {{shift.address}} </ion-label> 
+      </ion-item>
+
+
+      <ion-item text-wrap color="light">
+        <ion-label text-wrap><b>Position(s):</b></ion-label>Filled / Total
+      </ion-item>
+
+        <!-- <ion-list color="light"> -->
+        <ion-card color="light">
+          <ul>
+            
+            <li>unfilled {{unfilled}}</li>
+            <!-- <li>{{shift.positions[1].position}}</li> -->
+          </ul>
+        </ion-card>
+        <!-- </ion-list> -->
+
+      <ion-item color="light">
+          <em><b>   NEED 2 Werkers !</b>   Filled:</em> <h3>2</h3> <em>of</em> <h3>{{shift.positions.length}} </h3>
+      </ion-item>
+
+    
+  </mat-expansion-panel>
+  </ion-card>
 </div>

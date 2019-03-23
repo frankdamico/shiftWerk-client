@@ -10,21 +10,35 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title color="light">
-            {{ werker.name_first }} {{ werker.name_last }}
+          <ion-thumbnail><img src="{{ werker.url_photo }}"></ion-thumbnail> 
+          <ion-item lines="none">{{ werker.name_first }} {{ werker.name_last }}</ion-item>
         </mat-panel-title>
         <mat-panel-description>
-
+          
         </mat-panel-description>
-      </mat-expansion-panel-header>
-      <ion-item text-wrap color="light"><ion-label text-wrap>Email: </ion-label> 
-          {{ werker.email }}
+    </mat-expansion-panel-header>
+    
+      <ion-item enter-bio text-wrap color="light"><ion-label text-wrap>Bio: </ion-label>
+        {{ werker.bio }}
+      </ion-item>
+      <!-- <ion-item text-wrap color="light"><ion-label text-wrap> </ion-label> 
+        {{ werker.email }}
+      </ion-item> -->
+      <!-- <ion-item lines="none" text-wrap color="light" >{{ werker.phone }}<ion-label text-wrap></ion-label> -->
+        
+        <ion-item>
+          <ion-icon slot="start" name="heart-empty" (click)="favorite()"></ion-icon>
+          <ion-icon slot="end" name="call" (click)="callNum()"></ion-icon>
+          <ion-icon slot="end" name="text" (click)="text()"></ion-icon>
+          <ion-item lines="none"><app-rating></app-rating></ion-item>
         </ion-item>
-        <ion-item text-wrap color="light"><ion-label text-wrap>Phone: </ion-label>
-          {{ werker.phone }}
-        </ion-item>
-        <ion-item enter-bio text-wrap color="light"><ion-label text-wrap>Bio: </ion-label>
-          {{ werker.bio }}
-        </ion-item>
+
+          
+          <!-- <a button icon-start ion-button full (click)="callNum()">
+            <ion-icon name="call"></ion-icon>
+            <i class="icon ion-ios-telephone"></i>
+          </a> -->
+        <!-- </ion-item> -->
         <ion-item enter-positions color="light">
             <ion-list>
               <ion-item color="light">
@@ -33,7 +47,7 @@
               <ion-item color="light">
                 <ion-button>Server</ion-button>
                 <!-- <ion-toggle (click)="werkerPosition('Server')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
 
               </ion-item>
               <ion-item color="light">
@@ -51,7 +65,7 @@
               <ion-item color="light">
                 <ion-button>Bartender</ion-button>
                 <!-- <ion-toggle (click)="werkerPosition('Bartender')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
 
               </ion-item>
             </ion-list>
@@ -66,7 +80,6 @@
             </label>
           </ion-item>
     </mat-expansion-panel>
-    
   </ion-item>
 </ion-list>
 
