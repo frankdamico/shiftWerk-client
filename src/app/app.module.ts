@@ -27,7 +27,9 @@ const gapiClientConfig: NgGapiClientConfig = {
   scope: [
     'profile',
     'email',
-    'openid'
+    'openid',
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/user.phonenumbers.read',
   ].join(' ')
 };
 
