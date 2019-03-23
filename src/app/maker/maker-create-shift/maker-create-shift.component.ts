@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -16,6 +16,8 @@ export class MakerCreateShiftComponent implements OnInit {
   position: FormGroup;
   view: any;
 
+  @Input()
+  maker:any;
   constructor(
     private fb: FormBuilder,
     private shiftService: ShiftService) { 
@@ -56,7 +58,7 @@ export class MakerCreateShiftComponent implements OnInit {
   submit = () => {
     console.log('submitting');
     console.log(this.sForm.value);
-    this.shiftService.submitShift(this.sForm.value).subscribe(response => {
+    this.shiftService.submitShift(this.sForm.value, this.maker.id).subscribe(response => {
       console.log(response);
       }
     )
