@@ -12,17 +12,11 @@ export class HomePage implements OnInit {
     private auth: AuthService,
     private router: Router
   ) {}
-  authorize(role: string) {
-    this.auth.setUserInfo(role)
-      .subscribe(res => {
-        console.log(res);
-        this.auth.user = res;
-        this.router.navigateByUrl(`${role}-home`);
-      });
+  login(role: string) {
+    this.auth.login(role)
+      .subscribe();
   }
   tryLogin(role: string) {
-    this.auth.signIn(role)
-      .subscribe();
   }
   ngOnInit() {
   }
