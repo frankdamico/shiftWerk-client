@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import data from 'mockDataWerker.json';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -14,8 +13,7 @@ const serverUrl = 'http://35.185.77.220:4000';
 export class WerkerService {
 
   constructor(private http: HttpClient) { }
-  // TODO make allWerkers Array<Werker>
-  allWerkers: Array<any> = data;
+
   /** @method getWerkerById
    * gets Werker from db by id
    * currently reads mock data
@@ -26,6 +24,25 @@ export class WerkerService {
    * @todo make network request for DB data
    * @todo return Promise<Werker>
    */
+  public getWerkerById(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${id}`, httpOptions);
+  }
+
+  public getUpcomingShifts(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${id}/shifts/upcoming`, httpOptions);
+  }
+
+  public getHistory(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${id}/shifts/history`, httpOptions);
+  }
+
+  public getInvitations(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${id}/invitations`, httpOptions);
+  }
+
+  public getAllAvailableShifts(id: number): Observable<any> {
+    return this.http.get(`${serverUrl}/werkers/${id}/shifts/available`, httpOptions);
+  }
 
   /**
  * @method extractData
@@ -36,19 +53,9 @@ export class WerkerService {
   }
 
 
-  getWerkerById(id: Number): Object {
-    return this.allWerkers.find(werker => werker.id === id);
-  }
 
   updateProfileSettings(profileSettings): Observable<any> {
     return this.http.patch(`${serverUrl}/settings`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
-  }
-
-  getWerkerInfo(): Observable<any> {
-    // I believe this is working, its hitting the end point but /profile endpoint
-    // needs to be completed to receive data;
-    return this.http.get(`${serverUrl}/profile`, httpOptions)
-      .pipe(catchError(err => throwError(err)));
   }
 }
