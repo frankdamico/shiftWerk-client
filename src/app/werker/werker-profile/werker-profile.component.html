@@ -42,9 +42,9 @@
   <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
   </ion-card>
 
-  <!-- <ion-card color="light" padding="1px"> -->
-  <ion-item enter-positions>
-    <ion-list color="light" padding="1px">
+  <ion-card color="light" padding="1px">
+  <!-- <ion-item enter-positions> -->
+    <ion-list color="light">
       <ion-item color="light">
         <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
         Select position(s):
@@ -70,22 +70,21 @@
         <ion-toggle (click)="werkerPosition('Bartender')" checked="true" slot="end"></ion-toggle>
       </ion-item>
     </ion-list>
-  </ion-item>
-<!-- </ion-card> -->
+  <!-- </ion-item> -->
+</ion-card>
 
   <p></p>
-  <ion-card></ion-card>
-  <ion-item last-minute color="light" padding="1px">
+  <ion-card last-minute color="light" padding="1px">
     <!-- Rounded switch -->
     <label class="switch">
       <!-- <input type="checkbox"> -->
-      <span class="slider round">
-        <ion-label>Available Last-Minute</ion-label>
+      <ion-item class="slider round">
+        <ion-button><b>Available Last-Minute: </b></ion-button>
         <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle>
         <!-- <ion-toggle [(ngModel)]="Available Last-Minute"></ion-toggle> -->
-      </span>
+      </ion-item>
     </label>
-  </ion-item>
+  </ion-card>
   
   
 
