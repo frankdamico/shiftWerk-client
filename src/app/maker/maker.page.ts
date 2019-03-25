@@ -119,6 +119,7 @@ export class MakerPage implements OnInit {
         loading.present();
         this.authService.getDefaultUser('makers')
           .pipe(
+            tap(maker => this.maker = maker),
             concatMap(maker => forkJoin(
               this.makerService.getApplications(maker.id),
               this.makerService.getHistory(maker.id),
