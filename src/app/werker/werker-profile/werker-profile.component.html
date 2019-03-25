@@ -37,7 +37,12 @@
 
     <p></p>
 
-  <ion-card enter-bio color="light" padding="1px">
+    <ion-card enter-home color="light" padding="5px">
+      <ion-label>Home:</ion-label>
+      <ion-textarea [(ngModel)]="address" name="address" placeholder="Give us an address to base your shift recommendations around"></ion-textarea>
+    </ion-card>
+
+  <ion-card enter-bio color="light" padding="5px">
     <ion-label>Bio:</ion-label>
   <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
   </ion-card>
