@@ -14,16 +14,16 @@ export class WerkerProfileComponent implements OnInit {
 
   // grabs input from HTML
   // if i need the value use this.nameFirst
-  public nameFirst:string = "David";
-  public nameLast:string = "Lum";
-  public email:string;
+  public nameFirst;
+  public nameLast;
+  public email;
   // need to figure out how to format input from 1231231234 to 123-123-1234
-  public phoneNumber:any = '123-123-1234'; 
-  public positions:string[] = [];
-  public availability:boolean = false;
-  public bio:string;
-  public url_photo:string;
-  public certifications: string[] = [];
+  public phoneNumber;
+  public positions: object[];
+  public availability;
+  public bio;
+  public url_photo;
+  public certifications: object[];
 
   constructor(
     public toastController: ToastController,
@@ -108,7 +108,7 @@ export class WerkerProfileComponent implements OnInit {
   saveSettings() {
     const settings = {
       nameFirst: this.nameFirst,
-      nameLast: this.nameLast, 
+      nameLast: this.nameLast,
       email: this.email,
       url_photo: this.url_photo,
       bio: this.bio,
@@ -116,7 +116,7 @@ export class WerkerProfileComponent implements OnInit {
       availability: this.availability,
       certifications: this.certifications,
       positions: this.positions,
-    }
+    };
     this.werkerService.updateProfileSettings(this.werker.id, settings)
       .subscribe(res => {
         console.log(res);
@@ -125,6 +125,17 @@ export class WerkerProfileComponent implements OnInit {
       });
     this.presentToast();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.nameFirst = this.werker.name_first;
+    this.nameLast = this.werker.name_last;
+    this.email = this.werker.email;
+    // need to figure out how to format input from 1231231234 to 123-123-1234
+    this.phoneNumber = this.werker.phone;
+    this.positions = this.werker.positions;
+    this.availability = this.werker.last_minute;
+    this.bio = this.werker.bio;
+    this.url_photo = this.werker.url_photo;
+    this.certifications = this.werker.certifications;
+  }
 
 }
