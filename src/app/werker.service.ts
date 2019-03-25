@@ -2,18 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+// const serverUrl = 'http://35.185.77.220:4000';
+const serverUrl = 'http://localhost:4000';
 @Injectable({
   providedIn: 'root'
 })
 export class WerkerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public authService: AuthService
+    ) { }
 
   /** @method getWerkerById
    * gets Werker from db by id
@@ -55,8 +59,8 @@ export class WerkerService {
 
 
 
-  updateProfileSettings(profileSettings): Observable<any> {
-    return this.http.patch(`${serverUrl}/settings`, profileSettings, httpOptions)
+  updateProfileSettings(id, profileSettings): Observable<any> {
+    return this.http.patch(`${serverUrl}/werkers/${id}`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
   }
 }
