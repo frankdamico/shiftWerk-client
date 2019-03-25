@@ -33,7 +33,7 @@ export class WerkerProfileComponent implements OnInit {
   
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Your settings have been saved.',
+      message: `Profile UPDATED...Thanks!`,
       duration: 2000,
       color: 'primary',
       position: 'top'
