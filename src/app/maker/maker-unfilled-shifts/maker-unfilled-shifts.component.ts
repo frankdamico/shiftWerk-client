@@ -44,11 +44,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.shiftService.getUpcomingShifts('makers', 1);
-=======
     // this.shiftService.getUpcomingShifts();
->>>>>>> 4847d5e532465580ff3eec9781695636e69f3e35
     // this.makerService.getUnfulfilledShifts();
   }
 
