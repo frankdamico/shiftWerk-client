@@ -5,7 +5,6 @@ import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { concatMap, tap, filter } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-werker',
@@ -19,7 +18,6 @@ export class WerkerPage implements OnInit {
     public shiftService: ShiftService,
     public loadingController: LoadingController,
     public authService: AuthService,
-    public geolocation: Geolocation
   ) { }
   view = 'home';
   werker: any;
@@ -46,23 +44,6 @@ export class WerkerPage implements OnInit {
             this.upcomingShifts = upcoming;
             this.invitedShifts = invited;
             this.pastShifts = history;
-            this.geolocation.watchPosition()
-              .pipe(
-                filter(p => p.coords !== undefined),
-                tap(({ coords }) => {
-                  this.werker.lat = coords.latitude;
-                  this.werker.long = coords.longitude;
-                })
-              ).subscribe(data => {
-                console.log(data);
-                this.werkerService.updateProfileSettings(
-                  this.werker.id,
-                  {
-                    lat: this.werker.lat,
-                    long: this.werker.long
-                  }
-                ).subscribe(res => console.log(res));
-              });
             loading.dismiss();
           }, err => {
             console.error(err);

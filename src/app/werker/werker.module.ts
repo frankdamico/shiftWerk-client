@@ -24,7 +24,6 @@ import { WerkerUpcomingShiftsComponent } from './werker-upcoming-shifts/werker-u
 import { WerkerUpcomingShiftComponent } from './werker-upcoming-shift/werker-upcoming-shift.component';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material';
-// import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 const routes: Routes = [
   {
@@ -41,10 +40,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    // Geolocation
-  ],
-  providers: [
-    Geolocation,
   ],
   declarations: [
     WerkerPage,
