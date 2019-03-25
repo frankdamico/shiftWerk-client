@@ -57,5 +57,13 @@ export class MakerService {
     return this.http.get(`${serverUrl}/makers/${id}/fulfilled/history`)
       .pipe(catchError(err => throwError(err)));
   }
+  fav(id: object): Observable<Object> {
+    return this.http.put(`${serverUrl}/favorites`, id)
+      .pipe(catchError(err => throwError(err)));
+  }
+  unFav(id: object): Observable<Object> {
+    return this.http.delete(`${serverUrl}/favorites`, id)
+      .pipe(catchError(err => throwError(err)));
+  }
 }
 
