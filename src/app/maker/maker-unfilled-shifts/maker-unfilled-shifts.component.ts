@@ -33,7 +33,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.shifts.length == 5) {
+      if (this.shifts.length === 5) {
         event.target.disabled = true;
       }
     }, 500);
@@ -44,7 +44,11 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   }
 
   ngOnInit() {
+<<<<<<< HEAD
     this.shiftService.getUpcomingShifts('makers', 1);
+=======
+    // this.shiftService.getUpcomingShifts();
+>>>>>>> 4847d5e532465580ff3eec9781695636e69f3e35
     // this.makerService.getUnfulfilledShifts();
   }
 
