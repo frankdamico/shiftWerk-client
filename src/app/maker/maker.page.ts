@@ -45,7 +45,7 @@ export class MakerPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     // makers id is 1
-    await this.authService.getDefaultUser('makers', 1)
+    await this.authService.getDefaultUser('makers')
       .subscribe(res => {
         console.log('MEOW');
         console.log(res);
@@ -119,6 +119,7 @@ export class MakerPage implements OnInit {
         loading.present();
         this.authService.getDefaultUser('makers')
           .pipe(
+            tap(maker => this.maker = maker),
             concatMap(maker => forkJoin(
               this.makerService.getApplications(maker.id),
               this.makerService.getHistory(maker.id),
