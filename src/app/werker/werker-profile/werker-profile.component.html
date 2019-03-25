@@ -1,21 +1,21 @@
 <h3>Profile</h3>
-<ion-card enter-werker>
+<ion-card enter-werker color="warning" width="100%">
 <form>
   <!-- <ion-item enter-werker> -->
-    <ion-card color="light" padding="5px">
+    <ion-card color="light" padding="1px">
       <ion-label>Name:</ion-label>
       <ion-input [(ngModel)]="nameFirst" name="nameFirst" placeholder="Enter First Name"></ion-input>
       <ion-input [(ngModel)]="nameLast" name="nameLast"placeholder="Enter Last Name"></ion-input>
     </ion-card>
     <p></p>
 
-    <ion-card color="light" padding="5px">
+    <ion-card color="light" padding="1px">
       <ion-label>Email:</ion-label>
       <ion-input [(ngModel)]="email" name="email"placeholder="Enter E-mail"></ion-input>
     </ion-card>
     <p></p>
 
-    <ion-card color="light" padding="5px">
+    <ion-card color="light" padding="1px">
       <ion-label>Phone:</ion-label>
       <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter Phone Number"></ion-input>
           <a button icon-start ion-button full (click)="callNum()">
@@ -23,7 +23,7 @@
             <i class="icon ion-ios-telephone"></i>
           </a>
         </ion-card>
-    <ion-card color="light" padding="5px">
+    <ion-card color="light" padding="1px">
       <ion-label>Photo</ion-label>
       <!-- <ion-input [(ngModel)]="phoneNumber" name="phoneNumber"placeholder="Enter Phone Number"></ion-input> -->
             <a button icon-start ion-button full (click)="openCamera()">
@@ -34,14 +34,14 @@
 
     <p></p>
 
-  <ion-card enter-bio color="light" padding="5px">
+  <ion-card enter-bio color="light" padding="1px">
     <ion-label>Bio:</ion-label>
   <ion-textarea [(ngModel)]="bio" name="bio"placeholder="Tell us about yourself and your work experience"></ion-textarea>
   </ion-card>
 
-  <!-- <ion-card color="light" padding="5px"> -->
+  <!-- <ion-card color="light" padding="1px"> -->
   <ion-item enter-positions>
-    <ion-list color="light" padding="5px">
+    <ion-list color="light" padding="1px">
       <ion-item color="light">
         <!-- !!! if we don't want buttons, we can use the ion-label line instead, or just delete those lines!!! -->
         Select position(s):
@@ -71,7 +71,7 @@
 <!-- </ion-card> -->
 
   <p></p>
-  <ion-item last-minute color="light" padding="5px">
+  <ion-item last-minute color="light" padding="1px">
     <!-- Rounded switch -->
     <label class="switch">
       <!-- <input type="checkbox"> -->
