@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -10,6 +10,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
   styleUrls: ['./werker-profile.component.scss'],
 })
 export class WerkerProfileComponent implements OnInit {
+  @Input() werker: any;
 
   // grabs input from HTML
   // if i need the value use this.nameFirst
@@ -116,7 +117,7 @@ export class WerkerProfileComponent implements OnInit {
       certifications: this.certifications,
       positions: this.positions,
     }
-    this.werkerService.updateProfileSettings(settings)
+    this.werkerService.updateProfileSettings(this.werker.id, settings)
       .subscribe(res => {
         console.log(res);
       }, err => {
