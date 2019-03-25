@@ -12,26 +12,26 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class WerkerProfileComponent implements OnInit {
   @Input() werker: any;
 
+
+constructor(
+  public toastController: ToastController,
+  public werkerService: WerkerService,
+  private camera: Camera
+) {}
+
   // grabs input from HTML
   // if i need the value use this.nameFirst
-  public nameFirst;
-  public nameLast;
-  public email;
-  // need to figure out how to format input from 1231231234 to 123-123-1234
-  public phoneNumber;
+  public nameFirst: string;
+  public nameLast: string;
+  public email: string;
+  public phoneNumber: string;
   public positions: object[];
-  public availability;
-  public bio;
-  public url_photo;
+  public availability: boolean;
+  public bio: string;
+  public url_photo: string;
   public certifications: object[];
+  public address: string;
 
-  constructor(
-    public toastController: ToastController,
-    public werkerService: WerkerService,
-    private camera: Camera,
-
-  ) { }
-  
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Your settings have been saved.',
@@ -65,7 +65,6 @@ export class WerkerProfileComponent implements OnInit {
     //   encodingType: this.camera.EncodingType.JPEG,
     //   mediaType: this.camera.MediaType.PICTURE
     // }
-    
 
     // this.camera.getPicture(options).then((imageData) => {
     //   // imageData is either a base64 encoded string or a file URI
@@ -136,6 +135,6 @@ export class WerkerProfileComponent implements OnInit {
     this.bio = this.werker.bio;
     this.url_photo = this.werker.url_photo;
     this.certifications = this.werker.certifications;
+    this.address = this.werker.address;
   }
-
 }
