@@ -92,11 +92,7 @@
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
-    <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>Used to take pictures</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>We use your location for full functionality of certain app features.</string>
     </edit-config>
 </widget>
