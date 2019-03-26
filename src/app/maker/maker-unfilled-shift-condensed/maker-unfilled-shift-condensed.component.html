@@ -11,7 +11,7 @@
                 <div class-name="shift-time_date"> Positions Filled: {{count}} out of {{shift.positions.length}}</div>
                 </ion-label>
         </mat-panel-title>
-      </mat-expansion-panel-header >
+      </mat-expansion-panel-header>
 
       
       <ion-item text-wrap color="light">
@@ -26,7 +26,7 @@
         <ion-card color="light"
               *ngFor="let position of shift.positions let i=index" color="light" lines="none">
                 <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
-                  {{count}} out of {{shift.positions.length}}</ion-item></ion-item>
+                  {{count}} out of 1</ion-item></ion-item>
         </ion-card>
     
   </mat-expansion-panel>

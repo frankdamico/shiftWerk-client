@@ -5,22 +5,22 @@ import { ShiftService } from 'src/app/shift.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-maker-pending-shift-condensed',
-  templateUrl: './maker-pending-shift-condensed.component.html',
-  styleUrls: ['./maker-pending-shift-condensed.component.scss'],
+  selector: "app-maker-pending-shift-condensed",
+  templateUrl: "./maker-pending-shift-condensed.component.html",
+  styleUrls: ["./maker-pending-shift-condensed.component.scss"]
 })
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-
 export class MakerPendingShiftCondensedComponent implements OnInit {
+  count: number = 0;
+  shifts: any;
 
   constructor(
     public makerService: MakerService,
     public shiftService: ShiftService,
     public toastController: ToastController
-  ) { }
+  ) {}
 
   @Input() shift: object;
 
@@ -39,8 +39,16 @@ export class MakerPendingShiftCondensedComponent implements OnInit {
     this.presentToast(answer);
   }
 
-  ngOnInit() {
-    this.shiftService.getAllShifts();
+  getFilled() {
+    for(let i = 0; i < this.shift['positions'].length; i++) {
+      if(this.shift['positions'][i]['filled'] === true) {
+        return this.count + 1
+      }
+    }
   }
 
+  ngOnInit() {
+    this.shiftService.getAllShifts();
+    this.getFilled();
+  }
 }

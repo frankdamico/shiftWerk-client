@@ -51,7 +51,6 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
   ngOnInit() {
     this.shiftService.getAllShifts();
     this.getUnfilled();
-    console.log(this.shift['positions']);
   }
 
 }
