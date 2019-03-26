@@ -26,9 +26,7 @@
         <!-- <ion-list color="light"> -->
         <ion-card color="light">
           <ul>
-            
-            <li>unfilled {{unfilled}}</li>
-            <!-- <li>{{shift.positions[1].position}}</li> -->
+              <li *ngFor="let position of shift.positions let i=index" color="light">{{position.position}}</li>
           </ul>
         </ion-card>
         <!-- </ion-list> -->
