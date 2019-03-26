@@ -23,16 +23,11 @@
         <ion-label text-wrap><b>Position(s):</b></ion-label>Filled / Total
       </ion-item>
 
-        <!-- <ion-list color="light"> -->
         <ion-card color="light">
-          <ul>
-              <li *ngFor="let position of shift.positions let i=index" color="light">{{position.position}}</li>
-          </ul>
+              <ion-item *ngFor="let position of shift.positions let i=index" color="light" lines="none">
+                <ion-item slot="start" color="light" lines="none">{{position.position}}<ion-item slot="end" color="light" lines="none">{{count}} out of {{shift.positions.length}}</ion-item></ion-item>
+              </ion-item>
         </ion-card>
-        <!-- </ion-list> -->
-
-      <!-- <ion-item color="light"><em><b>   NEED 2 Werkers !</b>   Filled:</em> <h3>2</h3> <em>of</em> <h3>{{shift.positions.length}} </h3></ion-item> -->
-
     
   </mat-expansion-panel>
   </ion-card>
