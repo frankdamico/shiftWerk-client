@@ -1,24 +1,16 @@
 <h3>Search Werkers</h3>
 <ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
-<ion-list>
-  <ion-item *ngFor="let werker of werkers let i=index" (click)="goToProfile()">
-
-    <!-- <ion-card width="100%" padding="5px">
-      {{ werker.url }}
-    </ion-card> -->
-
-    <mat-expansion-panel>
+<ion-list color="light">
+  <ion-item *ngFor="let werker of werkers let i=index">
+    <mat-expansion-panel color="light">
       <mat-expansion-panel-header>
         <mat-panel-title color="light">
           <ion-thumbnail><img src="{{ werker.url_photo }}"></ion-thumbnail> 
           <ion-item lines="none">{{ werker.name_first }} {{ werker.name_last }}</ion-item>
         </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
     </mat-expansion-panel-header>
     
-      <ion-item enter-bio text-wrap color="light"><ion-label text-wrap>Bio: </ion-label>
+      <ion-item enter-bio text-wrap color="light"><ion-label text-wrap></ion-label>
         {{ werker.bio }}
       </ion-item>
       <!-- <ion-item text-wrap color="light"><ion-label text-wrap> </ion-label> 
@@ -26,58 +18,27 @@
       </ion-item> -->
       <!-- <ion-item lines="none" text-wrap color="light" >{{ werker.phone }}<ion-label text-wrap></ion-label> -->
         
-        <ion-item>
-          <ion-item lines="none"><app-favorite [maker]="maker" [i]="i" [werkers]="werkers"></app-favorite></ion-item>
+        <ion-item color="light">
+          <app-favorite [maker]="maker" [i]="i" [werkers]="werkers" color="light"></app-favorite>
           <ion-icon slot="end" name="call" (click)="callNum()"></ion-icon>
           <ion-icon slot="end" name="text" (click)="text()"></ion-icon>
-          <ion-item lines="none"><app-rating></app-rating></ion-item>
+          <ion-item lines="none" color="light"><app-rating></app-rating></ion-item>
         </ion-item>
-        <!-- <ion-icon slot="start" name="heart-empty" (click)="favorite(i)"></ion-icon> -->
 
-          
-          <!-- <a button icon-start ion-button full (click)="callNum()">
-            <ion-icon name="call"></ion-icon>
-            <i class="icon ion-ios-telephone"></i>
-          </a> -->
-        <!-- </ion-item> -->
-        <ion-item enter-positions color="light">
-            <ion-list>
               <ion-item color="light">
                 Werker position(s):
               </ion-item>
-              <ion-item color="light">
-                <ion-button>Server</ion-button>
-                <!-- <ion-toggle (click)="werkerPosition('Server')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-item *ngFor="let position of werker.positions" lines="none" color="light">
+                <ion-button>{{ position.position }}</ion-button>
+                <ion-button color="secondary" (click)="invite('INVITE')" slot="end" class-name="button-invite">SEND INVITE</ion-button>
+              </ion-item>
 
-              </ion-item>
-              <ion-item color="light">
-                <ion-button fill="outline">Expeditor</ion-button>
-                <!-- <ion-toggle (click)="werkerPosition('Expeditor')"slot="end"></ion-toggle> -->
-              </ion-item>
-              <ion-item color="light">
-                <ion-button fill="outline">Busser</ion-button>
-                <!-- <ion-toggle (click)="werkerPosition('Busser')"slot="end"></ion-toggle> -->
-              </ion-item>
-              <ion-item color="light">
-                <ion-button fill="outline">Hosting</ion-button>
-                <!-- <ion-toggle (click)="werkerPosition('Hostess')" slot="end"></ion-toggle> -->
-              </ion-item>
-              <ion-item color="light">
-                <ion-button>Bartender</ion-button>
-                <!-- <ion-toggle (click)="werkerPosition('Bartender')" slot="end" checked="true"></ion-toggle> -->
-                <ion-button color="secondary" (click)="invite('INVITE')" class-name="button-invite">SEND INVITE</ion-button>
-
-              </ion-item>
-            </ion-list>
-          </ion-item>
-          <p></p>
           <ion-item last-minute color="light">
             <label class="switch">
               <span class="slider round">
-                <ion-label>Available Last-Minute:</ion-label> YES!
-                <!-- <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle> -->
+                Available Last-Minute: {{werker.last_minute}}
               </span>
+              <!-- <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle> -->
             </label>
           </ion-item>
     </mat-expansion-panel>
