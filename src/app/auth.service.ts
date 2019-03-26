@@ -51,7 +51,7 @@ export class AuthService {
       this.getIDToken(),
       this.getLocalUserInfo()
     ).pipe(
-        concatMap(([token, user]) => {console.log(user, token); return user ? of(true) : this.verifyUser(token, user.type);}),
+        concatMap(([token, user]) => user ? of(true) : this.verifyUser(token, user.type)),
         map(res => res !== 'bad credentials'),
         catchError(err => of(true))
       );
