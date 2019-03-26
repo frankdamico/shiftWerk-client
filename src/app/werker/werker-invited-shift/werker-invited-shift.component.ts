@@ -13,7 +13,7 @@ export class WerkerInvitedShiftComponent implements OnInit {
   ) { }
 
   @Input()
-  invitedShift: Array<any>;
+  invitedShift:any;
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
