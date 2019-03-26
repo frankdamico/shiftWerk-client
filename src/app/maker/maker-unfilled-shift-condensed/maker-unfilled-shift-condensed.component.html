@@ -7,8 +7,8 @@
       <mat-expansion-panel-header>
         <mat-panel-title color="warning" >
                 <ion-icon name="alert" color="danger"></ion-icon>
-                <ion-label><b>{{shift.name}} </b>
-                <div class-name="shift-time_date"> {{shift.time_date | date:'MMM dd, yyyy h:mm a'}}</div>
+                <ion-label><b>{{shift.name}} @ {{shift.start | date:'MMM dd, yyyy h:mm a'}}</b>
+                <div class-name="shift-time_date"> Positions Filled: {{count}} out of {{shift.positions.length}}</div>
                 </ion-label>
         </mat-panel-title>
       </mat-expansion-panel-header >
@@ -33,9 +33,7 @@
         </ion-card>
         <!-- </ion-list> -->
 
-      <ion-item color="light">
-          <em><b>   NEED 2 Werkers !</b>   Filled:</em> <h3>2</h3> <em>of</em> <h3>{{shift.positions.length}} </h3>
-      </ion-item>
+      <!-- <ion-item color="light"><em><b>   NEED 2 Werkers !</b>   Filled:</em> <h3>2</h3> <em>of</em> <h3>{{shift.positions.length}} </h3></ion-item> -->
 
     
   </mat-expansion-panel>
