@@ -36,10 +36,9 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
     toast.present();
   }
 
-  invite(answer) {
-    console.log(answer);
-    this.presentToast(answer);
-  }
+  // invite(i) {
+  //   console.log(i);
+  // }
 
   getUnfilled() {
     for(let i = 0; i < this.shift['positions'].length;i++) {

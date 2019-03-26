@@ -20,13 +20,13 @@
 
 
       <ion-item text-wrap color="light">
-        <ion-label text-wrap><b>Position(s):</b></ion-label>Filled / Total
+        <ion-label text-wrap><b>Position(s):</b></ion-label>
       </ion-item>
 
-        <ion-card color="light">
-              <ion-item *ngFor="let position of shift.positions let i=index" color="light" lines="none">
-                <ion-item slot="start" color="light" lines="none">{{position.position}}<ion-item slot="end" color="light" lines="none">{{count}} out of {{shift.positions.length}}</ion-item></ion-item>
-              </ion-item>
+        <ion-card color="light"
+              *ngFor="let position of shift.positions let i=index" color="light" lines="none">
+                <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
+                  {{count}} out of {{shift.positions.length}}</ion-item></ion-item>
         </ion-card>
     
   </mat-expansion-panel>
