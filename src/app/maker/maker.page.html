@@ -6,7 +6,6 @@
  
 <ion-content padding>
   <app-maker-home [unfulfilled]="unfulfilled" [fulfilled]="upcomingFulfilled" *ngIf="view === 'home'"></app-maker-home>
-  <app-maker-unfilled-shifts [shifts]="unfulfilled" *ngIf="view === 'unfilled'"></app-maker-unfilled-shifts>
   <app-maker-notifications [applications]="applications" *ngIf="view === 'notifications'"></app-maker-notifications>
   <app-maker-profile [maker]="maker" *ngIf="view === 'profile'"></app-maker-profile>
   <app-maker-history-shifts [shifts]="history" *ngIf="view === 'history'"></app-maker-history-shifts>

@@ -20,7 +20,7 @@ export class MakerSearchComponent implements OnInit {
     private rating: RatingComponent
   ) {}
 
-  @Input() maker: Array<any>;
+  @Input() maker: any;
 
   async presentToast(answer) {
     const toast = await this.toastController.create({

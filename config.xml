@@ -93,6 +93,12 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>Used to take pictures</string>
     </edit-config>
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+    <string>need photo library access to get pictures from there</string>
+</edit-config>
+<feature name="Camera">
+    <param name="ios-package" value="CDVCamera" />
+</feature>
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
 </widget>
