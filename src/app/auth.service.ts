@@ -9,8 +9,8 @@ import { Werker, Maker } from './types';
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+// const serverUrl = 'http://35.185.77.220:4000';
+const serverUrl = 'http://localhost:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -39,15 +39,16 @@ export class AuthService {
         // res.signIn is method from GoogleAuthService
         concatMap(res => res.signIn()),
         concatMap(res => this.signInSuccess(res, role)),
-        concatMap(() => this.getToken()),
+        concatMap(() => this.getIDToken()),
         concatMap(token => this.saveLogin(token, role)),
+        concatMap(res => this.updateLocalUserInfo(res)),
         catchError(err => throwError(err))
       );
   }
 
   public checkLogin(): Observable<boolean> {
     return forkJoin(
-      this.getToken(),
+      this.getIDToken(),
       this.getLocalUserInfo()
     ).pipe(
         concatMap(([token, user]) => {console.log(user, token); return user ? of(true) : this.verifyUser(token, user.type);}),
@@ -123,7 +124,7 @@ export class AuthService {
   private saveLogin(token: string, role: string): Observable<any> {
     console.log(token);
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, { id_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}`, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -141,8 +142,14 @@ export class AuthService {
   /**
    * gets access token from local storage
    */
-  public getToken(): Observable<string> {
+  public getIDToken(): Observable<string> {
     return from(this.storage.get(AuthService.STORAGE_ID))
+      .pipe(catchError(err => throwError(err))
+    );
+  }
+
+  public getAccessToken(): Observable<string> {
+    return from(this.storage.get(AuthService.STORAGE_KEY))
       .pipe(catchError(err => throwError(err))
     );
   }
@@ -172,6 +179,7 @@ export class AuthService {
    * @param values - object with new values for local user
    */
   private updateLocalUserInfo(values: Object): Observable<any> {
+    console.log(values);
     return from(this.storage.set(
       AuthService.USER, Object.assign(this.user, values)
       ))
