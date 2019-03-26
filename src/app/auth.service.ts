@@ -117,13 +117,13 @@ export class AuthService {
   /**
    * sends access token to API server for verification and storage
    *
-   * @param token - access_token from google
+   * @param token - id_token from google
    * @param role - either 'werker' or 'maker'
    */
   private saveLogin(token: string, role: string): Observable<any> {
     console.log(token);
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}`, { id_token: token }, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -141,8 +141,8 @@ export class AuthService {
   /**
    * gets access token from local storage
    */
-  private getToken(): Observable<string> {
-    return from(this.storage.get(AuthService.STORAGE_KEY))
+  public getToken(): Observable<string> {
+    return from(this.storage.get(AuthService.STORAGE_ID))
       .pipe(catchError(err => throwError(err))
     );
   }
@@ -160,7 +160,7 @@ export class AuthService {
   private verifyUser(token: string, role: string): Observable<any> {
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
     console.log(JSON.stringify(token));
-    return this.http.put(`${serverUrl}/${endpoint}/login`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}/login`, { id_token: token }, httpOptions)
       .pipe(
         catchError(err => throwError(err))
       );
