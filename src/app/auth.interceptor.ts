@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, forkJoin } from 'rxjs';
 import { map, catchError, flatMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -18,11 +18,16 @@ import { AuthService } from './auth.service';
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authService.getToken().pipe(
-      flatMap(token => {
-        if (token) {
+    return forkJoin(
+      this.authService.getIDToken(),
+      this.authService.getAccessToken()
+    ).pipe(
+      flatMap(([id, access]) => {
+        if (id && access) {
           req = req.clone({
-            headers: req.headers.set('Authorization', token),
+            headers: req.headers.set('Authorization', access)
+              .set('ID-Token', id)
+              .set('User-Type', this.authService.user.type),
           });
         }
         return next.handle(req)
