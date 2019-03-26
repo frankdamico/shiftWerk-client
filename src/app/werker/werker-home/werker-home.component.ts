@@ -9,7 +9,7 @@ export class WerkerHomeComponent implements OnInit {
 
   constructor(
   ) { }
-  @Input() 
+  @Input()
   shifts: Array<any>;
   @Input()
   upcomingShifts: Array<any>;
