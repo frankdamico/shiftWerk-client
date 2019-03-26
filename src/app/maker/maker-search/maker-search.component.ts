@@ -53,8 +53,4 @@ export class MakerSearchComponent implements OnInit {
   text = () => {
     console.log("texting");
   };
-
-  goToProfile = () => {
-    console.log("wentToProfile");
-  };
 }
