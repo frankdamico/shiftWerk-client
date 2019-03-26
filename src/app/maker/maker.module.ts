@@ -26,6 +26,7 @@ import { MakerScheduleComponent } from './maker-schedule/maker-schedule.componen
 import { MakerSearchComponent } from './maker-search/maker-search.component';
 import { MatExpansionModule } from '@angular/material';
 import { RatingComponent } from '../rating/rating.component';
+import { FavoriteComponent} from '../favorite/favorite.component';
 
 
 const routes: Routes = [
@@ -65,6 +66,7 @@ const routes: Routes = [
     MakerScheduleComponent,
     MakerSearchComponent,
     RatingComponent,
+    FavoriteComponent,
   ]
 })
 export class MakerPageModule {}
