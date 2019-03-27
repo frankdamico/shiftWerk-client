@@ -2,7 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { CloudinaryVideo } from '@cloudinary/angular';
+let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/daft-funk/image/upload';
+let CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+};
 
 @Component({
   selector: 'app-werker-profile',
@@ -12,15 +19,17 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class WerkerProfileComponent implements OnInit {
   @Input() werker: any;
 
-
+v
 constructor(
   public toastController: ToastController,
   public werkerService: WerkerService,
-  private camera: Camera
+  private camera: Camera,
+  private http: HttpClient,
 ) {}
 
   // grabs input from HTML
   // if i need the value use this.nameFirst
+  public photo: any = "../../assets/david.png";
   public nameFirst: string;
   public nameLast: string;
   public email: string;
@@ -31,6 +40,7 @@ constructor(
   public url_photo: string;
   public certifications: object[];
   public address: string;
+  public info:any;
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -44,57 +54,47 @@ constructor(
 
   openCamera() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      alert(base64Image);
+      return this.werkerService.uploadPhoto(base64Image)
     }, (err) => {
       // Handle error
-      window.alert(err);
-    });
+        console.log(err);
+    })
+      .then(({url}) => {
+        this.photo = url;
+      })
+
   }
+
+
   openGallery() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
+      return this.werkerService.uploadPhoto(base64Image)
     }, (err) => {
       // Handle error
-    });
+      console.log(err);
+    })
+      .then(({url}) => {
+        this.photo = url;
+      })
   }
-  uploadImage() {
-    // const options: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.FILE_URI,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
-
-
-    // this.camera.getPicture(options).then((imageData) => {
-    //   // imageData is either a base64 encoded string or a file URI
-    //   // If it's base64 (DATA_URL):
-    //   let base64Image = 'data:image/jpeg;base64,' + imageData;
-    // }, (err) => {
-    //   // Handle error
-    // });
-
-  }
+ 
   callNum() {
     setTimeout(() => {
       window.open(`tel:${this.phoneNumber}`, '_system');
@@ -119,7 +119,7 @@ constructor(
       certifications: this.certifications,
       positions: this.positions,
     };
-    this.werkerService.updateProfileSettings(this.werker.id, settings)
+    this.werkerService.updateProfileSettings(settings)
       .subscribe(res => {
         console.log(res);
       }, err => {
@@ -128,10 +128,10 @@ constructor(
     this.presentToast();
   }
   ngOnInit() {
+    console.log(this.werker);
     this.nameFirst = this.werker.name_first;
     this.nameLast = this.werker.name_last;
     this.email = this.werker.email;
-    // need to figure out how to format input from 1231231234 to 123-123-1234
     this.phoneNumber = this.werker.phone;
     this.positions = this.werker.positions;
     this.availability = this.werker.last_minute;
