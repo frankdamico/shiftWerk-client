@@ -8,7 +8,8 @@
         <mat-panel-title color="warning" >
                 <ion-icon name="alert" color="danger"></ion-icon>
                 <ion-label><b>{{shift.name}} </b>
-                <div class-name="shift-time_date"> {{shift.time_date | date:'MMM dd, yyyy h:mm a'}}</div>
+                <div class-name="shift-start"> {{shift.start | date:'MMM dd, yyyy h:mm a'}}</div>
+                <div class-name="shift-start"> {{shift.duration | date:'MMM dd, yyyy h:mm a'}}</div>
                 </ion-label>
         </mat-panel-title>
       </mat-expansion-panel-header >
