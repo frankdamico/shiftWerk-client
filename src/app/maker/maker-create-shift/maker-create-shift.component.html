@@ -1,27 +1,29 @@
 <h3>Create a Shift</h3>
 <ion-card maker-notification color="warning" width="100%">
-  <ion-button (click)="submit()" (ngSubmit)="submit()" type="submit">Submit Shift</ion-button>
-  <ion-button (click)="addPosition()">Add Position</ion-button>
-
+  <!-- <ion-button (click)="addPosition()">Add Position</ion-button> -->
+  
   <ion-card color="tertiary" width="100%" padding="1px">
     <form [formGroup]="sForm">
-    <ion-input [(ngModel)]="name" formControlName="name" placeholder="Enter the Event Name">Shift Name:</ion-input>
-    <ion-input [(ngModel)]="address" formControlName="address" placeholder="Enter the event location">Address:</ion-input>
-    <!-- <ion-input [(ngModel)]="duration" formControlName="duration" placeholder="How long will the event last?">Address:</ion-input> -->
-    Start:<ion-datetime [(ngModel)]="start" formControlName="start" placeholder="Enter the event start"
+      <ion-input [(ngModel)]="name" formControlName="name" placeholder="Enter the Event Name">Shift Name:</ion-input>
+      <ion-input [(ngModel)]="address" formControlName="address" placeholder="Enter the event location">Address:</ion-input>
+      <!-- <ion-input [(ngModel)]="duration" formControlName="duration" placeholder="How long will the event last?">Address:</ion-input> -->
+      Start:<ion-datetime [(ngModel)]="start" formControlName="start" placeholder="Enter the event start"
       display-format="MMM DD, YYYY h:mm a" min="2019"></ion-datetime>
-    End:<ion-datetime [(ngModel)]="end" formControlName="end" placeholder="Enter the event end" 
+      End:<ion-datetime [(ngModel)]="end" formControlName="end" placeholder="Enter the event end" 
       display-format="MMM DD, YYYY h:mm a" min="2019"></ion-datetime>
-    <ion-input [(ngModel)]="description" formControlName="description" placeholder="Enter a a short description">Description:</ion-input>
-    <div formArrayName="positions">
-      <div *ngFor="let position of positions.controls; let i=index" [formGroupName]="i">
-        <ion-input formControlName="position{{i}}" placeholder="Enter position name">Position:</ion-input>
-        <!-- <ion-input formControlName="quantity{{i}}" placeholder="Enter quantity">Quantity:</ion-input> -->
-        <ion-input formControlName="payment_amnt{{i}}" placeholder="Enter payment Amount">Payment Amount:</ion-input>
-        <ion-input formControlName="payment_type{{i}}" placeholder="PayPal? Cash? Vemno?">Payment Type:</ion-input>
-        <ion-button (click)="deletePosition()">Delete Position</ion-button>
+      <ion-input [(ngModel)]="description" formControlName="description" placeholder="Enter a a short description">Description:</ion-input>
+      
+      <div formArrayName="positions">
+        <div *ngFor="let position of positions.controls; let i=index" [formGroupName]="i">
+          <ion-input formControlName="position{{i}}" placeholder="Enter position name">Position:</ion-input>
+          <!-- <ion-input formControlName="quantity{{i}}" placeholder="Enter quantity">Quantity:</ion-input> -->
+          <ion-input formControlName="payment_amnt{{i}}" placeholder="Enter payment Amount">Payment Amount:</ion-input>
+          <ion-input formControlName="payment_type{{i}}" placeholder="PayPal? Cash? Vemno?">Payment Type:</ion-input>
+          <ion-button (click)="deletePosition()" float-right size="small" color="warning">Delete Position</ion-button>
+        </div>
       </div>
-    </div>
+      <ion-button (click)="addPosition()" item-end size="small" color="secondary">+ Add Position</ion-button>
     </form>
-    </ion-card>
+    <ion-button (click)="submit()" (ngSubmit)="submit()" type="submit" expand="block" padding="1px">Submit Shift</ion-button>
   </ion-card>
+</ion-card>

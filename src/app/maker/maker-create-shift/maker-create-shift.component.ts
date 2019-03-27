@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,  EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -17,11 +17,13 @@ export class MakerCreateShiftComponent implements OnInit {
   view: any;
 
   @Input()
-  maker:any;
+  maker: any;
   constructor(
     private fb: FormBuilder,
-    private shiftService: ShiftService) { 
-  }
+    private shiftService: ShiftService) {
+    }
+
+    @Output() NavClick = new EventEmitter<'home'>();
 
   ngOnInit() {
     this.sForm = new FormGroup({
@@ -45,7 +47,7 @@ export class MakerCreateShiftComponent implements OnInit {
       // [`quantity${this.count}`]: new FormControl(),
       [`payment_amnt${this.count}`]: new FormControl(),
       [`payment_type${this.count}`]: new FormControl(),
-    })
+    });
     this.positions.push(this.position);
     this.count++;
   }
@@ -60,7 +62,9 @@ export class MakerCreateShiftComponent implements OnInit {
     console.log(this.sForm.value);
     this.shiftService.submitShift(this.sForm.value, this.maker.id).subscribe(response => {
       console.log(response);
-      }
-    )
+      });
+    // create shift - on submit click =>
+    // redirect to home-unfilled-shifts (to invite)
+    this.view = 'home';
   }
 }
