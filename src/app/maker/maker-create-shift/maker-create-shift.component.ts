@@ -27,9 +27,9 @@ export class MakerCreateShiftComponent implements OnInit {
     this.sForm = new FormGroup({
       name: new FormControl(),
       address: new FormControl(),
-      time_date: new FormControl(),
-      duration: new FormControl(),
-      // shiftEnd: new FormControl(),
+      start: new FormControl(),
+      end: new FormControl(),
+      // duration: new FormControl(),
       description: new FormControl(),
       positions: new FormArray([])
     });
