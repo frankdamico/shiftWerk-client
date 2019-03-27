@@ -12,7 +12,6 @@ import { MakerPositionsComponent } from './maker-positions/maker-positions.compo
 import { MakerProfileComponent } from './maker-profile/maker-profile.component';
 import { MakerSettingsComponent} from './maker-settings/maker-settings.component';
 import { MakerUnfilledShiftsComponent } from './maker-unfilled-shifts/maker-unfilled-shifts.component';
-import { MakerUnfilledShiftComponent } from './maker-unfilled-shift/maker-unfilled-shift.component';
 import { MakerUnfilledShiftCondensedComponent } from './maker-unfilled-shift-condensed/maker-unfilled-shift-condensed.component';
 import { MakerPendingShiftsComponent } from './maker-pending-shifts/maker-pending-shifts.component';
 import { MakerPendingShiftCondensedComponent } from './maker-pending-shift-condensed/maker-pending-shift-condensed.component';
@@ -53,7 +52,6 @@ const routes: Routes = [
     MakerProfileComponent,
     MakerSettingsComponent,
     MakerUnfilledShiftsComponent,
-    MakerUnfilledShiftComponent,
     MakerUnfilledShiftCondensedComponent,
     MakerPendingShiftsComponent,
     MakerPendingShiftCondensedComponent,
