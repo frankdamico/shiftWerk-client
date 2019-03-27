@@ -3,13 +3,6 @@ import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { CloudinaryVideo } from '@cloudinary/angular';
-let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/daft-funk/image/upload';
-let CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
-};
 
 @Component({
   selector: 'app-werker-profile',
@@ -27,9 +20,7 @@ constructor(
   private http: HttpClient,
 ) {}
 
-  // grabs input from HTML
-  // if i need the value use this.nameFirst
-  public photo: any = "../../assets/david.png";
+
   public nameFirst: string;
   public nameLast: string;
   public email: string;
@@ -68,7 +59,7 @@ constructor(
         console.log(err);
     })
       .then(({url}) => {
-        this.photo = url;
+        this.url_photo = url;
       })
 
   }
@@ -91,7 +82,7 @@ constructor(
       console.log(err);
     })
       .then(({url}) => {
-        this.photo = url;
+        this.url_photo = url;
       })
   }
  
@@ -119,7 +110,7 @@ constructor(
       certifications: this.certifications,
       positions: this.positions,
     };
-    this.werkerService.updateProfileSettings(settings)
+    this.werkerService.updateProfileSettings(settings, this.werker.id)
       .subscribe(res => {
         console.log(res);
       }, err => {
