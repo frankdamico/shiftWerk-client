@@ -124,10 +124,10 @@ export class MakerPage implements OnInit {
               this.maker = maker;
             }),
             concatMap(maker => forkJoin(
-              this.makerService.getApplications(maker.id),
-              this.makerService.getHistory(maker.id),
-              this.makerService.getUnfulfilledShifts(maker.id),
-              this.makerService.getUpcomingFulfilledShifts(maker.id),
+              this.makerService.getApplications(maker[0].id),
+              this.makerService.getHistory(maker[0].id),
+              this.makerService.getUnfulfilledShifts(maker[0].id),
+              this.makerService.getUpcomingFulfilledShifts(maker[0].id),
             )),
           ).subscribe(([applications, history, unfulfilled, fulfilled]) => {
             console.log(applications, history, unfulfilled, fulfilled);
