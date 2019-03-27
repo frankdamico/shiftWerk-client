@@ -28,9 +28,9 @@
               <ion-item color="light">
                 Werker position(s):
               </ion-item>
-                <ion-item *ngFor="let position of werker.positions" lines="none" color="light">
+                <ion-item *ngFor="let position of werker.positions let i=index" lines="none" color="light">
                 <ion-button>{{ position.position }}</ion-button>
-                <ion-button color="secondary" (click)="invite('INVITE')" slot="end" class-name="button-invite">SEND INVITE</ion-button>
+                <ion-button color="secondary" (click)="invite(i)" slot="end" class-name="button-invite">SEND INVITE</ion-button>
               </ion-item>
 
           <ion-item last-minute color="light">

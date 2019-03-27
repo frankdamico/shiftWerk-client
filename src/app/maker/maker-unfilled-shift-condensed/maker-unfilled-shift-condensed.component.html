@@ -7,12 +7,17 @@
       <mat-expansion-panel-header>
         <mat-panel-title color="warning" >
                 <ion-icon name="alert" color="danger"></ion-icon>
+<<<<<<< HEAD
                 <ion-label><b>{{shift.name}} </b>
                 <div class-name="shift-start"> {{shift.start | date:'MMM dd, yyyy h:mm a'}}</div>
                 <div class-name="shift-start"> {{shift.duration | date:'MMM dd, yyyy h:mm a'}}</div>
+=======
+                <ion-label><b>{{shift.name}} @ {{shift.start | date:'MMM dd, yyyy h:mm a'}}</b>
+                <div class-name="shift-time_date"> Positions Filled: {{count}} out of {{shift.positions.length}}</div>
+>>>>>>> 7c28eea5aa5c1167f9dc6ae8e50e9d2de5726725
                 </ion-label>
         </mat-panel-title>
-      </mat-expansion-panel-header >
+      </mat-expansion-panel-header>
 
       
       <ion-item text-wrap color="light">
@@ -21,23 +26,14 @@
 
 
       <ion-item text-wrap color="light">
-        <ion-label text-wrap><b>Position(s):</b></ion-label>Filled / Total
+        <ion-label text-wrap><b>Position(s):</b></ion-label>
       </ion-item>
 
-        <!-- <ion-list color="light"> -->
-        <ion-card color="light">
-          <ul>
-            
-            <li>unfilled {{unfilled}}</li>
-            <!-- <li>{{shift.positions[1].position}}</li> -->
-          </ul>
+        <ion-card color="light"
+              *ngFor="let position of shift.positions let i=index" color="light" lines="none">
+                <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
+                  {{count}} out of 1</ion-item></ion-item>
         </ion-card>
-        <!-- </ion-list> -->
-
-      <ion-item color="light">
-          <em><b>   NEED 2 Werkers !</b>   Filled:</em> <h3>2</h3> <em>of</em> <h3>{{shift.positions.length}} </h3>
-      </ion-item>
-
     
   </mat-expansion-panel>
   </ion-card>

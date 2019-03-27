@@ -8,7 +8,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
 const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4001';
+// const serverUrl = 'http://localhost:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -88,10 +88,10 @@ export class ShiftService {
     const submittedShift = {
       MakerId: makerId,
       name: formData.name,
-      duration: formData.duration,
       description: formData.description,
       address: formData.address,
-      time_date: formData.time_date,
+      start: formData.start,
+      end: formData.end,
       positions: formData.positions,
     }
 
