@@ -39,18 +39,19 @@ export class AuthService {
         // res.signIn is method from GoogleAuthService
         concatMap(res => res.signIn()),
         concatMap(res => this.signInSuccess(res, role)),
-        concatMap(() => this.getToken()),
+        concatMap(() => this.getIDToken()),
         concatMap(token => this.saveLogin(token, role)),
+        concatMap(res => this.updateLocalUserInfo(res)),
         catchError(err => throwError(err))
       );
   }
 
   public checkLogin(): Observable<boolean> {
     return forkJoin(
-      this.getToken(),
+      this.getIDToken(),
       this.getLocalUserInfo()
     ).pipe(
-        concatMap(([token, user]) => {console.log(user, token); return user ? of(true) : this.verifyUser(token, user.type);}),
+        concatMap(([token, user]) => user ? of(true) : this.verifyUser(token, user.type)),
         map(res => res !== 'bad credentials'),
         catchError(err => of(true))
       );
@@ -117,13 +118,13 @@ export class AuthService {
   /**
    * sends access token to API server for verification and storage
    *
-   * @param token - access_token from google
+   * @param token - id_token from google
    * @param role - either 'werker' or 'maker'
    */
   private saveLogin(token: string, role: string): Observable<any> {
     console.log(token);
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}`, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -141,7 +142,13 @@ export class AuthService {
   /**
    * gets access token from local storage
    */
-  private getToken(): Observable<string> {
+  public getIDToken(): Observable<string> {
+    return from(this.storage.get(AuthService.STORAGE_ID))
+      .pipe(catchError(err => throwError(err))
+    );
+  }
+
+  public getAccessToken(): Observable<string> {
     return from(this.storage.get(AuthService.STORAGE_KEY))
       .pipe(catchError(err => throwError(err))
     );
@@ -160,7 +167,7 @@ export class AuthService {
   private verifyUser(token: string, role: string): Observable<any> {
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
     console.log(JSON.stringify(token));
-    return this.http.put(`${serverUrl}/${endpoint}/login`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}/login`, { id_token: token }, httpOptions)
       .pipe(
         catchError(err => throwError(err))
       );
@@ -172,6 +179,7 @@ export class AuthService {
    * @param values - object with new values for local user
    */
   private updateLocalUserInfo(values: Object): Observable<any> {
+    console.log(values);
     return from(this.storage.set(
       AuthService.USER, Object.assign(this.user, values)
       ))

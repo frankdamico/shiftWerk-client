@@ -37,9 +37,9 @@ export class MakerSearchComponent implements OnInit {
     }, 100);
   }
 
-  invite(answer) {
-    console.log(answer);
-    this.presentToast(answer);
+  invite(i) {
+    console.log(i);
+    this.presentToast('invite');
   }
 
   ngOnInit() {}

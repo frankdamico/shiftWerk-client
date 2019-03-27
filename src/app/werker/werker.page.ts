@@ -30,9 +30,12 @@ export class WerkerPage implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.authService.getDefaultUser('werkers')
+        this.authService.getLocalUserInfo()
           .pipe(
-            tap(werker => this.werker = werker),
+            tap(werker => {
+              console.log(werker);
+              this.werker = werker;
+            }),
             concatMap(werker => forkJoin(
               this.werkerService.getAllAvailableShifts(werker.id),
               this.werkerService.getUpcomingShifts(werker.id),
