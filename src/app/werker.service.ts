@@ -62,8 +62,8 @@ export class WerkerService {
          }).toPromise();
   }
 
-  updateProfileSettings(profileSettings): Observable<any> {
-    return this.http.patch(`${serverUrl}/settings`, profileSettings, httpOptions)
+  updateProfileSettings(profileSettings, werkerId): Observable<any> {
+    return this.http.patch(`${serverUrl}/werkers/${werkerId}`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
   }
 }
