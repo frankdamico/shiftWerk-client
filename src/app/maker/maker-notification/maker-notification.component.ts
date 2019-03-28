@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ShiftService } from 'src/app/shift.service';
 
 @Component({
   selector: 'app-maker-notification',
@@ -7,8 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MakerNotificationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private shiftService: ShiftService
+  ) { }
   @Input() application: any;
+
+  respond(status: string) {
+    return this.shiftService.respondToInvitation(this.application.id, this.application.shiftId, status)
+      .subscribe(() => {
+        console.log('done!');
+      });
+  }
 
   ngOnInit() {}
 
