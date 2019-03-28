@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WerkerService } from 'src/app/werker.service';
 import { ShiftService } from '../shift.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
-import { concatMap, tap, filter } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -17,6 +16,7 @@ export class WerkerPage implements OnInit {
     public werkerService: WerkerService,
     public shiftService: ShiftService,
     public loadingController: LoadingController,
+    public toastController: ToastController,
     public authService: AuthService,
   ) { }
   view = 'home';
@@ -26,28 +26,52 @@ export class WerkerPage implements OnInit {
   pastShifts: any;
   invitedShifts: any;
 
-  ngOnInit() {
+  respondToInvitation({ shiftId, status }) {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.werker = this.authService.user;
-        console.log(this.werker);
-        forkJoin(
-          this.werkerService.getAllAvailableShifts(this.werker.id),
-          this.werkerService.getUpcomingShifts(this.werker.id),
-          this.werkerService.getInvitations(this.werker.id),
-          this.werkerService.getHistory(this.werker.id)
-        ).subscribe(([available, upcoming, invited, history]) => {
-            this.shifts = available;
-            this.upcomingShifts = upcoming;
-            this.invitedShifts = invited;
-            this.pastShifts = history;
+        this.shiftService.respondToInvitation(this.werker.id, shiftId, status)
+          .subscribe(() => {
             loading.dismiss();
-          }, err => {
-            console.error(err);
-            loading.dismiss();
+            this.invitedShifts = this.invitedShifts.filter(shift => shift.id !== shiftId);
+            console.log(this.invitedShifts);
+            this.toastController.create({
+              message: status === 'decline' ? 'Shift declined' : 'Shift accepted',
+              duration: 2000,
+              color: 'primary',
+              position: 'top',
+            }).then(toast => toast.present());
           });
-      });
+      })
+      .catch(err => console.error(err));
+  }
+
+  getWerkerShifts() {
+    this.loadingController.create()
+    .then(loading => {
+      loading.present();
+      this.werker = this.authService.user;
+      console.log(this.werker);
+      forkJoin(
+        this.werkerService.getAllAvailableShifts(this.werker.id),
+        this.werkerService.getUpcomingShifts(this.werker.id),
+        this.werkerService.getInvitations(this.werker.id),
+        this.werkerService.getHistory(this.werker.id)
+      ).subscribe(([available, upcoming, invited, history]) => {
+          this.shifts = available;
+          this.upcomingShifts = upcoming;
+          this.invitedShifts = invited;
+          this.pastShifts = history;
+          loading.dismiss();
+        }, err => {
+          console.error(err);
+          loading.dismiss();
+        });
+    });
+  }
+
+  ngOnInit() {
+    this.getWerkerShifts();
   }
 
   /** @method onNavClick
@@ -60,5 +84,8 @@ export class WerkerPage implements OnInit {
   onNavClick(view: string) {
     console.log(view);
     this.view = view;
+    if (this.view === 'home') {
+      this.getWerkerShifts();
+    }
   }
 }

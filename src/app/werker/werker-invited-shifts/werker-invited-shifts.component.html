@@ -2,7 +2,7 @@
 <mat-accordion>
     <ion-item *ngFor="let invitedShift of invitedShifts">
       <ion-card color="warning">
-        <app-werker-invited-shift [invitedShift]="invitedShift"></app-werker-invited-shift>
+        <app-werker-invited-shift [invitedShift]="invitedShift" (respondToInvitation)="onRespond($event)"></app-werker-invited-shift>
       </ion-card> 
   </ion-item>
 </mat-accordion>
