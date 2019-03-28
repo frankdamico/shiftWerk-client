@@ -3,8 +3,9 @@ import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
-import { forkJoin } from 'rxjs';
-import { map, tap, concatMap } from 'rxjs/operators';
+import { forkJoin, from } from 'rxjs';
+import { map, tap, concatMap, flatMap } from 'rxjs/operators';
+import { loadInternal } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-maker',
@@ -42,7 +43,18 @@ export class MakerPage implements OnInit {
       });
   }
 
-  ngOnInit() {
+  respondToApplication({werkerId, shiftId, status}) {
+    return from(this.loadingController.create())
+      .pipe(
+        flatMap(loading => loading.present()),
+        map(() => this.shiftService.respondToInvitation(werkerId, shiftId, status))
+      ).subscribe(() => {
+        this.loadingController.dismiss();
+        this.applications = this.applications.filter(app => app.shiftId !== shiftId);
+      });
+  }
+
+  getMakerShifts() {
     this.loadingController.create()
       .then(loading => {
         loading.present();
@@ -66,6 +78,10 @@ export class MakerPage implements OnInit {
             loading.dismiss();
           });
       });
+  }
+
+  ngOnInit() {
+    this.getMakerShifts();
   }
   onNavClick(view: string) {
     console.log(view);
