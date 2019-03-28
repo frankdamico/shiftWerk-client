@@ -45,7 +45,7 @@ export class MakerSearchComponent implements OnInit {
     let type = 'invite'
     let shiftId;
     this.presentToast('invite');
-    this.shiftService.inviteWerker(shiftId, type, werkerId, positionName).subscribe(response => {
+    this.shiftService.inviteOrApply(shiftId, type, werkerId, positionName).subscribe(response => {
       console.log(response);
     })
   }
