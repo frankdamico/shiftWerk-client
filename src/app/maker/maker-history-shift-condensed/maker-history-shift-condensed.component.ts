@@ -25,8 +25,8 @@ export class MakerHistoryShiftCondensedComponent implements OnInit {
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
-      message: `Ratings for ${answer} ...soon`,
-      duration: 2000,
+      message: `No more ${answer}s to rate`,
+      duration: 1000,
       color: "primary",
       position: "top"
     });
