@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -11,7 +11,7 @@ export class WerkerInvitedShiftComponent implements OnInit {
   constructor(
     public toastController: ToastController
   ) { }
-
+  @Output() respondToInvitation = new EventEmitter<object>();
   @Input()
   invitedShift:any;
 
@@ -25,14 +25,8 @@ export class WerkerInvitedShiftComponent implements OnInit {
     toast.present();
   }
 
-  accept(answer) {
-    console.log(answer);
-    this.presentToast(answer);
-  }
-
-  decline(answer) {
-    console.log(answer);
-    this.presentToast(answer);
+  onRespond({shiftId, status}) {
+    this.respondToInvitation.emit({shiftId, status});
   }
 
   ngOnInit() {}
