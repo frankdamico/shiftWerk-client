@@ -16,28 +16,27 @@
   
   </mat-expansion-panel> -->
 
-<ion-list>
+<!-- <ion-list text-wrap> -->
   <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title color="light">
-       {{ shift.name }}
-      </mat-panel-title>
-      <mat-panel-description>
-        <!-- This is a summary of the content -->
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-  
-    {{shift.description}}<br><br>
-    {{shift.address}}
-  <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
-  </mat-expansion-panel>
-    
-     <!-- <button ion-button full>
-      {{ shift.name }}
-    </button>  -->
-   </ion-item>
-</ion-list>
+
+  <ion-card text-wrap width="100%" color="tertiary">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title color="light">
+        {{ shift.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}<ion-item slot="end" color="light" lines="none">
+          {{shift.address}}</ion-item></ion-item>
+          <!-- <ion-button slot="end" (click)="invite(i)">Apply to Shift</ion-button> -->
+      <!-- {{shift.description}}<br><br> -->
+      <!-- {{shift.address}} -->
+    <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
+    </mat-expansion-panel>
+  </ion-card>
+
+  </ion-item>
+<!-- </ion-list> -->
 
 <!-- <ion-list>
   <button detail-none (click)="expandItem(shift)" ion-item *ngFor="let shift of shifts">

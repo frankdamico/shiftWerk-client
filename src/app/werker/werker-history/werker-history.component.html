@@ -1,27 +1,24 @@
 <h3>History</h3>
+
 <ion-list>
-  <ion-item *ngFor="let pastShift of pastShifts" color="light" padding="2px">
+  <!-- <mat-accordian> -->
+    <ion-item *ngFor="let pastShift of pastShifts" color="light" padding="2px">
+    <!-- </mat-accordian> -->
     <mat-expansion-panel>
+      
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ pastShift.name }}
+          <ion-icon name="calendar" color="dark"></ion-icon>
+          <ion-label><b>{{ pastShift.name }}</b></ion-label>
+          <div>{{pastShift.start | date:'MMM dd, yyyy h:mm a'}}</div>
         </mat-panel-title>
-        <mat-panel-description>
-          <!-- This is a summary of the content -->
-        </mat-panel-description>
+        
       </mat-expansion-panel-header>
-
-      {{pastShift.description}}<br><br>
-      {{pastShift.address}}
+      <div><b>Shift History Details:</b></div>
+      <div>{{pastShift.address}}</div>
+       <div>{{pastShift.description}}</div>
+       <div>{{pastShift.position}}</div>
       <ion-button (click)="rateShift(pastShift)" size="default" expand="block" color="primary">RATE THIS SHIFT</ion-button>
     </mat-expansion-panel>
 
-      <!-- <ion-item>
-        <ion-label>Hair Color</ion-label>
-        <ion-select value="brown" okText="Okay" cancelText="Dismiss">
-          <ion-select-option value="brown">Brown</ion-select-option>
-          <ion-select-option value="blonde">Blonde</ion-select-option>
-          <ion-select-option value="black">Black</ion-select-option>
-          <ion-select-option value="red">Red</ion-select-option>
-        </ion-select>
-      </ion-item> -->
+
