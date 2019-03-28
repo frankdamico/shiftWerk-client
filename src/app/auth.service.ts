@@ -12,11 +12,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
 const serverUrl = 'http://35.185.77.220:4000';
-<<<<<<< HEAD
-// const serverUrl = 'http://localhost:4000';
-=======
 // const serverUrl = 'http://localhost:4200';
->>>>>>> 4392d3385f3568c5395b0d71a639fbf28d5a3bcb
 
 @Injectable({
   providedIn: 'root'
