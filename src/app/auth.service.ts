@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { GoogleAuthService } from 'ng-gapi';
 import { Storage } from '@ionic/storage';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, from, forkJoin, of } from 'rxjs';
-import { catchError, map, concatMap, tap } from 'rxjs/operators';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError, from, of } from 'rxjs';
+import { catchError, concatMap, tap } from 'rxjs/operators';
 import { Werker, Maker } from './types';
 
 const httpOptions = {
@@ -19,7 +21,9 @@ export class AuthService {
   constructor(
     private googleAuth: GoogleAuthService,
     private storage: Storage,
-    private http: HttpClient
+    private http: HttpClient,
+    private googlePlus: GooglePlus,
+    public platform: Platform
   ) {}
   public static STORAGE_KEY = 'accessToken';
   public static STORAGE_ID = 'idToken';
@@ -33,169 +37,78 @@ export class AuthService {
    *
    * @param role - either 'werker' or 'maker'
    */
-  public login(role: string): Observable<any> {
-    return this.signIn(role)
+  public login(role: string): Observable<any> | any {
+    return this.signIn()
       .pipe(
-        // res.signIn is method from GoogleAuthService
-        concatMap(res => res.signIn()),
-        concatMap(res => this.signInSuccess(res, role)),
-        concatMap(() => this.getIDToken()),
-        concatMap(token => this.lazyServerLogin(role)),
-        concatMap(res => this.updateLocalUserInfo(res)),
+        concatMap(code => this.saveLogin(code, role)),
+        concatMap(res => this.saveLocalToken(res)),
+        concatMap(() => this.getRemoteUserInfo()),
         catchError(err => throwError(err))
       );
   }
 
-  public checkLogin(): Observable<boolean> {
-    return forkJoin(
-      this.getIDToken(),
-      this.getLocalUserInfo()
-    ).pipe(
-        concatMap(([token, user]) => user ? of(true) : this.verifyUser(token, user.type)),
-        map(res => res !== 'bad credentials'),
-        catchError(err => of(true))
-      );
-  }
-
-  public signOut(): Observable<any> {
-    this.storage.clear();
-    return this.googleAuth.getAuth();
-  }
-
   /**
    * uses GoogleAuthService to request permissions from user
-   *
-   * @param role - either 'werker' or 'maker'
+   * defers to cordova GooglePlus on mobile devices
    */
-  private signIn(role: string): Observable<any> {
-    return this.googleAuth.getAuth()
-      .pipe(
-        catchError(err => throwError(err)));
-  }
-
-  /**
-   * stores relevant info in local storage
-   *
-   * @param res - google auth response
-   * @param role - either 'werker' or 'maker'
-   */
-  private signInSuccess(res: gapi.auth2.GoogleUser | any, role: string): Observable<any> {
-    console.log(res.isSignedIn());
-    // res.grantOfflineAccess([
-    //   'profile',
-    //   'email',
-    //   'openid',
-    //   'https://www.googleapis.com/auth/calendar',
-    //   'https://www.googleapis.com/auth/user.phonenumbers.read',
-    // ].join(' '))
-    //   .then(res => console.log(res));
-    const token = res.getAuthResponse();
-    console.log(token);
-    if (role === 'maker') {
-      this.user = {
-        type: 'Maker',
-        name: res.w3.ig,
-        email: res.w3.U3,
-        url_photo: res.w3.Paa,
-      };
-    } else {
-      this.user = {
-        type: 'Werker',
-        name_first: res.w3.ofa,
-        name_last: res.w3.wea,
-        email: res.w3.U3,
-        url_photo: res.w3.Paa,
-        bio: '',
-        certifications: [],
-        positions: [],
-        shifts: []
-      };
+  private signIn(): Observable<string> {
+    if (this.platform.is('desktop')) {
+      return this.googleAuth.getAuth()
+        .pipe(
+          concatMap(res => from(res.grantOfflineAccess({
+            prompt: 'consent',
+          }))),
+          concatMap(obj => of(obj.code)),
+          catchError(err => throwError(err))
+          );
     }
-    return from(Promise.all([
-      this.storage.set(
-        AuthService.STORAGE_KEY, token.access_token
-      ),
-      this.storage.set(
-        AuthService.STORAGE_ID, token.id_token
-      ),
-      this.storage.set(
-        AuthService.USER, this.user
-      )
-    ])
-    ).pipe(catchError(err => throwError(err)));
+    return from(this.googlePlus.login({
+      scopes: [
+        'profile',
+        'email',
+        'openid',
+        'https://www.googleapis.com/auth/calendar',
+        'https://www.googleapis.com/auth/user.phonenumbers.read'
+        ].join(' '),
+        webClientId: this._webClientId,
+        offline: true,
+    })).pipe(
+      concatMap(obj => of(obj.serverAuthCode))
+    );
   }
 
   /**
    * sends access token to API server for verification and storage
    *
-   * @param token - id_token from google
+   * @param code - one-time code from google
    * @param role - either 'werker' or 'maker'
+   * @return Observable containing a new JWT from the API server
    */
-  private saveLogin(token: string, role: string): Observable<any> {
-    console.log(token);
-    const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, httpOptions)
+  private saveLogin(code: string, role: string): Observable<string> {
+    console.log(code);
+    return this.http.get(`${serverUrl}/login?code=${code}&type=${role}`, { responseType: 'text' })
       .pipe(catchError(err => throwError(err)));
   }
 
-  /**
-   * gets user from local storage
-   */
-  public getLocalUserInfo(): Observable<Werker | Maker> {
-    return from(this.storage.get(AuthService.USER))
+  private saveLocalToken(code: string): Observable<void> {
+    return from(this.storage.set(AuthService.STORAGE_KEY, code));
+  }
+
+  public getRemoteUserInfo(): Observable<any> {
+    return this.http.get(`${serverUrl}/user`)
       .pipe(
-        tap(user => this.user = user),
-        catchError(err => throwError(err))
+        tap(user => this.user = user)
       );
   }
 
   /**
    * gets access token from local storage
+   * used by HTTP interceptor
    */
-  public getIDToken(): Observable<string> {
-    return from(this.storage.get(AuthService.STORAGE_ID))
-      .pipe(catchError(err => throwError(err))
-    );
-  }
-
   public getAccessToken(): Observable<string> {
     return from(this.storage.get(AuthService.STORAGE_KEY))
       .pipe(catchError(err => throwError(err))
     );
-  }
-
-  /**
-   * submits access token to API server for verification
-   * res should have either user info or notification
-   * that user is not verified
-   *
-   * @todo make this work
-   *
-   * @param token - access token from google
-   * @param role - either 'werker' or 'maker'
-   */
-  private verifyUser(token: string, role: string): Observable<any> {
-    const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    console.log(JSON.stringify(token));
-    return this.http.put(`${serverUrl}/${endpoint}/login`, { id_token: token }, httpOptions)
-      .pipe(
-        catchError(err => throwError(err))
-      );
-  }
-
-  /**
-   * updates local storage with new data
-   *
-   * @param values - object with new values for local user
-   */
-  private updateLocalUserInfo(values: Object): Observable<any> {
-    console.log(values);
-    return from(this.storage.set(
-      AuthService.USER, Object.assign(this.user, values)
-      ))
-      .pipe(
-        catchError(err => throwError(err))
-      );
   }
 
   /**
@@ -204,11 +117,12 @@ export class AuthService {
    * @param values - object with new values for server
    */
   private updateServerUserInfo(user: Werker | Maker, values: Object): Observable<any> {
-    return this.http.patch(`${serverUrl}/settings`, Object.assign(user, values), httpOptions)
+    return this.http.patch(`${serverUrl}/profile`, Object.assign(user, values), httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
   /**
+   * @deprecated
    * gets a default user for demonstration purposes
    *
    * @param role - either 'werkers' or 'makers'
@@ -220,6 +134,12 @@ export class AuthService {
     return this.http.get(`${serverUrl}/werkers/5`);
   }
 
+  /**
+   * @deprecated
+   * old login procedure
+   *
+   * @param role - either 'werker' or 'maker'
+   */
   public lazyServerLogin(role: string): Observable<any> {
     if (role === 'maker') {
       return this.http.put(`${serverUrl}/makers`, this.user, httpOptions);
