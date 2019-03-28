@@ -117,18 +117,13 @@ export class MakerPage implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.authService.getLocalUserInfo()
-          .pipe(
-            tap(maker => {
-              console.log(maker);
-              this.maker = maker;
-            }),
-            concatMap(maker => forkJoin(
-              this.makerService.getApplications(maker.id),
-              this.makerService.getHistory(maker.id),
-              this.makerService.getUnfulfilledShifts(maker.id),
-              this.makerService.getUpcomingFulfilledShifts(maker.id),
-            )),
+        this.maker = this.authService.user;
+        console.log(this.maker);
+        forkJoin(
+              this.makerService.getApplications(this.maker.id),
+              this.makerService.getHistory(this.maker.id),
+              this.makerService.getUnfulfilledShifts(this.maker.id),
+              this.makerService.getUpcomingFulfilledShifts(this.maker.id),
           ).subscribe(([applications, history, unfulfilled, fulfilled]) => {
             console.log(applications, history, unfulfilled, fulfilled);
             this.applications = applications;
