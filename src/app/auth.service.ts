@@ -9,8 +9,8 @@ import { Werker, Maker } from './types';
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+// const serverUrl = 'http://35.185.77.220:4000';
+const serverUrl = 'http://localhost:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -39,18 +39,19 @@ export class AuthService {
         // res.signIn is method from GoogleAuthService
         concatMap(res => res.signIn()),
         concatMap(res => this.signInSuccess(res, role)),
-        concatMap(() => this.getToken()),
-        concatMap(token => this.saveLogin(token, role)),
+        concatMap(() => this.getIDToken()),
+        concatMap(token => this.lazyServerLogin(role)),
+        concatMap(res => this.updateLocalUserInfo(res)),
         catchError(err => throwError(err))
       );
   }
 
   public checkLogin(): Observable<boolean> {
     return forkJoin(
-      this.getToken(),
+      this.getIDToken(),
       this.getLocalUserInfo()
     ).pipe(
-        concatMap(([token, user]) => {console.log(user, token); return user ? of(true) : this.verifyUser(token, user.type);}),
+        concatMap(([token, user]) => user ? of(true) : this.verifyUser(token, user.type)),
         map(res => res !== 'bad credentials'),
         catchError(err => of(true))
       );
@@ -78,8 +79,18 @@ export class AuthService {
    * @param res - google auth response
    * @param role - either 'werker' or 'maker'
    */
-  private signInSuccess(res, role: string): Observable<any> {
+  private signInSuccess(res: gapi.auth2.GoogleUser | any, role: string): Observable<any> {
+    console.log(res.isSignedIn());
+    // res.grantOfflineAccess([
+    //   'profile',
+    //   'email',
+    //   'openid',
+    //   'https://www.googleapis.com/auth/calendar',
+    //   'https://www.googleapis.com/auth/user.phonenumbers.read',
+    // ].join(' '))
+    //   .then(res => console.log(res));
     const token = res.getAuthResponse();
+    console.log(token);
     if (role === 'maker') {
       this.user = {
         type: 'Maker',
@@ -117,13 +128,13 @@ export class AuthService {
   /**
    * sends access token to API server for verification and storage
    *
-   * @param token - access_token from google
+   * @param token - id_token from google
    * @param role - either 'werker' or 'maker'
    */
   private saveLogin(token: string, role: string): Observable<any> {
     console.log(token);
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
-    return this.http.put(`${serverUrl}/${endpoint}`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}`, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 
@@ -141,7 +152,13 @@ export class AuthService {
   /**
    * gets access token from local storage
    */
-  private getToken(): Observable<string> {
+  public getIDToken(): Observable<string> {
+    return from(this.storage.get(AuthService.STORAGE_ID))
+      .pipe(catchError(err => throwError(err))
+    );
+  }
+
+  public getAccessToken(): Observable<string> {
     return from(this.storage.get(AuthService.STORAGE_KEY))
       .pipe(catchError(err => throwError(err))
     );
@@ -160,7 +177,7 @@ export class AuthService {
   private verifyUser(token: string, role: string): Observable<any> {
     const endpoint = role === 'werker' ? 'werkers' : 'makers';
     console.log(JSON.stringify(token));
-    return this.http.put(`${serverUrl}/${endpoint}/login`, { access_token: token }, httpOptions)
+    return this.http.put(`${serverUrl}/${endpoint}/login`, { id_token: token }, httpOptions)
       .pipe(
         catchError(err => throwError(err))
       );
@@ -172,6 +189,7 @@ export class AuthService {
    * @param values - object with new values for local user
    */
   private updateLocalUserInfo(values: Object): Observable<any> {
+    console.log(values);
     return from(this.storage.set(
       AuthService.USER, Object.assign(this.user, values)
       ))
@@ -200,5 +218,12 @@ export class AuthService {
       return this.http.get(`${serverUrl}/makers/2`);
     }
     return this.http.get(`${serverUrl}/werkers/5`);
+  }
+
+  public lazyServerLogin(role: string): Observable<any> {
+    if (role === 'maker') {
+      return this.http.put(`${serverUrl}/makers`, this.user, httpOptions);
+    }
+    return this.http.put(`${serverUrl}/werkers`, this.user, httpOptions);
   }
 }
