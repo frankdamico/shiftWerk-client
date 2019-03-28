@@ -25,8 +25,8 @@ export class WerkerInvitedShiftComponent implements OnInit {
     toast.present();
   }
 
-  onRespond({shiftId, status}) {
-    this.respondToInvitation.emit({shiftId, status});
+  onRespond(status) {
+    this.respondToInvitation.emit({shiftId: this.invitedShift.id, status});
   }
 
   ngOnInit() {}

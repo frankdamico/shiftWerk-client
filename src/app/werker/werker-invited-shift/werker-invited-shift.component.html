@@ -6,7 +6,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title color="warning">
           <ion-icon name="alert" color="danger"></ion-icon>
-          <ion-label><b>{{invitedShift.shiftName}}</b>
+          <ion-label><b>{{invitedShift.name}}</b>
             <div class-name="shift-start"> {{invitedShift.start | date:'MMM dd, yyyy h:mm a'}}</div>
           </ion-label>
         </mat-panel-title>
@@ -22,8 +22,8 @@
         </div>
         <div class-name="invite-position">Looking for: Bartender</div>
         <p></p>
-        <ion-button (click)="onRespond(invitedShift.shiftId, 'accept')" class-name="button-accept">ACCEPT</ion-button>
-        <ion-button (click)="onRespond(invitedShift.shiftId, 'decline')" class-name="button-decline">DECLINE</ion-button>
+        <ion-button (click)="onRespond('accept')" class-name="button-accept">ACCEPT</ion-button>
+        <ion-button (click)="onRespond('decline')" class-name="button-decline">DECLINE</ion-button>
         <p></p>
         <div class-name="shift_maker-name">Posted by: Shift M. Aker</div>
         <p></p>

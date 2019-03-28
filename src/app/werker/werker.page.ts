@@ -34,6 +34,7 @@ export class WerkerPage implements OnInit {
           .subscribe(() => {
             loading.dismiss();
             this.invitedShifts = this.invitedShifts.filter(shift => shift.id !== shiftId);
+            console.log(this.invitedShifts);
             this.toastController.create({
               message: status === 'decline' ? 'Shift declined' : 'Shift accepted',
               duration: 2000,
