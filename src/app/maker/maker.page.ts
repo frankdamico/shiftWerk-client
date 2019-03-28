@@ -86,5 +86,8 @@ export class MakerPage implements OnInit {
   onNavClick(view: string) {
     console.log(view);
     this.view = view;
+    if (this.view === 'home') {
+      this.getMakerShifts();
+    }
   }
 }
