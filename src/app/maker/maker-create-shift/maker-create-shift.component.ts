@@ -2,6 +2,8 @@ import { Component,  EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maker-create-shift',
@@ -20,10 +22,22 @@ export class MakerCreateShiftComponent implements OnInit {
   maker: any;
   constructor(
     private fb: FormBuilder,
-    private shiftService: ShiftService) {
+    private shiftService: ShiftService,
+    public toastController: ToastController,
+    private router: Router) {
     }
 
     @Output() NavClick = new EventEmitter<'home'>();
+
+    async presentToast(answer) {
+      const toast = await this.toastController.create({
+        message: `Event ${answer}...Thanks!`,
+        duration: 2000,
+        color: 'primary',
+        position: 'top'
+      });
+      toast.present();
+    }
 
   ngOnInit() {
     this.sForm = new FormGroup({
@@ -65,6 +79,11 @@ export class MakerCreateShiftComponent implements OnInit {
       });
     // create shift - on submit click =>
     // redirect to home-unfilled-shifts (to invite)
-    this.view = 'home';
+    // this.view = 'home';
+    this.router.navigate([`maker-home`])
+  }
+  update(answer) {
+    console.log('Toast Submit');
+    this.presentToast(answer);
   }
 }
