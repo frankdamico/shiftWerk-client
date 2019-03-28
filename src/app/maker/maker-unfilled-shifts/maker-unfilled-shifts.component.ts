@@ -21,6 +21,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   ) { }
 
   @Input() shifts: Array<any>;
+  @Input() maker: any;
   // unfilled: Array<any>;
   // unfulfulled: Array<any>;
 
@@ -44,8 +45,9 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.maker)
     // this.shiftService.getUpcomingShifts();
-    // this.makerService.getUnfulfilledShifts();
+    this.makerService.getUnfulfilledShifts(this.maker.id);
   }
 
 }

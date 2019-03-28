@@ -20,7 +20,8 @@ export class MakerPendingShiftsComponent implements OnInit {
     public shiftService: ShiftService
   ) { }
   @Input() shifts: Array<any>;
-
+  @Input() maker: any;
+  
   ngOnInit() {
   }
 

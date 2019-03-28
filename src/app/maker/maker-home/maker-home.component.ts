@@ -11,6 +11,7 @@ export class MakerHomeComponent implements OnInit {
 
   @Input() unfulfilled: Array<any>;
   @Input() fulfilled: Array<any>;
+  @Input() maker: any;
   ngOnInit() {}
 
 }

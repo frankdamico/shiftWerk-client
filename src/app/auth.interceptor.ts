@@ -18,22 +18,18 @@ import { AuthService } from './auth.service';
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return forkJoin(
-      this.authService.getIDToken(),
-      this.authService.getAccessToken()
-    ).pipe(
-      flatMap(([id, access]) => {
-        if (id && access) {
-          req = req.clone({
-            headers: req.headers.set('Authorization', access)
-              .set('ID-Token', id)
-              .set('User-Type', this.authService.user.type),
-          });
-        }
-        return next.handle(req)
-          .pipe(
-            catchError(err => throwError(err))
-          );
+    return this.authService.getAccessToken()
+    .pipe(
+      flatMap((access) => {
+      if (access) {
+        req = req.clone({
+          headers: req.headers.set('Authorization', `Bearer ${access}`)
+        });
+      }
+      return next.handle(req)
+        .pipe(
+          catchError(err => throwError(err))
+        );
       })
     );
   }
