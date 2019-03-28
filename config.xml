@@ -89,12 +89,12 @@
     </plugin>
     <allow-navigation href="http://172.24.0.216:8100" sessionid="3330a05f" />
     <plugin name="cordova-plugin-nativestorage" spec="2.3.2" />
-    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+    <!-- <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>Used to take pictures</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
         <string>need photo library access to get pictures from there</string>
-    </edit-config>
+    </edit-config> -->
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
     </feature>
