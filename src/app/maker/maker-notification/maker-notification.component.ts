@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service';
 
 @Component({
@@ -8,16 +8,17 @@ import { ShiftService } from 'src/app/shift.service';
 })
 export class MakerNotificationComponent implements OnInit {
 
-  constructor(
-    private shiftService: ShiftService
-  ) { }
+  constructor() { }
+  @Output() onRespond = new EventEmitter<object>();
   @Input() application: any;
 
   respond(status: string) {
-    return this.shiftService.respondToInvitation(this.application.id, this.application.shiftId, status)
-      .subscribe(() => {
-        console.log('done!');
-      });
+    console.log(status);
+    this.onRespond.emit({
+      werkerId: this.application.id,
+      shiftId: this.application.shiftId,
+      status,
+    });
   }
 
   ngOnInit() {}
