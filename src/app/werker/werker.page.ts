@@ -30,19 +30,14 @@ export class WerkerPage implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.authService.getLocalUserInfo()
-          .pipe(
-            tap(werker => {
-              console.log(werker);
-              this.werker = werker;
-            }),
-            concatMap(werker => forkJoin(
-              this.werkerService.getAllAvailableShifts(werker.id),
-              this.werkerService.getUpcomingShifts(werker.id),
-              this.werkerService.getInvitations(werker.id),
-              this.werkerService.getHistory(werker.id)
-            ))
-          ).subscribe(([available, upcoming, invited, history]) => {
+        this.werker = this.authService.user;
+        console.log(this.werker);
+        forkJoin(
+          this.werkerService.getAllAvailableShifts(this.werker.id),
+          this.werkerService.getUpcomingShifts(this.werker.id),
+          this.werkerService.getInvitations(this.werker.id),
+          this.werkerService.getHistory(this.werker.id)
+        ).subscribe(([available, upcoming, invited, history]) => {
             this.shifts = available;
             this.upcomingShifts = upcoming;
             this.invitedShifts = invited;
