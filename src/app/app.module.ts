@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -58,6 +59,7 @@ const gapiClientConfig: NgGapiClientConfig = {
     IonicStorageModule.forRoot(),
   ],
   providers: [
+    GooglePlus,
     Camera,
     StatusBar,
     SplashScreen,
