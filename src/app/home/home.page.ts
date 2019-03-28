@@ -14,9 +14,9 @@ export class HomePage implements OnInit {
   ) {}
   login(role: string) {
     this.auth.login(role)
-      .subscribe(res => console.log(res), err => console.log(err));
+      // .subscribe(res => console.log(res), err => console.log(err));
+      .subscribe(res => this.router.navigate([`${role}-home`]), err => console.log(err));
   }
-  //     .subscribe(res => this.router.navigate([`${role}-home`]), err => console.log(err));
   // }
   // tryLogin(role: string) {
   //   this.auth.checkLogin()
