@@ -1,6 +1,8 @@
 <h3 align="left">Upcoming Shifts</h3>
-<ion-item *ngFor="let upcomingShift of upcomingShifts">
-  <ion-card width="120%" color="light" padding="5px">
-    <app-werker-upcoming-shift [upcomingShift]="upcomingShift"></app-werker-upcoming-shift>
-  </ion-card>
-</ion-item>
+<mat-accordion>
+  <ion-item *ngFor="let upcomingShift of upcomingShifts">
+    <ion-card width="120%" color="light">
+      <app-werker-upcoming-shift [upcomingShift]="upcomingShift"></app-werker-upcoming-shift>
+    </ion-card>
+  </ion-item>
+</mat-accordion>

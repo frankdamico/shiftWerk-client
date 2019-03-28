@@ -52,7 +52,7 @@ export class AuthService {
    * defers to cordova GooglePlus on mobile devices
    */
   private signIn(): Observable<string> {
-    if (this.platform.is('desktop')) {
+    if (!(this.platform.is('ios') || this.platform.is('android'))) {
       return this.googleAuth.getAuth()
         .pipe(
           concatMap(res => from(res.grantOfflineAccess({
@@ -85,12 +85,12 @@ export class AuthService {
    * @return Observable containing a new JWT from the API server
    */
   private saveLogin(code: string, role: string): Observable<string> {
-    console.log(code);
     return this.http.get(`${serverUrl}/login?code=${code}&type=${role}`, { responseType: 'text' })
       .pipe(catchError(err => throwError(err)));
   }
 
   private saveLocalToken(code: string): Observable<void> {
+    console.log(code);
     return from(this.storage.set(AuthService.STORAGE_KEY, code));
   }
 
