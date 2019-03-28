@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { RatingComponent } from 'src/app/rating/rating.component'
 import { MakerService } from 'src/app/maker.service';
 import { ToastController } from '@ionic/angular';
+import { ShiftService } from 'src/app/shift.service'
 
 @Component({
   selector: "app-maker-search",
@@ -17,7 +18,8 @@ export class MakerSearchComponent implements OnInit {
   constructor(
     private makerService: MakerService,
     public toastController: ToastController,
-    private rating: RatingComponent
+    private rating: RatingComponent,
+    private shiftService: ShiftService,
   ) {}
 
   @Input() maker: any;
@@ -37,9 +39,15 @@ export class MakerSearchComponent implements OnInit {
     }, 100);
   }
 
-  invite(i) {
-    console.log(i);
+  invite(i, j) {
+    let positionName = this.werkers[i]['positions'][j];
+    let werkerId = this.werkers[i]['id'];
+    let type = 'invite'
+    let shiftId;
     this.presentToast('invite');
+    this.shiftService.inviteWerker(shiftId, type, werkerId, positionName).subscribe(response => {
+      console.log(response);
+    })
   }
 
   ngOnInit() {}

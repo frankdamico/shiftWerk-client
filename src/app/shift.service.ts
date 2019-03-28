@@ -99,4 +99,12 @@ export class ShiftService {
       catchError(error => throwError(error))
     )
   }
+
+  inviteWerker(shiftId, type, werkerId, positionName): Observable<any> {
+    console.log(event);
+    return;
+  //   return this.http.put(`${serverUrl}/shifts/${shiftId}${type}${werkerId}${positionName}`, httpOptions)
+  //   .pipe(catchError(error => throwError(error)));
+  }
+  // app.put('/shifts/:shiftId/:applyOrInvite/:werkerId/:positionName'
 }
