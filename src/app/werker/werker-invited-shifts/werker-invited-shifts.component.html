@@ -1,8 +1,9 @@
 <h3 align="left">Invited Shifts</h3>
-<ion-item *ngFor="let invitedShift of invitedShifts">
-  <ion-card color="warning">
-    <app-werker-invited-shift [invitedShift]="invitedShift"></app-werker-invited-shift>
-  </ion-card> 
-</ion-item>
-
+<mat-accordion>
+    <ion-item *ngFor="let invitedShift of invitedShifts">
+      <ion-card color="warning">
+        <app-werker-invited-shift [invitedShift]="invitedShift"></app-werker-invited-shift>
+      </ion-card> 
+  </ion-item>
+</mat-accordion>
 
