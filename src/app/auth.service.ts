@@ -9,8 +9,8 @@ import { Werker, Maker } from './types';
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json' }),
 };
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+// const serverUrl = 'http://35.185.77.220:4000';
+const serverUrl = 'http://localhost:4000';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class AuthService {
         concatMap(res => res.signIn()),
         concatMap(res => this.signInSuccess(res, role)),
         concatMap(() => this.getIDToken()),
-        concatMap(token => this.saveLogin(token, role)),
+        concatMap(token => this.lazyServerLogin(role)),
         concatMap(res => this.updateLocalUserInfo(res)),
         catchError(err => throwError(err))
       );
@@ -79,8 +79,18 @@ export class AuthService {
    * @param res - google auth response
    * @param role - either 'werker' or 'maker'
    */
-  private signInSuccess(res, role: string): Observable<any> {
+  private signInSuccess(res: gapi.auth2.GoogleUser | any, role: string): Observable<any> {
+    console.log(res.isSignedIn());
+    // res.grantOfflineAccess([
+    //   'profile',
+    //   'email',
+    //   'openid',
+    //   'https://www.googleapis.com/auth/calendar',
+    //   'https://www.googleapis.com/auth/user.phonenumbers.read',
+    // ].join(' '))
+    //   .then(res => console.log(res));
     const token = res.getAuthResponse();
+    console.log(token);
     if (role === 'maker') {
       this.user = {
         type: 'Maker',
@@ -208,5 +218,12 @@ export class AuthService {
       return this.http.get(`${serverUrl}/makers/2`);
     }
     return this.http.get(`${serverUrl}/werkers/5`);
+  }
+
+  public lazyServerLogin(role: string): Observable<any> {
+    if (role === 'maker') {
+      return this.http.put(`${serverUrl}/makers`, this.user, httpOptions);
+    }
+    return this.http.put(`${serverUrl}/werkers`, this.user, httpOptions);
   }
 }
