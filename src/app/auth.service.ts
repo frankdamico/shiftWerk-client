@@ -47,7 +47,6 @@ export class AuthService {
    * defers to cordova GooglePlus on mobile devices
    */
   private signIn(): Observable<string[]> {
-    alert(this.platform.platforms());
     if (this.platform.is('mobile')) {
       return from(this.googlePlus.login({
         scopes: [
@@ -60,7 +59,6 @@ export class AuthService {
           webClientId: this._webClientId,
           offline: true,
       })).pipe(
-        tap(obj => alert(JSON.stringify(obj))),
         concatMap(obj => of([obj.serverAuthCode, 'mobile'])),
         catchError(err => throwError(err))
       );
@@ -83,18 +81,14 @@ export class AuthService {
    * @return Observable containing a new JWT from the API server
    */
   private saveLogin(code: string, role: string, deviceType: string): Observable<string> {
-    alert(code);
     return this.http.get(`${serverUrl}/login?code=${code}&type=${role}&device=${deviceType}`, { responseType: 'text' })
       .pipe(
-        tap(res => alert(res)),
         catchError(err => {
-          alert(JSON.stringify(err));
           return throwError(err);
         }));
   }
 
   private saveLocalToken(code: string): Observable<void> {
-    alert(code);
     console.log(code);
     return from(this.storage.set(AuthService.STORAGE_KEY, code));
   }
