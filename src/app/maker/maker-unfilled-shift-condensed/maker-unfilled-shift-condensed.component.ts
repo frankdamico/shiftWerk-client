@@ -16,6 +16,7 @@ import { ToastController } from '@ionic/angular';
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
   shifts: any;
   count: number = 0;
+  results: any;
 
   constructor(
     public makerService: MakerService,
@@ -39,15 +40,16 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
 
   
 
-  invite(i) {
-    console.log(this.shift['id']);
-    console.log(this.shift['positions'][i]['position']);
-    this.NavClick.emit('search');
-    this.makerService.getWerkers(this.shift['positions'][i]['position'])
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
+  // invite(i) {
+  //   console.log(this.shift['id']);
+  //   console.log(this.shift['positions'][i]['position']);
+  //   // this.NavClick.emit('search');
+  //   this.makerService.getWerkers(this.shift['positions'][i]['position'])
+  //     .subscribe(results => {
+  //       this.results = results;
+  //       console.log(this.results);
+  //     });
+  // }
 
   getUnfilled() {
     for(let i = 0; i < this.shift['positions'].length;i++) {
