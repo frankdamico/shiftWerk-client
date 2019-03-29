@@ -15,7 +15,7 @@
   <app-werker-profile [werker]="werker" *ngIf="view == 'profile'"></app-werker-profile>
   <app-werker-history [pastShifts]="pastShifts" *ngIf="view == 'history'"></app-werker-history>
   <app-werker-schedule *ngIf="view == 'schedule'"></app-werker-schedule>
-  <app-werker-search *ngIf="view == 'search'"></app-werker-search>
+  <app-werker-search [werker]="werker" *ngIf="view == 'search'"></app-werker-search>
 </ion-content>
 <ion-footer>
   <app-werker-navbar (NavClick)="onNavClick($event)"></app-werker-navbar>

@@ -1,18 +1,32 @@
 <h3>Search Shifts</h3>
-<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
-  debounce="750"></ion-searchbar>
 
-  <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
-    <ion-card text-wrap width="100%" expand="block" color="tertiary">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title color="light">
-          {{ shift.name }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}</ion-item>
-          <ion-item slot="end" color="light" lines="none">{{shift.address}}</ion-item>        
-      <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
-      </mat-expansion-panel>
-    </ion-card>
-  </ion-item>
+<form>
+  <ion-label>Select a position:</ion-label>
+  <ion-select placeholder="Position" name="position" [(ngModel)]="position" (ionChange)="filterShifts()">
+    <ion-select-option *ngFor="let pos of positions" [value]="pos">{{pos}}</ion-select-option>
+    <ion-select-option>None</ion-select-option>
+  </ion-select>
+  <ion-label>Select a payment type:</ion-label>
+  <ion-select placeholder="Payment Type" name="paymentType" [(ngModel)]="payment_type" (ionChange)="filterShifts()">
+    <ion-select-option *ngFor="let type of paymentTypes" [value]="type">{{type}}</ion-select-option>
+    <ion-select-option>None</ion-select-option>
+  </ion-select>
+</form>
+
+<ion-item *ngFor="let shift of shifts" (click)="goToShift()">
+
+  <ion-card text-wrap width="100%" expand="block" color="tertiary">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title color="light">
+        {{ shift.name }} looking for -> {{shift.position}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}</ion-item>
+        <ion-item slot="end" color="light" lines="none">{{shift.address}}</ion-item> 
+        <ion-item slot="end" color="light" lines="none">{{shift.payment_type}}</ion-item>       
+    <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
+    </mat-expansion-panel>
+  </ion-card>
+
+</ion-item>
