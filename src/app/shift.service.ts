@@ -22,7 +22,7 @@ export class ShiftService {
    * returns either response or empty object in case of no response
    */
   private extractData(res: Response): Response | object {
-    return res || {};
+    return res || [];
   }
   /**
    * @method getAllShifts
@@ -62,13 +62,13 @@ export class ShiftService {
   }
   /**
    * sends a query with specific search terms
-   * @param event the search terms taken in by the search bar, returns an observable
+   * @param terms the search terms taken in by the search bar, returns an observable
    */
-  getShiftsByTerm(event): Observable<any> {
+  getShiftsByTerm(terms: object): Observable<any> {
     let params = new HttpParams();
-    console.log(event);
-    params = params.append('value', event);
-    return this.http.get(`${serverUrl}/shifts/search/${event}`, { params })
+    console.log(terms);
+    Object.entries(terms).forEach(([term, value]) => params = params.append(term, value));
+    return this.http.get(`${serverUrl}/shifts`, { params })
       .pipe(
         map(this.extractData),
         catchError(err => throwError(err))
