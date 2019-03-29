@@ -1,27 +1,25 @@
 <h3>Search Shifts</h3>
-<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
-  debounce="750"></ion-searchbar>
 
-  <!-- <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        This is the expansion title
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-  
-    <p>This is the primary content of the panel.</p>
-  
-  </mat-expansion-panel> -->
-
+<!-- <ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
+  debounce="750"></ion-searchbar> -->
+<form>
+  <ion-label>Select a position:</ion-label>
+  <ion-select placeholder="Position" name="position" [(ngModel)]="position" (ionChange)="filterShifts()">
+    <ion-select-option *ngFor="let pos of positions" [value]="pos">{{pos}}</ion-select-option>
+    <ion-select-option>None</ion-select-option>
+  </ion-select>
+  <ion-label>Select a payment type:</ion-label>
+  <ion-select placeholder="Payment Type" name="paymentType" [(ngModel)]="payment_type" (ionChange)="filterShifts()">
+    <ion-select-option *ngFor="let type of paymentTypes" [value]="type">{{type}}</ion-select-option>
+    <ion-select-option>None</ion-select-option>
+  </ion-select>
+</form>
 <ion-list>
   <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
-  <mat-expansion-panel>
+  <mat-expansion-panel hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title color="light">
-       {{ shift.name }}
+       {{ shift.name }} looking for -> {{shift.position}}
       </mat-panel-title>
       <mat-panel-description>
         <!-- This is a summary of the content -->
