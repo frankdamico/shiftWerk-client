@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -11,6 +11,7 @@ export class MakerNotificationsComponent implements OnInit {
   constructor(
     public toastController: ToastController
     ) { }
+  @Output() respondToApplication = new EventEmitter<object>();
   @Input() applications: any[];
   async presentToast(answer) {
     const toast = await this.toastController.create({
@@ -32,6 +33,13 @@ export class MakerNotificationsComponent implements OnInit {
     this.presentToast(answer);
   }
 
-  ngOnInit() {}
+  onRespond({werkerId, shiftId, status}) {
+    this.respondToApplication.emit({
+      werkerId,
+      shiftId,
+      status,
+    });
+  }
 
+  ngOnInit() {}
 }

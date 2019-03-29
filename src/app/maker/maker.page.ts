@@ -3,8 +3,9 @@ import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from '../shift.service';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
-import { forkJoin } from 'rxjs';
-import { map, tap, concatMap } from 'rxjs/operators';
+import { forkJoin, from } from 'rxjs';
+import { map, tap, concatMap, flatMap } from 'rxjs/operators';
+import { loadInternal } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-maker',
@@ -41,79 +42,19 @@ export class MakerPage implements OnInit {
         loading.dismiss();
       });
   }
-  async getMaker() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    // makers id is 1
-    await this.authService.getDefaultUser('makers')
-      .subscribe(res => {
-        console.log('MEOW');
-        console.log(res);
-        this.maker = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
+
+  respondToApplication({werkerId, shiftId, status}) {
+    return from(this.loadingController.create())
+      .pipe(
+        flatMap(loading => loading.present()),
+        map(() => this.shiftService.respondToInvitation(werkerId, shiftId, status))
+      ).subscribe(() => {
+        this.loadingController.dismiss();
+        this.applications = this.applications.filter(app => app.shiftId !== shiftId);
       });
   }
 
-  async getApplications() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.makerService.getApplications(this.maker.id)
-      .subscribe(res => {
-        console.log(res);
-        this.applications = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
-
-  async getUpcomingFulfilled() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.makerService.getUpcomingFulfilledShifts(this.maker.id)
-      .subscribe(res => {
-        console.log('fulfilled', res);
-        this.upcomingFulfilled = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
-
-  async getUnfulfilled() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.makerService.getUnfulfilledShifts(this.maker.id)
-      .subscribe(res => {
-        console.log('unfulfilled', res);
-        this.unfulfilled = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
-
-  async getHistory() {
-    const loading = await this.loadingController.create();
-    await loading.present();
-    await this.makerService.getHistory(this.maker.id)
-      .subscribe(res => {
-        console.log('history', res);
-        this.history = res;
-        loading.dismiss();
-      }, err => {
-        console.error(err);
-        loading.dismiss();
-      });
-  }
-
-  ngOnInit() {
+  getMakerShifts() {
     this.loadingController.create()
       .then(loading => {
         loading.present();
@@ -138,8 +79,15 @@ export class MakerPage implements OnInit {
           });
       });
   }
+
+  ngOnInit() {
+    this.getMakerShifts();
+  }
   onNavClick(view: string) {
     console.log(view);
     this.view = view;
+    if (this.view === 'home') {
+      this.getMakerShifts();
+    }
   }
 }

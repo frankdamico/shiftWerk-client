@@ -100,11 +100,25 @@ export class ShiftService {
     )
   }
 
-  inviteWerker(shiftId, type, werkerId, positionName): Observable<any> {
-    console.log(event);
-    return;
-  //   return this.http.put(`${serverUrl}/shifts/${shiftId}${type}${werkerId}${positionName}`, httpOptions)
-  //   .pipe(catchError(error => throwError(error)));
+  /**
+   * either accepts or declines an application or invitation
+   *
+   * @param acceptOrDecline - either 'accept' or 'decline'
+   */
+  public respondToInvitation(werkerId: number, shiftId: number, acceptOrDecline: string): Observable<any> {
+    return this.http.patch(`${serverUrl}/shifts/${shiftId}/application/${werkerId}/${acceptOrDecline}`, {}, httpOptions);
+  }
+
+  /**
+   * either invites a werker to a shift or makes a new application for a shift
+   *
+   * @param type - either 'apply' or 'invite'
+   */
+  public inviteOrApply(shiftId: number, type: string, werkerId: number, positionName: string): Observable<any> {
+    // console.log(event);
+    // return;
+    return this.http.put(`${serverUrl}/shifts/${shiftId}/${type}/${werkerId}/${positionName}`, httpOptions)
+    .pipe(catchError(error => throwError(error)));
   }
   // app.put('/shifts/:shiftId/:applyOrInvite/:werkerId/:positionName'
 }

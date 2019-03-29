@@ -1,7 +1,7 @@
 <h3>Notifications</h3>
   <!-- <ion-card enter-maker> -->
   <div *ngFor="let application of applications">
-    <app-maker-notification [application]="application"></app-maker-notification>
+    <app-maker-notification [application]="application" (onRespond)="onRespond($event)"></app-maker-notification>
   </div>
   <p></p>
 

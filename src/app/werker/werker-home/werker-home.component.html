@@ -2,7 +2,7 @@
   <ion-infinite-scroll-content>
     <!-- <ion-list> -->
       <!-- <ion-item> -->
-        <app-werker-invited-shifts [invitedShifts]="invitedShifts"></app-werker-invited-shifts>
+        <app-werker-invited-shifts [invitedShifts]="invitedShifts" (respondToInvitation)="onRespond($event)"></app-werker-invited-shifts>
       <!-- </ion-item> -->
         <!-- <ion-item> -->
           <app-werker-upcoming-shifts [upcomingShifts]="upcomingShifts"></app-werker-upcoming-shifts>
