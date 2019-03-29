@@ -4,7 +4,7 @@
     <ion-infinite-scroll-content>
       <!-- <ion-label>SHIFTS UNFILLED</ion-label> -->
       <h3 align="left">Shifts Unfilled</h3>
-      <app-maker-unfilled-shifts [maker]="maker" [shifts]="unfulfilled"></app-maker-unfilled-shifts>
+      <app-maker-unfilled-shifts [maker]="maker" [shifts]="unfulfilled" (NavClick)="onNavClick($event)"></app-maker-unfilled-shifts>
 
       <!-- <ion-label><b>SHIFTS PENDING</b></ion-label> -->
       <h3 align="left">Shifts Pending</h3>
