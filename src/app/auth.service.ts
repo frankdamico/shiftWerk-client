@@ -35,7 +35,7 @@ export class AuthService {
   public login(role: string): Observable<any> | any {
     return this.signIn()
       .pipe(
-        concatMap(code => this.saveLogin(code, role)),
+        concatMap(([code, deviceType]) => this.saveLogin(code, role, deviceType)),
         concatMap(res => this.saveLocalToken(res)),
         concatMap(() => this.getRemoteUserInfo()),
         catchError(err => throwError(err))
@@ -46,29 +46,32 @@ export class AuthService {
    * uses GoogleAuthService to request permissions from user
    * defers to cordova GooglePlus on mobile devices
    */
-  private signIn(): Observable<string> {
-    if (!(this.platform.is('ios') || this.platform.is('android'))) {
-      return this.googleAuth.getAuth()
-        .pipe(
-          concatMap(res => from(res.grantOfflineAccess({
-            prompt: 'consent',
-          }))),
-          concatMap(obj => of(obj.code)),
-          catchError(err => throwError(err))
-          );
+  private signIn(): Observable<string[]> {
+    alert(this.platform.platforms());
+    if (this.platform.is('mobile')) {
+      return from(this.googlePlus.login({
+        scopes: [
+          'profile',
+          'email',
+          'openid',
+          'https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/user.phonenumbers.read'
+          ].join(' '),
+          webClientId: this._webClientId,
+          offline: true,
+      })).pipe(
+        tap(obj => alert(JSON.stringify(obj))),
+        concatMap(obj => of([obj.serverAuthCode, 'mobile'])),
+        catchError(err => throwError(err))
+      );
     }
-    return from(this.googlePlus.login({
-      scopes: [
-        'profile',
-        'email',
-        'openid',
-        'https://www.googleapis.com/auth/calendar',
-        'https://www.googleapis.com/auth/user.phonenumbers.read'
-        ].join(' '),
-        webClientId: this._webClientId,
-        offline: true,
-    })).pipe(
-      concatMap(obj => of(obj.serverAuthCode))
+  return this.googleAuth.getAuth()
+    .pipe(
+      concatMap(res => from(res.grantOfflineAccess({
+       prompt: 'consent',
+      }))),
+      concatMap(obj => of([obj.code, 'desktop'])),
+      catchError(err => throwError(err))
     );
   }
 
@@ -79,12 +82,19 @@ export class AuthService {
    * @param role - either 'werker' or 'maker'
    * @return Observable containing a new JWT from the API server
    */
-  private saveLogin(code: string, role: string): Observable<string> {
-    return this.http.get(`${serverUrl}/login?code=${code}&type=${role}`, { responseType: 'text' })
-      .pipe(catchError(err => throwError(err)));
+  private saveLogin(code: string, role: string, deviceType: string): Observable<string> {
+    alert(code);
+    return this.http.get(`${serverUrl}/login?code=${code}&type=${role}&device=${deviceType}`, { responseType: 'text' })
+      .pipe(
+        tap(res => alert(res)),
+        catchError(err => {
+          alert(JSON.stringify(err));
+          return throwError(err);
+        }));
   }
 
   private saveLocalToken(code: string): Observable<void> {
+    alert(code);
     console.log(code);
     return from(this.storage.set(AuthService.STORAGE_KEY, code));
   }
