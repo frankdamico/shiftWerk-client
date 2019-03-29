@@ -66,5 +66,9 @@ export class MakerService {
     return this.http.delete(`${serverUrl}/favorites`, id)
       .pipe(catchError(err => throwError(err)));
   }
+  updateProfileSettings(profileSettings, makerId): Observable<any> {
+    return this.http.patch(`${serverUrl}/maker/${makerId}`, profileSettings, httpOptions)
+      .pipe(catchError(err => throwError(err)));
+  }
 }
 
