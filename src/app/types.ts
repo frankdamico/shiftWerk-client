@@ -26,6 +26,7 @@ export interface Position {
   position: string;
   shift?: Shift;
   filled?: boolean;
+  payment_type: string;
 }
 
 export interface Maker {
@@ -41,11 +42,10 @@ export interface Maker {
 export interface Shift {
   id: number;
   name: string;
-  time_date: Date;
+  start: Date;
+  end: Date;
   duration: number;
   address: string;
-  latitude: number;
-  longitude: number;
   description: string;
   positions: Position[];
 }
