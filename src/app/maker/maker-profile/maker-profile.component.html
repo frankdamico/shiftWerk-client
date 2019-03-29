@@ -3,34 +3,46 @@
 <form>
 
     <ion-card color="light" padding="1px" padding="1px">
-      <ion-thumbnail><ion-img padding="1px" src="../../assets/fd.png"></ion-img>
-      </ion-thumbnail>
-      <ion-label>Name:</ion-label><ion-input placeholder="Frank D'Amico"></ion-input>
+      <ion-avatar>
+        <ion-img padding="1px" src="{{url_photo}}"></ion-img>
+      </ion-avatar>
+      <br>
+      <a button icon-start ion-button full (click)="openCamera()">
+        <ion-icon name="camera"></ion-icon>
+        <!-- <i class="icon ion-ios-telephone"></i> -->
+      </a>
+      <a button icon-start ion-button full (click)="openGallery()">
+        <ion-icon name="images"></ion-icon>
+        <!-- <i class="icon ion-ios-telephone"></i> -->
+      </a>
+      <br>
+      <ion-label>Name:</ion-label>
+      <ion-input [(ngModel)]="name" name="name" placeholder="Enter Name"></ion-input>
           <!-- <ion-input placeholder="D'Amico"></ion-input> -->
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px" padding="1px">
       <ion-label>Email:</ion-label>
-      <ion-input placeholder="frankieD123@hawtmale.com"></ion-input>
+      <ion-input [(ngModel)]="email" name="email" placeholder="Enter E-mail"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px">
       <ion-label>Phone:</ion-label>
-      <ion-input placeholder="504-550-1812"></ion-input>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px">
         <ion-label>Bio:</ion-label>
-        <ion-textarea placeholder="Server for 5 years in fine dining and for catering company.  Bartender for special events. Currently attending mime school because i like it quiet."></ion-textarea> 
+        <ion-textarea [(ngModel)]="bio" name="bio" placeholder="Tell us about yourself Maker!"></ion-textarea>
       </ion-card>  
 
       <!-- <ion-input placeholder=""> -->
         <!-- <div>[ XXXXX <div></div> PHOTO <div></div>XXXXX <div></div> IMAGE <div></div> XXXXX ] <div></div><ion-button size="small" color="secondary">ADD/CHANGE PHOTO</ion-button></div> -->
       <!-- </ion-input> -->
-      <ion-button width="95%" expand="block" color="primary" (click)="update('UPDATED')" class-name="button-update">SAVE/UPDATE PROFILE</ion-button>
+      <ion-button width="95%" expand="block" color="primary" (click)="saveSettings('UPDATED')" class-name="button-update">SAVE/UPDATE PROFILE</ion-button>
     </form>
   </ion-card>
   
