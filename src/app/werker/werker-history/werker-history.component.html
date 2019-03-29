@@ -1,24 +1,29 @@
 <h3>History</h3>
 
-<ion-list>
+<!-- <ion-list width="100%"> -->
   <!-- <mat-accordian> -->
-    <ion-item *ngFor="let pastShift of pastShifts" color="light" padding="2px">
+    <ion-item *ngFor="let pastShift of pastShifts">
     <!-- </mat-accordian> -->
-    <mat-expansion-panel>
+  <ion-card text-wrap width="50%" expand="block" color="tertiary">
+    
+    <mat-expansion-panel multi="false">
       
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          <ion-icon name="calendar" color="dark"></ion-icon>
-          <ion-label><b>{{ pastShift.name }}</b></ion-label>
-          <div>{{pastShift.start | date:'MMM dd, yyyy h:mm a'}}</div>
+        <mat-panel-title color="tertiary">
+          <ion-icon name="star-half" color="dark"></ion-icon>
+          <ion-label><b>{{ pastShift.name }}</b>
+            <div>{{pastShift.start | date:'MMM dd, yyyy h:mm a'}}</div>
+          </ion-label>
         </mat-panel-title>
-        
       </mat-expansion-panel-header>
+
       <div><b>Shift History Details:</b></div>
       <div>{{pastShift.address}}</div>
        <div>{{pastShift.description}}</div>
        <div>{{pastShift.position}}</div>
       <ion-button (click)="rateShift(pastShift)" size="default" expand="block" color="primary">RATE THIS SHIFT</ion-button>
     </mat-expansion-panel>
+    </ion-card>
+    </ion-item>
 
 
