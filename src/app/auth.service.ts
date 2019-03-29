@@ -118,30 +118,4 @@ export class AuthService {
     return this.http.patch(`${serverUrl}/profile`, Object.assign(user, values), httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
-
-  /**
-   * @deprecated
-   * gets a default user for demonstration purposes
-   *
-   * @param role - either 'werkers' or 'makers'
-   */
-  public getDefaultUser(role: string): Observable<any> {
-    if (role === 'makers') {
-      return this.http.get(`${serverUrl}/makers/2`);
-    }
-    return this.http.get(`${serverUrl}/werkers/5`);
-  }
-
-  /**
-   * @deprecated
-   * old login procedure
-   *
-   * @param role - either 'werker' or 'maker'
-   */
-  public lazyServerLogin(role: string): Observable<any> {
-    if (role === 'maker') {
-      return this.http.put(`${serverUrl}/makers`, this.user, httpOptions);
-    }
-    return this.http.put(`${serverUrl}/werkers`, this.user, httpOptions);
-  }
 }
