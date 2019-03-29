@@ -3,28 +3,29 @@
 <form>
 
     <ion-card color="light" padding="1px" padding="1px">
-      <ion-thumbnail><ion-img padding="1px" src="../../assets/fd.png"></ion-img>
+      <ion-thumbnail><ion-img padding="1px" src="{{url_photo}}"></ion-img>
       </ion-thumbnail>
-      <ion-label>Name:</ion-label><ion-input placeholder="Frank D'Amico"></ion-input>
+      <ion-label>Name:</ion-label>
+      <ion-input [(ngModel)]="name" name="name" placeholder="Enter Name"></ion-input>
           <!-- <ion-input placeholder="D'Amico"></ion-input> -->
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px" padding="1px">
       <ion-label>Email:</ion-label>
-      <ion-input placeholder="frankieD123@hawtmale.com"></ion-input>
+      <ion-input [(ngModel)]="email" name="email" placeholder="Enter E-mail"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px">
       <ion-label>Phone:</ion-label>
-      <ion-input placeholder="504-550-1812"></ion-input>
+      <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number"></ion-input>
     </ion-card>
     <p></p>
 
     <ion-card color="light" padding="1px">
         <ion-label>Bio:</ion-label>
-        <ion-textarea placeholder="Server for 5 years in fine dining and for catering company.  Bartender for special events. Currently attending mime school because i like it quiet."></ion-textarea> 
+        <ion-textarea [(ngModel)]="bio" name="bio" placeholder="Tell us about yourself Maker!"></ion-textarea>
       </ion-card>  
 
       <!-- <ion-input placeholder=""> -->

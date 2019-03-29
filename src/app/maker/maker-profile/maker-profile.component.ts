@@ -9,6 +9,13 @@ import { ToastController } from '@ionic/angular';
 })
 export class MakerProfileComponent implements OnInit {
 
+
+  public name: string;
+  public email: string;
+  public phoneNumber: string;
+  public bio: string;
+  public url_photo: string;
+
   constructor(
     public toastController: ToastController
   ) { }
@@ -27,6 +34,13 @@ export class MakerProfileComponent implements OnInit {
     this.presentToast(answer);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.maker);
+  this.name = this.maker.name;
+  this.email = this.maker.email;
+  this.phoneNumber = this.maker.phone;
+  this.bio = this.maker.bio;
+  this.url_photo = this.maker.url_photo;
+  }
 
 }
