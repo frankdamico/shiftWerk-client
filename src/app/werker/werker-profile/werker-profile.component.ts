@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-werker-profile',
@@ -17,7 +16,6 @@ constructor(
   public toastController: ToastController,
   public werkerService: WerkerService,
   private camera: Camera,
-  private http: HttpClient,
 ) {}
 
 
@@ -31,7 +29,6 @@ constructor(
   public url_photo: string;
   public certifications: object[];
   public address: string;
-  public info:any;
 
   async presentToast() {
     const toast = await this.toastController.create({
