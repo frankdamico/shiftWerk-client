@@ -2,19 +2,17 @@
 <ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)"
   debounce="750"></ion-searchbar>
 
-    <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
-
-  <ion-card text-wrap width="100%" expand="block" color="tertiary">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title color="light">
-        {{ shift.name }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}</ion-item>
-        <ion-item slot="end" color="light" lines="none">{{shift.address}}</ion-item>        
-    <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
-    </mat-expansion-panel>
-  </ion-card>
-
+  <ion-item *ngFor="let shift of shifts" (click)="goToShift()">
+    <ion-card text-wrap width="100%" expand="block" color="tertiary">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title color="light">
+          {{ shift.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}</ion-item>
+          <ion-item slot="end" color="light" lines="none">{{shift.address}}</ion-item>        
+      <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
+      </mat-expansion-panel>
+    </ion-card>
   </ion-item>
