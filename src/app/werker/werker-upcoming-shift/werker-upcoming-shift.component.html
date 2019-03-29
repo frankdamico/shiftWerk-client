@@ -1,9 +1,9 @@
 <div class-name="werker-shift-expanded">
 
 
-  <mat-expansion-panel multi="false">
+  <mat-expansion-panel multi="false" display="flex" text-wrap>
 
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header display="flex">
       <mat-panel-title color="light">
         <ion-icon name="alert" color="secondary"></ion-icon>
         <ion-label><b>{{upcomingShift.name}}</b>
@@ -16,8 +16,8 @@
     <!-- <div class-name="shift-name">{{upcomingShift.name}}</div> -->
     <div class-name="shift-address">{{upcomingShift.address}}</div>
     <!-- <div class-name="shift-start">{{upcomingShift.start}}</div> -->
-    <div class-name="shift-description">
-      <p>{{upcomingShift.description}}</p>
+    <div class-name="shift-description" text-wrap>
+      <p text-wrap>{{upcomingShift.description}}</p>
     </div>
     <div class-name="invite-position">Position: Bartender</div>
     <!-- <p></p>

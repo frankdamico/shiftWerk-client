@@ -7,12 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, from, of } from 'rxjs';
 import { catchError, concatMap, tap } from 'rxjs/operators';
 import { Werker, Maker } from './types';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'content-type': 'application/json' }),
-};
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+import { serverUrl, httpOptions } from './environment';
 
 @Injectable({
   providedIn: 'root'
