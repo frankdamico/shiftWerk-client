@@ -50,7 +50,6 @@ export class WerkerPage implements OnInit {
     this.loadingController.create()
     .then(loading => {
       loading.present();
-      this.werker = this.authService.user;
       console.log(this.werker);
       forkJoin(
         this.werkerService.getAllAvailableShifts(this.werker.id),
@@ -71,7 +70,11 @@ export class WerkerPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getWerkerShifts();
+    this.authService.getRemoteUserInfo()
+    .subscribe(user => {
+        this.werker = user;
+        this.getWerkerShifts();
+      }, err => console.error(err));
   }
 
   /** @method onNavClick

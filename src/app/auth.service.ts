@@ -37,7 +37,6 @@ export class AuthService {
       .pipe(
         concatMap(([code, deviceType]) => this.saveLogin(code, role, deviceType)),
         concatMap(res => this.saveLocalToken(res)),
-        concatMap(() => this.getRemoteUserInfo()),
         catchError(err => throwError(err))
       );
   }

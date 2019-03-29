@@ -58,7 +58,6 @@ export class MakerPage implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.maker = this.authService.user;
         console.log(this.maker);
         forkJoin(
               this.makerService.getApplications(this.maker.id),
@@ -81,7 +80,11 @@ export class MakerPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getMakerShifts();
+    this.authService.getRemoteUserInfo()
+      .subscribe(user => {
+        this.maker = user;
+        this.getMakerShifts();
+      }, err => console.error(err));
   }
   onNavClick(view: string) {
     console.log(view);
