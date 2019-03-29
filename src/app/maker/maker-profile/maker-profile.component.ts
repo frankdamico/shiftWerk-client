@@ -57,6 +57,12 @@ export class MakerProfileComponent implements OnInit {
 
   }
 
+  callNum() {
+    setTimeout(() => {
+      window.open(`tel:${this.phoneNumber}`, '_system');
+    }, 100);
+  }
+
   openGallery() {
     const options: CameraOptions = {
       quality: 50,
