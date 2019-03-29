@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
+import { MakerService } from 'src/app/maker.service';
 
 @Component({
   selector: 'app-maker-profile',
@@ -21,6 +21,7 @@ export class MakerProfileComponent implements OnInit {
   @Input() maker: any;
 
   constructor(
+    public makerService: MakerService,
     public toastController: ToastController,
     public werkerService: WerkerService, // using werker service to send cloudinary photo
     private camera: Camera,               // need to refactor all the services later into one
@@ -84,9 +85,7 @@ export class MakerProfileComponent implements OnInit {
       })
   }
 
-  // update(answer) {
-  //   this.presentToast(answer);
-  // }
+
   saveSettings(answer) {
     const settings = {
       name: this.name,
@@ -95,12 +94,12 @@ export class MakerProfileComponent implements OnInit {
       bio: this.bio,
       phone: this.phoneNumber
     };
-    // this.werkerService.updateProfileSettings(settings, this.werker.id)
-    //   .subscribe(res => {
-    //     console.log(res);
-    //   }, err => {
-    //     console.error(err);
-    //   });
+    this.makerService.updateProfileSettings(settings, this.maker.id)
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.error(err);
+      });
     this.presentToast(answer);
     console.log(settings);
   }
