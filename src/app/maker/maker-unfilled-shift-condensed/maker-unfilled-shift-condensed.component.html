@@ -26,7 +26,9 @@
         <ion-card color="light"
               *ngFor="let position of shift.positions let i=index" color="light" lines="none" display="flex" width="100%">
                 <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
-                  {{count}} out of 1</ion-item><ion-button slot="end" (click)="invite(i)">Invite Werker</ion-button></ion-item>
+                  {{count}} out of 1</ion-item></ion-item>
+                  <app-invite [i]="i" [shift]="shift" slot="end" color="light"></app-invite>
+                  <app-maker-search [results]="results" [shift]="shift" color="light"></app-maker-search>
         </ion-card>
     
   </mat-expansion-panel>
