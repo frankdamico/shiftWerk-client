@@ -23,6 +23,8 @@ export class MakerSearchComponent implements OnInit {
   ) {}
 
   @Input() maker: any;
+  @Input() results: any;
+  @Input() shift: any;
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
@@ -40,17 +42,20 @@ export class MakerSearchComponent implements OnInit {
   }
 
   invite(i, j) {
-    let positionName = this.werkers[i]['positions'][j];
-    let werkerId = this.werkers[i]['id'];
+    console.log(this.results[i]['positions'][j]['position'])
+    let positionName = this.results[i]['positions'][j]['position'];
+    let werkerId = this.results[i]['id'];
     let type = 'invite'
-    let shiftId;
+    let shiftId = this.shift['id'];
     this.presentToast('invite');
     this.shiftService.inviteOrApply(shiftId, type, werkerId, positionName).subscribe(response => {
       console.log(response);
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.results)
+  }
 
   searchFunc = event => {
     this.makerService.getWerkers(event).subscribe(werkers => {
