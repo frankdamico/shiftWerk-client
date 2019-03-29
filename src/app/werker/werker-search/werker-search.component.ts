@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ShiftService } from 'src/app/shift.service';
-import { Shift } from 'src/app/types';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -11,7 +11,9 @@ import { Shift } from 'src/app/types';
 export class WerkerSearchComponent implements OnInit {
   constructor(
     private shiftService: ShiftService,
+    public loadingController: LoadingController
   ) { }
+  @Input() werker;
   allShifts: Array<any>;
   shifts: Array<any>;
   position = '';
@@ -21,14 +23,20 @@ export class WerkerSearchComponent implements OnInit {
   paymentTypes: Array<string>;
 
   ngOnInit() {
-    this.shiftService.getShiftsByTerm({})
-      .subscribe((shifts) => {
-        console.log(shifts);
-        this.shifts = shifts;
-        this.allShifts = shifts;
-        this.positions = shifts.map(shift => shift.position).filter((pos, i, positions) => positions.indexOf(pos) === i);
-        this.paymentTypes = shifts.map(shift => shift.payment_type).filter((type, i, types) => types.indexOf(type) === i);
-        console.log(this.positions);
+    this.loadingController.create()
+      .then(loading => {
+        loading.present();
+        this.shiftService.getShiftsByTerm({})
+          .subscribe((shifts) => {
+            loading.dismiss();
+            this.shifts = shifts;
+            this.allShifts = shifts;
+            this.positions = shifts.map(shift => shift.position).filter((pos, i, positions) => positions.indexOf(pos) === i);
+            this.paymentTypes = shifts.map(shift => shift.payment_type).filter((type, i, types) => types.indexOf(type) === i);
+          }, err => {
+            loading.dismiss();
+            console.error(err);
+          });
       });
   }
 
@@ -45,7 +53,19 @@ export class WerkerSearchComponent implements OnInit {
   }
 
   applyForShift(shift) {
-    console.log(shift);
+    this.loadingController.create()
+      .then(loading => {
+        loading.present();
+        this.shiftService.inviteOrApply(shift.id, 'apply', this.werker.id, shift.position)
+          .subscribe(() => {
+            loading.dismiss();
+            console.log('applied');
+            this.allShifts = this.allShifts.filter(oldShift => shift.id !== oldShift.id);
+          }, err => {
+            console.error(err);
+            loading.dismiss();
+          });
+      });
   }
 
   searchFunc = (event) => {
