@@ -84,8 +84,25 @@ export class MakerProfileComponent implements OnInit {
       })
   }
 
-  update(answer) {
+  // update(answer) {
+  //   this.presentToast(answer);
+  // }
+  saveSettings(answer) {
+    const settings = {
+      name: this.name,
+      email: this.email,
+      url_photo: this.url_photo,
+      bio: this.bio,
+      phone: this.phoneNumber
+    };
+    // this.werkerService.updateProfileSettings(settings, this.werker.id)
+    //   .subscribe(res => {
+    //     console.log(res);
+    //   }, err => {
+    //     console.error(err);
+    //   });
     this.presentToast(answer);
+    console.log(settings);
   }
 
   ngOnInit() {
