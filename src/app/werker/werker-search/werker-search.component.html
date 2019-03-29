@@ -26,10 +26,10 @@
         {{ shift.name }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}<ion-item slot="end" color="light" lines="none">
-          {{shift.address}}</ion-item></ion-item>
+      <ion-item slot="start" color="light" lines="none" expand="block">{{shift.description}}</ion-item>
+        <ion-item slot="end" color="light" lines="none">{{shift.address}}</ion-item>        
+        <ion-item> {{shift.description}}</ion-item>
           <!-- <ion-button slot="end" (click)="invite(i)">Apply to Shift</ion-button> -->
-      <!-- {{shift.description}}<br><br> -->
       <!-- {{shift.address}} -->
     <ion-button (click)="applyForShift(shift)" size="default" expand="block" color="primary">APPLY</ion-button>
     </mat-expansion-panel>
