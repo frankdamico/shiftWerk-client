@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-maker-home',
@@ -12,6 +12,14 @@ export class MakerHomeComponent implements OnInit {
   @Input() unfulfilled: Array<any>;
   @Input() fulfilled: Array<any>;
   @Input() maker: any;
-  ngOnInit() {}
+  @Output() NavClick = new EventEmitter<string>();
+  
+  onNavClick(view: string) {
+    this.NavClick.emit(view);
+  }
+
+  ngOnInit() {
+
+  }
 
 }

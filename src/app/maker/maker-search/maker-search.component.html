@@ -1,17 +1,16 @@
-<h3>Search Werkers</h3>
-<ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar>
+<!-- <ion-searchbar color="light" [(ngModel)]="searchTerm" searchTerm="searchTerm" (ionChange)="searchFunc(searchTerm)" (click)="searchFunc($event)" debounce="750"></ion-searchbar> -->
 <ion-list color="light">
-  <ion-item *ngFor="let werker of werkers let i=index">
+  <ion-item *ngFor="let result of results let i=index">
     <mat-expansion-panel color="light">
       <mat-expansion-panel-header>
         <mat-panel-title color="light">
-          <ion-thumbnail><img src="{{ werker.url_photo }}"></ion-thumbnail> 
-          <ion-item lines="none">{{ werker.name_first }} {{ werker.name_last }}</ion-item>
+          <ion-thumbnail><img src="{{ result.url_photo }}"></ion-thumbnail> 
+          <ion-item lines="none">{{ result.name_first }} {{ result.name_last }}</ion-item>
         </mat-panel-title>
     </mat-expansion-panel-header>
     
       <ion-item enter-bio text-wrap color="light"><ion-label text-wrap></ion-label>
-        {{ werker.bio }}
+        {{ result.bio }}
       </ion-item>
       <!-- <ion-item text-wrap color="light"><ion-label text-wrap> </ion-label> 
         {{ werker.email }}
@@ -28,15 +27,15 @@
               <ion-item color="light">
                 Werker position(s):
               </ion-item>
-                <ion-item *ngFor="let position of werker.positions let j=index" lines="none" color="light">
-                <ion-button>{{ position.position }}</ion-button>
+                <ion-item *ngFor="let position of result.positions let j=index" lines="none" color="light">
+                <ion-button>{{ position.position}}</ion-button>
                 <ion-button color="secondary" (click)="invite(i, j)" slot="end" class-name="button-invite">SEND INVITE</ion-button>
               </ion-item>
 
           <ion-item last-minute color="light">
             <label class="switch">
               <span class="slider round">
-                Available Last-Minute: {{werker.last_minute}}
+                Available Last-Minute: {{result.last_minute}}
               </span>
               <!-- <ion-toggle (click)="lastMinAvail()" slot="end" checked="true"></ion-toggle> -->
             </label>

@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from 'src/app/shift.service';
@@ -22,6 +22,7 @@ export class MakerUnfilledShiftsComponent implements OnInit {
 
   @Input() shifts: Array<any>;
   @Input() maker: any;
+  @Output() NavClick = new EventEmitter<string>();  
   // unfilled: Array<any>;
   // unfulfulled: Array<any>;
 
@@ -38,6 +39,10 @@ export class MakerUnfilledShiftsComponent implements OnInit {
         event.target.disabled = true;
       }
     }, 500);
+  }
+
+  onNavClick(view: string) {
+    this.NavClick.emit(view);
   }
 
   toggleInfiniteScroll() {
