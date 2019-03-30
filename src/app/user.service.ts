@@ -9,7 +9,7 @@ const CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
 @Injectable({
   providedIn: 'root'
 })
-export class WerkerService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
