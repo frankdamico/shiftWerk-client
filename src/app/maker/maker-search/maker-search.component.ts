@@ -54,16 +54,9 @@ export class MakerSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.results)
   }
-
-  searchFunc = event => {
-    this.makerService.getWerkers(event).subscribe(werkers => {
-      this.werkers = werkers;
-    });
-  };
 
   text = () => {
     console.log("texting");
-  };
+  }
 }
