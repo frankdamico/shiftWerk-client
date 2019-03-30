@@ -3,8 +3,8 @@ import { Platform } from '@ionic/angular';
 import { GoogleAuthService } from 'ng-gapi';
 import { Storage } from '@ionic/storage';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, from, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError, from, of, forkJoin } from 'rxjs';
 import { catchError, concatMap, tap } from 'rxjs/operators';
 import { Werker, Maker } from './types';
 import { serverUrl, httpOptions } from './environment';
@@ -21,8 +21,7 @@ export class AuthService {
     public platform: Platform
   ) {}
   public static STORAGE_KEY = 'accessToken';
-  public static STORAGE_ID = 'idToken';
-  public static USER = 'user';
+  public static USER_TYPE = 'userType';
   public user: Werker | Maker;
   _webClientId: String = '347712232584-9dv95ud3ilg9bk7vg8i0biqav62fh1q7.apps.googleusercontent.com';
 
@@ -36,7 +35,7 @@ export class AuthService {
     return this.signIn()
       .pipe(
         concatMap(([code, deviceType]) => this.saveLogin(code, role, deviceType)),
-        concatMap(res => this.saveLocalToken(res)),
+        concatMap(res => this.saveLocalTokenAndType(res, role)),
         catchError(err => throwError(err))
       );
   }
@@ -87,9 +86,9 @@ export class AuthService {
         }));
   }
 
-  private saveLocalToken(code: string): Observable<void> {
+  private saveLocalTokenAndType(code: string, role: string): Observable<any> {
     console.log(code);
-    return from(this.storage.set(AuthService.STORAGE_KEY, code));
+    return forkJoin(from(this.storage.set(AuthService.USER_TYPE, role)), from(this.storage.set(AuthService.STORAGE_KEY, code)));
   }
 
   public getRemoteUserInfo(): Observable<any> {
@@ -105,6 +104,12 @@ export class AuthService {
    */
   public getAccessToken(): Observable<string> {
     return from(this.storage.get(AuthService.STORAGE_KEY))
+      .pipe(catchError(err => throwError(err))
+    );
+  }
+
+  public getUserType(): Observable<string> {
+    return from(this.storage.get(AuthService.USER_TYPE))
       .pipe(catchError(err => throwError(err))
     );
   }
