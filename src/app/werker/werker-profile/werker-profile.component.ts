@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-werker-profile',
@@ -14,7 +14,7 @@ export class WerkerProfileComponent implements OnInit {
 v
 constructor(
   public toastController: ToastController,
-  public werkerService: WerkerService,
+  public userService: UserService,
   private camera: Camera,
 ) {}
 
@@ -49,15 +49,14 @@ constructor(
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      return this.werkerService.uploadPhoto(base64Image)
+      const base64Image = 'data:image/jpeg;base64,' + imageData;
+      return this.userService.uploadPhoto(base64Image);
     }, (err) => {
-      // Handle error
-        console.log(err);
+        console.error(err);
     })
       .then(({url}) => {
         this.url_photo = url;
-      })
+      });
 
   }
 
@@ -72,17 +71,16 @@ constructor(
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      return this.werkerService.uploadPhoto(base64Image)
+      const base64Image = 'data:image/jpeg;base64,' + imageData;
+      return this.userService.uploadPhoto(base64Image);
     }, (err) => {
-      // Handle error
-      console.log(err);
+      console.error(err);
     })
       .then(({url}) => {
         this.url_photo = url;
-      })
+      });
   }
- 
+
   callNum() {
     setTimeout(() => {
       window.open(`tel:${this.phoneNumber}`, '_system');
@@ -107,7 +105,7 @@ constructor(
       certifications: this.certifications,
       positions: this.positions,
     };
-    this.werkerService.updateProfileSettings(settings, this.werker.id)
+    this.userService.updateProfileSettings(settings)
       .subscribe(res => {
         console.log(res);
       }, err => {
