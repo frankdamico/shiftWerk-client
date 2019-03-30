@@ -86,6 +86,12 @@ export class AuthService {
         }));
   }
 
+  /**
+   * given login response from server, saves new JWT and user type
+   *
+   * @param code - new JWT from server
+   * @param role - 'werker' or 'maker'
+   */
   private saveLocalTokenAndType(code: string, role: string): Observable<any> {
     console.log(code);
     return forkJoin(from(this.storage.set(AuthService.USER_TYPE, role)), from(this.storage.set(AuthService.STORAGE_KEY, code)));
@@ -108,6 +114,11 @@ export class AuthService {
     );
   }
 
+  /**
+   * gets user type from local storage
+   * either 'werker' or 'maker'
+   * used by authGuard
+   */
   public getUserType(): Observable<string> {
     return from(this.storage.get(AuthService.USER_TYPE))
       .pipe(catchError(err => throwError(err))
