@@ -75,24 +75,24 @@ export class ShiftService {
       );
   }
   /**
-   * @function submitShift creates a new shift
-   * @param {shiftBody} the proper information needed to create the shift
+   * creates a new shift
+   *
+   * @param shiftBody the proper information needed to create the shift
    */
-  submitShift(formData, makerId): Observable<any> {
+  submitShift(formData: {
+    name: string,
+    address: string,
+    start: Date,
+    end: Date,
+    description: string,
+    positions: object[],
+  }, makerId): Observable<any> {
 
-    const submittedShift = {
-      MakerId: makerId,
-      name: formData.name,
-      description: formData.description,
-      address: formData.address,
-      start: formData.start,
-      end: formData.end,
-      positions: formData.positions,
-    }
+    const submittedShift = Object.assign(formData, { MakerId: makerId });
 
     return this.http.put(`${serverUrl}/shifts`, JSON.stringify(submittedShift), httpOptions).pipe(
       catchError(error => throwError(error))
-    )
+    );
   }
 
   /**
