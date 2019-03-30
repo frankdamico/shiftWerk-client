@@ -127,8 +127,8 @@ export class WerkerService {
     bio?: string,
     certifications?: object[],
     positions?: object[],
-  }, werkerId: number): Observable<any> {
-    return this.http.patch(`${serverUrl}/werkers/${werkerId}`, profileSettings, httpOptions)
+  }): Observable<any> {
+    return this.http.patch(`${serverUrl}/users`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
   }
 }
