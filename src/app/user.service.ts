@@ -68,7 +68,7 @@ export class UserService {
    * @param query "upcoming", "history", "apply", "invite", "available", "unfulfilled"
    */
   public getShifts(query: string): Observable<any> {
-    return this.http.get(`${serverUrl}/users/shifts?shifts=${query}`, httpOptions);
+    return this.http.get(`${serverUrl}/user/shifts?shifts=${query}`, httpOptions);
   }
 
   /**
@@ -140,7 +140,7 @@ export class UserService {
     certifications?: object[],
     positions?: object[],
   }): Observable<any> {
-    return this.http.patch(`${serverUrl}/users`, profileSettings, httpOptions)
+    return this.http.patch(`${serverUrl}/user`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
   }
 }
