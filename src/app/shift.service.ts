@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import data from 'mockDataShift.json';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { serverUrl, httpOptions } from './environment';
@@ -13,60 +12,38 @@ export class ShiftService {
   constructor(
     private http: HttpClient,
   ) { }
-  /**
-   * @deprecated
-   */
-  allShifts: Array<any> = data;
+
   /**
    * @method extractData
-   * returns either response or empty object in case of no response
+   * returns either response or empty array in case of no response
    */
   private extractData(res: Response): Response | object {
     return res || [];
   }
+
   /**
+   * @deprecated
    * @method getAllShifts
    * gets shifts from server, returning observable
    */
   getAllShifts(): Observable<any> {
     // might need to refactor to this endpoint later
-    //GET /werkers/:werkerId/shifts/all
+    // GET /werkers/:werkerId/shifts/all
     return this.http.get(`${serverUrl}/shifts`, httpOptions).pipe(
       map(this.extractData),
       catchError(err => throwError(err))
     );
   }
 
-  // TODO TEST TO MAKE SURE IT WORKS
-  getUpcomingShifts(werkerId, histOrUpcoming): Observable<any> {
-    // /werkers/:werkerId/shifts/:histOrUpcoming
-    return this.http.get(`${serverUrl}/werkers/${werkerId}/shifts/${histOrUpcoming}`).pipe(
-      map(this.extractData),
-      catchError(err => throwError(err))
-    )
-  }
-  // TODO TEST TO MAKE SURE IT WORKS
-  getPastShifts(): Observable<any> {
-    //werkers/:werkerId/shifts/past
-    return this.http.get(`${serverUrl}/shifts`).pipe(
-      map(this.extractData),
-      catchError(err => throwError(err))
-    )
-  }
-
-  getInvitedShifts(werkerId): Observable<any> {
-    return this.http.get(`${serverUrl}/werkers/${werkerId}/invitations`).pipe(
-      map(this.extractData),
-      catchError(err => throwError(err))
-    );
-  }
   /**
    * sends a query with specific search terms
-   * @param terms the search terms taken in by the search bar, returns an observable
    */
-  getShiftsByTerm(terms: object): Observable<any> {
+  getShiftsByTerm(terms: {
+    position: string,
+    payment_amnt: number,
+    payment_type: string
+  }): Observable<any> {
     let params = new HttpParams();
-    console.log(terms);
     Object.entries(terms).forEach(([term, value]) => params = params.append(term, value));
     return this.http.get(`${serverUrl}/shifts`, { params })
       .pipe(
@@ -110,10 +87,7 @@ export class ShiftService {
    * @param type - either 'apply' or 'invite'
    */
   public inviteOrApply(shiftId: number, type: string, werkerId: number, positionName: string): Observable<any> {
-    // console.log(event);
-    // return;
     return this.http.put(`${serverUrl}/shifts/${shiftId}/${type}/${werkerId}/${positionName}`, httpOptions)
     .pipe(catchError(error => throwError(error)));
   }
-  // app.put('/shifts/:shiftId/:applyOrInvite/:werkerId/:positionName'
 }
