@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { serverUrl, httpOptions } from './environment';
@@ -69,6 +69,18 @@ export class UserService {
    */
   public getShifts(query: string): Observable<any> {
     return this.http.get(`${serverUrl}/users/shifts?shifts=${query}`, httpOptions);
+  }
+
+  /**
+   * sends a query with specific search terms
+   * @param terms the search terms taken in by the search bar, returns an observable
+   */
+  getShiftsByTerm(terms: object): Observable<any> {
+    let params = new HttpParams();
+    console.log(terms);
+    Object.entries(terms).forEach(([term, value]) => params = params.append(term, value));
+    return this.http.get(`${serverUrl}/shifts`, { params })
+      .pipe(catchError(err => throwError(err)));
   }
 
   /**

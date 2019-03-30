@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ShiftService } from 'src/app/shift.service';
 import { LoadingController } from '@ionic/angular';
+import { UserService } from 'src/app/user.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class WerkerSearchComponent implements OnInit {
   constructor(
-    private shiftService: ShiftService,
+    private userService: UserService,
     public loadingController: LoadingController
   ) { }
   @Input() werker;
@@ -26,7 +26,7 @@ export class WerkerSearchComponent implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.shiftService.getShiftsByTerm({})
+        this.userService.getShiftsByTerm({})
           .subscribe((shifts) => {
             loading.dismiss();
             console.log(shifts);
@@ -57,7 +57,7 @@ export class WerkerSearchComponent implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.shiftService.inviteOrApply(shift.id, 'apply', this.werker.id, shift.position)
+        this.userService.inviteOrApply(shift.id, shift.position)
           .subscribe(() => {
             loading.dismiss();
             console.log('applied');
@@ -67,13 +67,6 @@ export class WerkerSearchComponent implements OnInit {
             loading.dismiss();
           });
       });
-  }
-
-  searchFunc = (event) => {
-    this.shiftService.getShiftsByTerm(event).subscribe(shifts => {
-      this.shifts = shifts;
-      console.log(shifts);
-    });
   }
 
   goToShift = () => {
