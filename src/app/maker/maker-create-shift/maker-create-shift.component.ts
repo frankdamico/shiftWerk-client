@@ -45,7 +45,6 @@ export class MakerCreateShiftComponent implements OnInit {
       address: new FormControl(),
       start: new FormControl(),
       end: new FormControl(),
-      // duration: new FormControl(),
       description: new FormControl(),
       positions: new FormArray([])
     });

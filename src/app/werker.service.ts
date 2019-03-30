@@ -13,15 +13,10 @@ export class WerkerService {
 
   constructor(private http: HttpClient) { }
 
-  /** @method getWerkerById
+  /**
    * gets Werker from db by id
-   * currently reads mock data
    *
    * @param id - database-generated id
-   * @return - Werker object
-   *
-   * @todo make network request for DB data
-   * @todo return Promise<Werker>
    */
   public getWerkerById(id: number): Observable<any> {
     return this.http.get(`${serverUrl}/werkers/${id}`, httpOptions);
@@ -43,14 +38,6 @@ export class WerkerService {
     return this.http.get(`${serverUrl}/werkers/${id}/shifts/available`, httpOptions);
   }
 
-  /**
- * @method extractData
- * returns either response or empty object in case of no response
- */
-  private extractData(res: Response): Response | object {
-    return res || {};
-  }
-
   uploadPhoto(photo): Promise<any> {
     return this.http.post(CLOUDINARY_URL, {
            file: photo,
@@ -58,7 +45,15 @@ export class WerkerService {
          }).toPromise();
   }
 
-  updateProfileSettings(profileSettings, werkerId): Observable<any> {
+  updateProfileSettings(profileSettings: {
+    name_first?: string,
+    name_last?: string,
+    email?: string,
+    url_photo?: string,
+    bio?: string,
+    certifications?: object[],
+    positions?: object[],
+  }, werkerId: number): Observable<any> {
     return this.http.patch(`${serverUrl}/werkers/${werkerId}`, profileSettings, httpOptions)
     .pipe(catchError(err => throwError(err)));
   }
