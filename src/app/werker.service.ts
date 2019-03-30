@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { serverUrl, httpOptions } from './environment';
-let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/daft-funk/image/upload';
-let CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/daft-funk/image/upload';
+const CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
 
 @Injectable({
   providedIn: 'root'
@@ -22,20 +22,54 @@ export class WerkerService {
     return this.http.get(`${serverUrl}/werkers/${id}`, httpOptions);
   }
 
-  public getUpcomingShifts(id: number): Observable<any> {
-    return this.http.get(`${serverUrl}/werkers/${id}/shifts/upcoming`, httpOptions);
+  /**
+   * gets shifts for logged in user according to query string
+   *
+   * @param query "upcoming", "history", "apply", "invite", "available", "unfulfilled"
+   */
+  public getShifts(query: string): Observable<any> {
+    return this.http.get(`${serverUrl}/users/shifts?shifts=${query}`, httpOptions);
   }
 
-  public getHistory(id: number): Observable<any> {
-    return this.http.get(`${serverUrl}/werkers/${id}/shifts/history`, httpOptions);
+  /**
+   * creates a new shift
+   *
+   * @param shiftBody the proper information needed to create the shift
+   */
+  public submitShift(formData: {
+    name: string,
+    address: string,
+    start: Date,
+    end: Date,
+    description: string,
+    positions: object[],
+  }): Observable<any> {
+    return this.http.put(`${serverUrl}/shifts`, JSON.stringify(formData), httpOptions).pipe(
+      catchError(error => throwError(error))
+    );
   }
 
-  public getInvitations(id: number): Observable<any> {
-    return this.http.get(`${serverUrl}/werkers/${id}/invitations`, httpOptions);
+  /**
+   * either accepts or declines an application or invitation
+   *
+   * @param acceptOrDecline - either 'accept' or 'decline'
+   */
+  public respondToInvitation(shiftId: number, acceptOrDecline: string, werkerId?: number, ): Observable<any> {
+    const werkerQuery = werkerId ? `&werker=${werkerId}` : '';
+    return this.http.patch(
+      `${serverUrl}/shifts/${shiftId}/applications?status=${acceptOrDecline}${werkerQuery}`,
+      {}, httpOptions)
+      .pipe(catchError(err => throwError(err)));
   }
 
-  public getAllAvailableShifts(id: number): Observable<any> {
-    return this.http.get(`${serverUrl}/werkers/${id}/shifts/available`, httpOptions);
+  /**
+   * either invites a werker to a shift or makes a new application for a shift
+   *
+   */
+  public inviteOrApply(shiftId: number, positionName: string, werkerId?: number): Observable<any> {
+    const werkerQuery = werkerId ? `&werker=${werkerId}` : '';
+    return this.http.put(`${serverUrl}/shifts/${shiftId}/applications?position=${positionName}${werkerQuery}`, httpOptions)
+    .pipe(catchError(error => throwError(error)));
   }
 
   uploadPhoto(photo): Promise<any> {
