@@ -29,6 +29,7 @@ export class WerkerSearchComponent implements OnInit {
         this.shiftService.getShiftsByTerm({})
           .subscribe((shifts) => {
             loading.dismiss();
+            console.log(shifts);
             this.shifts = shifts;
             this.allShifts = shifts;
             this.positions = shifts.map(shift => shift.position).filter((pos, i, positions) => positions.indexOf(pos) === i);
@@ -71,6 +72,7 @@ export class WerkerSearchComponent implements OnInit {
   searchFunc = (event) => {
     this.shiftService.getShiftsByTerm(event).subscribe(shifts => {
       this.shifts = shifts;
+      console.log(shifts);
     });
   }
 
