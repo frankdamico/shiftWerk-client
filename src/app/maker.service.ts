@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
 import { makeBindingParser } from '@angular/compiler';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { serverUrl, httpOptions } from './environment';
 
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 @Injectable({
   providedIn: 'root'
 })
@@ -64,6 +59,10 @@ export class MakerService {
   }
   unFav(id: object): Observable<Object> {
     return this.http.delete(`${serverUrl}/favorites`, id)
+      .pipe(catchError(err => throwError(err)));
+  }
+  updateProfileSettings(profileSettings, makerId): Observable<any> {
+    return this.http.patch(`${serverUrl}/maker/${makerId}`, profileSettings, httpOptions)
       .pipe(catchError(err => throwError(err)));
   }
 }

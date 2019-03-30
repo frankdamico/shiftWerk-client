@@ -25,19 +25,19 @@ export class MakerCreateShiftComponent implements OnInit {
     private shiftService: ShiftService,
     public toastController: ToastController,
     private router: Router) {
-    }
+  }
 
-    @Output() NavClick = new EventEmitter<'home'>();
+  @Output() NavClick = new EventEmitter<'home'>();
 
-    async presentToast(answer) {
-      const toast = await this.toastController.create({
-        message: `Event ${answer}...Thanks!`,
-        duration: 2000,
-        color: 'primary',
-        position: 'top'
-      });
-      toast.present();
-    }
+  async presentToast(answer) {
+    const toast = await this.toastController.create({
+      message: `Event ${answer}...Thanks!`,
+      duration: 2000,
+      color: 'primary',
+      position: 'top'
+    });
+    toast.present();
+  }
 
   ngOnInit() {
     this.sForm = new FormGroup({
@@ -71,16 +71,17 @@ export class MakerCreateShiftComponent implements OnInit {
   }
 
 
-  submit = () => {
+  submit() {
     console.log('submitting');
     console.log(this.sForm.value);
     this.shiftService.submitShift(this.sForm.value, this.maker.id).subscribe(response => {
       console.log(response);
-      });
+      this.presentToast('created');
+      this.NavClick.emit('home');
+      }, error => console.error(error));
     // create shift - on submit click =>
     // redirect to home-unfilled-shifts (to invite)
     // this.view = 'home';
-    this.router.navigate([`maker-home`])
   }
   update(answer) {
     console.log('Toast Submit');

@@ -7,12 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, from, of } from 'rxjs';
 import { catchError, concatMap, tap } from 'rxjs/operators';
 import { Werker, Maker } from './types';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'content-type': 'application/json' }),
-};
-const serverUrl = 'http://35.185.77.220:4000';
-// const serverUrl = 'http://localhost:4000';
+import { serverUrl, httpOptions } from './environment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +35,7 @@ export class AuthService {
   public login(role: string): Observable<any> | any {
     return this.signIn()
       .pipe(
-        concatMap(code => this.saveLogin(code, role)),
+        concatMap(([code, deviceType]) => this.saveLogin(code, role, deviceType)),
         concatMap(res => this.saveLocalToken(res)),
         concatMap(() => this.getRemoteUserInfo()),
         catchError(err => throwError(err))
@@ -51,29 +46,30 @@ export class AuthService {
    * uses GoogleAuthService to request permissions from user
    * defers to cordova GooglePlus on mobile devices
    */
-  private signIn(): Observable<string> {
-    if (!(this.platform.is('ios') || this.platform.is('android'))) {
-      return this.googleAuth.getAuth()
-        .pipe(
-          concatMap(res => from(res.grantOfflineAccess({
-            prompt: 'consent',
-          }))),
-          concatMap(obj => of(obj.code)),
-          catchError(err => throwError(err))
-          );
+  private signIn(): Observable<string[]> {
+    if (this.platform.is('mobile')) {
+      return from(this.googlePlus.login({
+        scopes: [
+          'profile',
+          'email',
+          'openid',
+          'https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/user.phonenumbers.read'
+          ].join(' '),
+          webClientId: this._webClientId,
+          offline: true,
+      })).pipe(
+        concatMap(obj => of([obj.serverAuthCode, 'mobile'])),
+        catchError(err => throwError(err))
+      );
     }
-    return from(this.googlePlus.login({
-      scopes: [
-        'profile',
-        'email',
-        'openid',
-        'https://www.googleapis.com/auth/calendar',
-        'https://www.googleapis.com/auth/user.phonenumbers.read'
-        ].join(' '),
-        webClientId: this._webClientId,
-        offline: true,
-    })).pipe(
-      concatMap(obj => of(obj.serverAuthCode))
+  return this.googleAuth.getAuth()
+    .pipe(
+      concatMap(res => from(res.grantOfflineAccess({
+       prompt: 'consent',
+      }))),
+      concatMap(obj => of([obj.code, 'desktop'])),
+      catchError(err => throwError(err))
     );
   }
 
@@ -84,9 +80,12 @@ export class AuthService {
    * @param role - either 'werker' or 'maker'
    * @return Observable containing a new JWT from the API server
    */
-  private saveLogin(code: string, role: string): Observable<string> {
-    return this.http.get(`${serverUrl}/login?code=${code}&type=${role}`, { responseType: 'text' })
-      .pipe(catchError(err => throwError(err)));
+  private saveLogin(code: string, role: string, deviceType: string): Observable<string> {
+    return this.http.get(`${serverUrl}/login?code=${code}&type=${role}&device=${deviceType}`, { responseType: 'text' })
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
   }
 
   private saveLocalToken(code: string): Observable<void> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { MakerService } from 'src/app/maker.service';
 import { ShiftService } from 'src/app/shift.service';
@@ -16,6 +16,7 @@ import { ToastController } from '@ionic/angular';
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
   shifts: any;
   count: number = 0;
+  results: any;
 
   constructor(
     public makerService: MakerService,
@@ -25,6 +26,7 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
 
   @Input() shift: object;
   @Input() unfilled: Array<any>;
+  @Output() NavClick = new EventEmitter<string>();
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
@@ -36,14 +38,18 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
     toast.present();
   }
 
-  invite(i) {
-    console.log(this.shift['id']);
-    console.log(this.shift['positions'][i]['position']);
-    this.makerService.getWerkers(this.shift['positions'][i]['position'])
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
+  
+
+  // invite(i) {
+  //   console.log(this.shift['id']);
+  //   console.log(this.shift['positions'][i]['position']);
+  //   // this.NavClick.emit('search');
+  //   this.makerService.getWerkers(this.shift['positions'][i]['position'])
+  //     .subscribe(results => {
+  //       this.results = results;
+  //       console.log(this.results);
+  //     });
+  // }
 
   getUnfilled() {
     for(let i = 0; i < this.shift['positions'].length;i++) {
@@ -57,5 +63,4 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
     this.shiftService.getAllShifts();
     this.getUnfilled();
   }
-
 }
