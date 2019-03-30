@@ -28,6 +28,9 @@ export class MakerPage implements OnInit {
   unfulfilled: any;
   history: any;
 
+  /**
+   * @deprecated
+   */
   async getShifts() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -43,7 +46,14 @@ export class MakerPage implements OnInit {
       });
   }
 
-  respondToApplication({werkerId, shiftId, status}) {
+  /**
+   * responds to an application, marking it as either accepted or declined
+   * removes application from state
+   *
+   * @param info.status - either 'accept' or 'decline'
+   */
+  respondToApplication(info: {werkerId, shiftId, status}) {
+    const { werkerId, shiftId, status } = info;
     return from(this.loadingController.create())
       .pipe(
         flatMap(loading => loading.present()),
@@ -54,19 +64,21 @@ export class MakerPage implements OnInit {
       });
   }
 
+  /**
+   * populates local state with all applications, history,
+   * unfulfilled shifts, and upcoming fulfilled shifts
+   * for the logged in maker
+   */
   getMakerShifts() {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.maker = this.authService.user;
-        console.log(this.maker);
         forkJoin(
               this.makerService.getApplications(this.maker.id),
               this.makerService.getHistory(this.maker.id),
               this.makerService.getUnfulfilledShifts(this.maker.id),
               this.makerService.getUpcomingFulfilledShifts(this.maker.id),
           ).subscribe(([applications, history, unfulfilled, fulfilled]) => {
-            console.log(applications, history, unfulfilled, fulfilled);
             this.applications = applications;
             this.history = history;
             this.unfulfilled = unfulfilled;
@@ -81,10 +93,20 @@ export class MakerPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getMakerShifts();
+    this.authService.getRemoteUserInfo()
+      .subscribe(user => {
+        this.maker = user;
+        this.getMakerShifts();
+      }, err => console.error(err));
   }
+
+  /**
+   * changes the component rendered in <ion-content>
+   * if home is rendered, fetches all shifts again
+   *
+   * @param view - 'home', 'notifications', 'profile', 'history', 'schedule', 'search', or 'createShift'
+   */
   onNavClick(view: string) {
-    console.log(view);
     this.view = view;
     if (this.view === 'home') {
       this.getMakerShifts();

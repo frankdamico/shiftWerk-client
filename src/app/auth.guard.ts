@@ -24,17 +24,21 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('checking login');
-    return true;
-    // return this.authService.checkLogin()
-    //   .pipe(
-    //     tap(isLoggedIn => {
-    //       if (!isLoggedIn) {
-    //         this.router.navigate(['home']);
-    //       }
-    //     })
-    //   );
+    state: RouterStateSnapshot,): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.authService.getUserType()
+      .pipe(
+        map((type) => {
+          const target = this.router.getCurrentNavigation().extractedUrl.toString() === '/werker-home'
+            ? 'werker'
+            : 'maker';
+          console.log(type, target);
+          if (target !== type) {
+            this.router.navigate(['home']);
+            return false;
+          }
+          return true;
+        })
+      );
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
