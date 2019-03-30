@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { MakerService } from 'src/app/maker.service';
-import { ShiftService } from 'src/app/shift.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -18,8 +16,6 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
   count = 0;
 
   constructor(
-    public makerService: MakerService,
-    public shiftService: ShiftService,
     public toastController: ToastController
   ) { }
 

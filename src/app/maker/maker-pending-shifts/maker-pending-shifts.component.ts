@@ -1,7 +1,5 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { MakerService } from 'src/app/maker.service';
-import { ShiftService } from 'src/app/shift.service';
 
 @Component({
   selector: 'app-maker-pending-shifts',
@@ -16,12 +14,10 @@ import { ShiftService } from 'src/app/shift.service';
 export class MakerPendingShiftsComponent implements OnInit {
 
   constructor(
-    public makerService: MakerService,
-    public shiftService: ShiftService
   ) { }
   @Input() shifts: Array<any>;
   @Input() maker: any;
-  
+
   ngOnInit() {
   }
 

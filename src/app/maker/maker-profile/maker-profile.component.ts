@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { WerkerService } from 'src/app/werker.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { MakerService } from 'src/app/maker.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-maker-profile',
@@ -17,14 +16,13 @@ export class MakerProfileComponent implements OnInit {
   public phoneNumber: string;
   public bio: string;
   public url_photo: string;
-  
+
   @Input() maker: any;
 
   constructor(
-    public makerService: MakerService,
+    public userService: UserService,
     public toastController: ToastController,
-    public werkerService: WerkerService, // using werker service to send cloudinary photo
-    private camera: Camera,               // need to refactor all the services later into one
+    private camera: Camera,
   ) { }
 
   async presentToast(answer) {
@@ -46,8 +44,8 @@ export class MakerProfileComponent implements OnInit {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      return this.werkerService.uploadPhoto(base64Image)
+      const base64Image = 'data:image/jpeg;base64,' + imageData;
+      return this.userService.uploadPhoto(base64Image);
     }, (err) => {
       // Handle error
       console.log(err);
@@ -74,8 +72,8 @@ export class MakerProfileComponent implements OnInit {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      return this.werkerService.uploadPhoto(base64Image)
+      const base64Image = 'data:image/jpeg;base64,' + imageData;
+      return this.userService.uploadPhoto(base64Image);
     }, (err) => {
       // Handle error
       console.log(err);
@@ -94,7 +92,7 @@ export class MakerProfileComponent implements OnInit {
       bio: this.bio,
       phone: this.phoneNumber
     };
-    this.makerService.updateProfileSettings(settings, this.maker.id)
+    this.userService.updateProfileSettings(settings)
       .subscribe(res => {
         console.log(res);
       }, err => {
