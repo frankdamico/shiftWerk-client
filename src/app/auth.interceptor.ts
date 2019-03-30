@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
-  HttpResponse,
   HttpHandler,
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
 
-import { Observable, throwError, forkJoin } from 'rxjs';
-import { map, catchError, flatMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, flatMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
