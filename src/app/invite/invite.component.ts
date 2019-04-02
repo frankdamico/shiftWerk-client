@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MakerService } from '../maker.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-invite',
@@ -9,7 +9,7 @@ import { MakerService } from '../maker.service';
 export class InviteComponent implements OnInit {
 
   constructor(
-    private makerService: MakerService,
+    private userService: UserService,
   ) { }
   @Input() shift: any;
   @Input() results: any;
@@ -19,7 +19,7 @@ export class InviteComponent implements OnInit {
     console.log(this.shift['id']);
     console.log(this.shift['positions'][i]['position']);
     // this.NavClick.emit('search');
-    this.makerService.getWerkers(this.shift['positions'][i]['position'])
+    this.userService.getWerkers(this.shift['positions'][i]['position'])
       .subscribe(results => {
         this.results = results;
         console.log(this.results);

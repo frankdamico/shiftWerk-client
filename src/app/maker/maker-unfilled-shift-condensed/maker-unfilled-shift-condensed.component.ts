@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { MakerService } from 'src/app/maker.service';
-import { ShiftService } from 'src/app/shift.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -15,12 +13,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
   shifts: any;
-  count: number = 0;
-  results: any;
+  count = 0;
 
   constructor(
-    public makerService: MakerService,
-    public shiftService: ShiftService,
     public toastController: ToastController
   ) { }
 
@@ -38,19 +33,6 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
     toast.present();
   }
 
-  
-
-  // invite(i) {
-  //   console.log(this.shift['id']);
-  //   console.log(this.shift['positions'][i]['position']);
-  //   // this.NavClick.emit('search');
-  //   this.makerService.getWerkers(this.shift['positions'][i]['position'])
-  //     .subscribe(results => {
-  //       this.results = results;
-  //       console.log(this.results);
-  //     });
-  // }
-
   getUnfilled() {
     for(let i = 0; i < this.shift['positions'].length;i++) {
       if (this.shift['positions'][i]['filled'] === false) {
@@ -60,7 +42,5 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shiftService.getAllShifts();
-    this.getUnfilled();
   }
 }

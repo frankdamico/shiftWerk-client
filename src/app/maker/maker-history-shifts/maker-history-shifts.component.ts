@@ -1,7 +1,5 @@
 import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { MakerService } from 'src/app/maker.service';
-import { ShiftService } from 'src/app/shift.service';
 
 @Component({
   selector: 'app-maker-history-shifts',
@@ -16,8 +14,6 @@ import { ShiftService } from 'src/app/shift.service';
 export class MakerHistoryShiftsComponent implements OnInit {
 
   constructor(
-    public makerService: MakerService,
-    public shiftService: ShiftService
   ) { }
 
   @Input() shifts: Array<any>;
@@ -41,7 +37,6 @@ export class MakerHistoryShiftsComponent implements OnInit {
   //   this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   // }
   ngOnInit() {
-    // this.shiftService.getAllShifts();
     console.log(this.shifts);
   }
 }
