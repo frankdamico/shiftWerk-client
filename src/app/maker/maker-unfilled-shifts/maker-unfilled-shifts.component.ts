@@ -1,7 +1,5 @@
 import { Component, Injectable, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { MakerService } from 'src/app/maker.service';
-import { ShiftService } from 'src/app/shift.service';
 
 @Component({
   selector: 'app-maker-unfilled-shifts',
@@ -16,15 +14,11 @@ import { ShiftService } from 'src/app/shift.service';
 export class MakerUnfilledShiftsComponent implements OnInit {
 
   constructor(
-    public makerService: MakerService,
-    public shiftService: ShiftService
   ) { }
 
   @Input() shifts: Array<any>;
   @Input() maker: any;
-  @Output() NavClick = new EventEmitter<string>();  
-  // unfilled: Array<any>;
-  // unfulfulled: Array<any>;
+  @Output() NavClick = new EventEmitter<string>();
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -50,9 +44,5 @@ export class MakerUnfilledShiftsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.maker)
-    // this.shiftService.getUpcomingShifts();
-    this.makerService.getUnfulfilledShifts(this.maker.id);
   }
-
 }

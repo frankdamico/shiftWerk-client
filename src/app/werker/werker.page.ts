@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { WerkerService } from 'src/app/werker.service';
-import { ShiftService } from '../shift.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { forkJoin } from 'rxjs';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-werker',
@@ -13,8 +12,7 @@ import { forkJoin } from 'rxjs';
 export class WerkerPage implements OnInit {
 
   constructor(
-    public werkerService: WerkerService,
-    public shiftService: ShiftService,
+    public userService: UserService,
     public loadingController: LoadingController,
     public toastController: ToastController,
     public authService: AuthService,
@@ -30,7 +28,7 @@ export class WerkerPage implements OnInit {
     this.loadingController.create()
       .then(loading => {
         loading.present();
-        this.shiftService.respondToInvitation(this.werker.id, shiftId, status)
+        this.userService.respondToInvitation(shiftId, status)
           .subscribe(() => {
             loading.dismiss();
             this.invitedShifts = this.invitedShifts.filter(shift => shift.id !== shiftId);
@@ -50,13 +48,12 @@ export class WerkerPage implements OnInit {
     this.loadingController.create()
     .then(loading => {
       loading.present();
-      this.werker = this.authService.user;
       console.log(this.werker);
       forkJoin(
-        this.werkerService.getAllAvailableShifts(this.werker.id),
-        this.werkerService.getUpcomingShifts(this.werker.id),
-        this.werkerService.getInvitations(this.werker.id),
-        this.werkerService.getHistory(this.werker.id)
+        this.userService.getShifts('available'),
+        this.userService.getShifts('upcoming'),
+        this.userService.getShifts('invite'),
+        this.userService.getShifts('history')
       ).subscribe(([available, upcoming, invited, history]) => {
           this.shifts = available;
           this.upcomingShifts = upcoming;
@@ -71,7 +68,11 @@ export class WerkerPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getWerkerShifts();
+    this.authService.getRemoteUserInfo()
+    .subscribe(user => {
+        this.werker = user;
+        this.getWerkerShifts();
+      }, err => console.error(err));
   }
 
   /** @method onNavClick

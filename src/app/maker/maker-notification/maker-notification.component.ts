@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ShiftService } from 'src/app/shift.service';
 
 @Component({
   selector: 'app-maker-notification',

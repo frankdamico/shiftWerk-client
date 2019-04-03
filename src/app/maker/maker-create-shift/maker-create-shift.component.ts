@@ -1,6 +1,5 @@
 import { Component,  EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { ShiftService } from 'src/app/shift.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../user.service';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class MakerCreateShiftComponent implements OnInit {
 
   sForm: FormGroup;
-  count: number = 0;
+  count = 0;
   position: FormGroup;
   view: any;
 
@@ -22,7 +21,7 @@ export class MakerCreateShiftComponent implements OnInit {
   maker: any;
   constructor(
     private fb: FormBuilder,
-    private shiftService: ShiftService,
+    private userService: UserService,
     public toastController: ToastController,
     private router: Router) {
   }
@@ -45,7 +44,6 @@ export class MakerCreateShiftComponent implements OnInit {
       address: new FormControl(),
       start: new FormControl(),
       end: new FormControl(),
-      // duration: new FormControl(),
       description: new FormControl(),
       positions: new FormArray([])
     });
@@ -74,7 +72,7 @@ export class MakerCreateShiftComponent implements OnInit {
   submit() {
     console.log('submitting');
     console.log(this.sForm.value);
-    this.shiftService.submitShift(this.sForm.value, this.maker.id).subscribe(response => {
+    this.userService.submitShift(this.sForm.value).subscribe(response => {
       console.log(response);
       this.presentToast('created');
       this.NavClick.emit('home');
