@@ -8,7 +8,7 @@
   <app-maker-home [unfulfilled]="unfulfilled" [fulfilled]="upcomingFulfilled" *ngIf="view === 'home'"[maker]="maker" (NavClick)="onNavClick($event)"></app-maker-home>
   <app-maker-notifications [applications]="applications" (respondToApplication)="respondToApplication($event)" *ngIf="view === 'notifications'"></app-maker-notifications>
   <app-maker-profile [maker]="maker" *ngIf="view === 'profile'"></app-maker-profile>
-  <app-maker-history-shifts [shifts]="history" *ngIf="view === 'history'"></app-maker-history-shifts>
+  <app-maker-history [shifts]="history" *ngIf="view === 'history'"></app-maker-history>
   <app-maker-schedule *ngIf="view === 'schedule'"></app-maker-schedule>
   <app-maker-search *ngIf="view === 'search'" [maker]="maker"></app-maker-search>
   <app-maker-create-shift [maker]="maker" (NavClick)="onNavClick($event)" *ngIf="view === 'createShift'"></app-maker-create-shift>

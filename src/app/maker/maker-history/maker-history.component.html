@@ -1,0 +1,27 @@
+<h3>History</h3>
+
+<mat-accordion class="item item-text-wrap">
+
+<ion-item *ngFor="let shift of shifts">
+  <ion-card text-wrap color="tertiary">
+    <mat-expansion-panel multi="false">
+      
+      <mat-expansion-panel-header>
+        <mat-panel-title color="tertiary">
+          <ion-icon name="star-half" color="dark"></ion-icon>
+          <ion-label><b>{{ shift.name }}</b>
+            <div>{{shift.start | date:'MMM dd, yyyy h:mm a'}}</div>
+          </ion-label>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div><b>Shift History Details:</b></div>
+      <div>{{shift.address}}</div>
+       <div>{{shift.description}}</div>
+      <ion-button (click)="rate('Werkers')" size="default" expand="block" class-name="button-rate">RATE SHIFT WERKERS</ion-button>
+    </mat-expansion-panel>
+  </ion-card>
+</ion-item>
+</mat-accordion>    
+
+
