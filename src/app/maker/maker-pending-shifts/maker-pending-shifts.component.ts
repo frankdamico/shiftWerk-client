@@ -1,5 +1,5 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+// import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-maker-pending-shifts',
