@@ -86,8 +86,10 @@
 };
 ion-card {
   --color: #e2ffa8;
+  box-shadow: none !important;
+  padding: .5rem 0;
 }
- 
+
 // @font-face {
 //   font-family: 'Raleway';
 //   font-style: normal;
