@@ -1,9 +1,7 @@
 <h3 align="left">Upcoming Shifts</h3>
   <mat-accordion class="item item-text-wrap">
-    <ion-item *ngFor="let shift of shifts">
-      <ion-card text-wrap color="light">
+    <ion-card text-wrap color="light" *ngFor="let shift of shifts">
         <app-maker-pending-shift-condensed [shift]="shift"></app-maker-pending-shift-condensed>
-      </ion-card>
-    </ion-item>
+    </ion-card>
   </mat-accordion>
   
