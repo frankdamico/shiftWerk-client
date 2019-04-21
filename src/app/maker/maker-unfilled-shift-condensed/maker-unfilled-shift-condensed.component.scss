@@ -1,16 +1,5 @@
-mat-expansion-panel,
-mat-expansion-panel-header {
-  display: flex;
-  padding: 1;
-  margin: 1;
-};
-mat-expansion-panel-body {
-  padding: 0, 0, 0;
-  margin: 0, 0, 0;
-  display: flex;
 
-};
-ion-card {
-  display: flex;
-  width: 100%;
-};
+
+.mat-expansion-panel-header {
+  padding: 2rem .75rem;
+}
