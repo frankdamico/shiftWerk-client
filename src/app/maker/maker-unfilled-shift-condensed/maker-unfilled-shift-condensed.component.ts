@@ -14,8 +14,14 @@ import { Shift, Position } from 'src/app/types';
 })
 export class MakerUnfilledShiftCondensedComponent implements OnInit {
   positions: Position[];
-  count = 0;
-  focusedPosition: Position | null;
+  positionCounts: {
+    position: string,
+    total: number,
+    filled: number,
+    focused: boolean,
+  }[] = [];
+  totalCount: number = 0;
+  focusedPosition: {position: string, total: number, filled: number, focused: boolean} | null;
 
   constructor(
     public toastController: ToastController
@@ -35,17 +41,9 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
     toast.present();
   }
 
-  getUnfilled() {
-    for(let i = 0; i < this.positions.length; i++) {
-      if (this.positions[i].filled === false) {
-        this.count += 1;
-      }
-    }
-  }
-
   getInvites(position) {
-    this.positions.forEach(listPosition => {
-      if (position.id === listPosition.id) {
+    this.positionCounts.forEach(listPosition => {
+      if (position.position === listPosition.position) {
         listPosition.focused = !listPosition.focused;
         this.focusedPosition = listPosition.focused ? listPosition : null;
       } else {
@@ -60,5 +58,20 @@ export class MakerUnfilledShiftCondensedComponent implements OnInit {
 
   ngOnInit() {
     this.positions = this.shift.positions.map(position => Object.assign(position, {focused: false}));
+    this.positionCounts = this.positions.reduce((listPositionCounts, pos) => {
+      if (pos.filled) {
+        this.totalCount++;
+      }
+      const { position } = pos;
+      const index = listPositionCounts.findIndex(entry => entry.position === position);
+      if (index === -1) {
+        return listPositionCounts.concat([{position: position, total: 1, filled: pos.filled ? 1 : 0, focused: false}]);
+      }
+      listPositionCounts[index].total++;
+      if (pos.filled) {
+        listPositionCounts[index].filled++;
+      }
+      return listPositionCounts;
+    }, []);
   }
 }
