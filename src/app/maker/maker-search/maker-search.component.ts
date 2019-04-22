@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { RatingComponent } from 'src/app/rating/rating.component';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/user.service';
+import { Position, Maker, Werker, Shift } from 'src/app/types';
 
 @Component({
   selector: 'app-maker-search',
@@ -10,23 +11,23 @@ import { UserService } from 'src/app/user.service';
   providers: [RatingComponent]
 })
 export class MakerSearchComponent implements OnInit {
-  public phoneNumber: any = '123-123-1234';
-  public positions: string[] = [];
-  werkers: any;
-  view = 'search';
+  private phoneNumber: string = '123-123-1234';
+  private werkers: Werker[] = [];
+
   constructor(
     private userService: UserService,
     public toastController: ToastController,
     private rating: RatingComponent,
+    public loadingController: LoadingController,
   ) {}
 
-  @Input() maker: any;
-  @Input() results: any;
-  @Input() shift: any;
+  @Input() maker: Maker;
+  @Input() position: Position;
+  @Input() shift: Shift;
 
   async presentToast(answer) {
     const toast = await this.toastController.create({
-      message: `Sent ${answer} to Werkers`,
+      message: `${answer}`,
       duration: 2000,
       color: 'primary',
       position: 'top'
@@ -39,18 +40,20 @@ export class MakerSearchComponent implements OnInit {
     }, 100);
   }
 
-  invite(i, j) {
-    console.log(this.results[i]['positions'][j]['position'])
-    const positionName = this.results[i]['positions'][j]['position'];
-    const werkerId = this.results[i]['id'];
-    const shiftId = this.shift['id'];
-    this.presentToast('invite');
-    this.userService.inviteOrApply(shiftId, positionName, werkerId).subscribe(response => {
-      console.log(response);
+  async invite(werker) {
+    const loading = await this.loadingController.create();
+    loading.present();
+    this.userService.inviteOrApply(this.shift.id, this.position.position, werker.id).subscribe(() => {
+      this.presentToast(`Invited ${werker.name_first} as ${this.position.position} to ${this.shift.name}`);
+      loading.dismiss();
+    }, (err) => {
+      loading.dismiss();
+      this.presentToast(`Invited ${werker.name_first} as ${this.position.position} to ${this.shift.name}`);
     });
   }
 
   ngOnInit() {
+    this.userService.getWerkers(this.position.position).subscribe(werkers => this.werkers = werkers);
   }
 
   text = () => {

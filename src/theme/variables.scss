@@ -4,7 +4,9 @@
 /** Ionic CSS Variables **/
 :root {
 
-  --ion-background-color: #f1e8b8;
+  --ion-padding: .5rem 0 .5rem .25rem;
+
+  --ion-background-color: #faf8ea;
 
   --ion-card: #e2ffa8;
 
@@ -41,7 +43,7 @@
   --ion-color-success-tint: #28e070;
 
   /** warning **/
-  --ion-color-warning: #ff6666;
+  --ion-color-warning: #f58585;
   --ion-color-warning-rgb: 255, 206, 0;
   --ion-color-warning-contrast: #1e2023;
   --ion-color-warning-contrast-rgb: 255, 255, 255;
@@ -84,8 +86,12 @@
 };
 ion-card {
   --color: #e2ffa8;
+  box-shadow: none !important;
+  padding: .5rem 0;
+  border-radius: 0 !important;
+  border: 1px solid #d2ee9a;
 }
- 
+
 // @font-face {
 //   font-family: 'Raleway';
 //   font-style: normal;

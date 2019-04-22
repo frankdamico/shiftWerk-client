@@ -1,10 +1,6 @@
 <h3 align="left">Unfilled Shifts</h3>
 <mat-accordion class="item item-text-wrap">
-  <ion-item class-name="app-maker-unfilled-shifts" *ngFor="let shift of shifts">
-    <ion-card text-wrap color="light">
-      <app-maker-unfilled-shift-condensed [shift]="shift" (NavClick)="onNavClick($event)"></app-maker-unfilled-shift-condensed>
-    </ion-card>
-  </ion-item>
+  <app-maker-unfilled-shift-condensed [shift]="shift" (NavClick)="onNavClick($event)" *ngFor="let shift of shifts"></app-maker-unfilled-shift-condensed>
 </mat-accordion>
 
 

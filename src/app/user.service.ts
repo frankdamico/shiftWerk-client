@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { serverUrl, httpOptions } from './environment';
+import { Werker } from './types';
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/daft-funk/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'mxfd1wnl';
 
@@ -36,7 +37,7 @@ export class UserService {
    *
    * @param position - the name of the position being searched for
    */
-  public getWerkers(position: string): Observable <object> {
+  public getWerkers(position: string): Observable <Werker[] | any> {
     return this.http.get(`${serverUrl}/werkers/search/${position}`)
       .pipe(catchError(err => throwError(err)));
   }
@@ -120,7 +121,11 @@ export class UserService {
    */
   public inviteOrApply(shiftId: number, positionName: string, werkerId?: number): Observable<any> {
     const werkerQuery = werkerId ? `&werker=${werkerId}` : '';
-    return this.http.put(`${serverUrl}/shifts/${shiftId}/applications?position=${positionName}${werkerQuery}`, httpOptions)
+    return this.http.put(`${serverUrl}/shifts/${shiftId}/applications?position=${positionName}${werkerQuery}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain'
+      })
+    })
     .pipe(catchError(error => throwError(error)));
   }
 

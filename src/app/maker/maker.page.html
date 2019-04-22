@@ -10,7 +10,7 @@
   <app-maker-profile [maker]="maker" *ngIf="view === 'profile'"></app-maker-profile>
   <app-maker-history [shifts]="history" *ngIf="view === 'history'"></app-maker-history>
   <app-maker-schedule *ngIf="view === 'schedule'"></app-maker-schedule>
-  <app-maker-search *ngIf="view === 'search'" [maker]="maker"></app-maker-search>
+  <!-- <app-maker-search *ngIf="view === 'search'" [maker]="maker"></app-maker-search> -->
   <app-maker-create-shift [maker]="maker" (NavClick)="onNavClick($event)" *ngIf="view === 'createShift'"></app-maker-create-shift>
 </ion-content>
 <ion-footer>

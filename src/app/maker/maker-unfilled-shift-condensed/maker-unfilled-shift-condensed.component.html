@@ -1,31 +1,31 @@
-<div class-name="app-maker-unfilled-shift-condensed">
-  <mat-expansion-panel class="item item-text-wrap">
+<ion-card color="light" class-name="app-maker-unfilled-shift-condensed">
+  <mat-expansion-panel>
 
-    <mat-expansion-panel-header class="item item-text-wrap">
+    <mat-expansion-panel-header>
       <mat-panel-title color="warning" >
               <ion-icon name="alert" color="danger"></ion-icon>
-              <ion-label><b>{{shift.name}} @ {{shift.start | date:'MMM dd, yyyy h:mm a'}}</b>
-              <div class-name="shift-time_date"> Positions Filled: {{count}} out of {{shift.positions.length}}</div>
+              <ion-label><b>{{shift.name}}<br>@ {{shift.start | date:'MMM dd, yyyy h:mm a'}}</b>
+              <div class-name="shift-time_date"> Positions Filled: {{totalCount}} out of {{shift.positions.length}}</div>
               </ion-label>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
     
-    <ion-item text-wrap color="light" display="flex" width="100%">
-      <ion-label class="text text-wrap"><b>Address:</b> {{shift.address}} </ion-label> 
+    <ion-item color="light">
+      <div><b>Address:</b> <br> {{shift.address.street}}<br>{{shift.address.rest}} </div> 
     </ion-item>
 
 
-    <ion-item text-wrap color="light" display="flex" width="100%">
+    <ion-item color="light">
       <ion-label text-wrap><b>Position(s):</b></ion-label>
     </ion-item>
 
-      <ion-card color="light"
-            *ngFor="let position of shift.positions let i=index" color="light" lines="none" display="flex" width="100%">
-              <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
-                {{count}} out of 1</ion-item></ion-item>
-                <app-invite [i]="i" [shift]="shift" slot="end" color="light"></app-invite>
-      </ion-card>
+      <ion-item *ngFor="let position of positionCounts" [color]="position.filled === position.total ? 'secondary' : 'warning'" lines="inset">
+        <ion-label>{{position.position}}</ion-label>
+        <ion-text>{{position.filled}} out of {{position.total}}</ion-text>
+        <ion-button (click)="getInvites(position)" *ngIf="position.filled !== position.total">{{position.focused ? "Close" : "Invite"}}</ion-button>
+      </ion-item>
+      <app-maker-search [maker]="maker" [shift]="shift" [position]="focusedPosition" slot="end" color="light" *ngIf="focusedPosition"></app-maker-search>
     
   </mat-expansion-panel>
-</div>
+</ion-card>

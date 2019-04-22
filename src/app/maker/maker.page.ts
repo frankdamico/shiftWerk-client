@@ -26,6 +26,19 @@ export class MakerPage implements OnInit {
   unfulfilled: any;
   history: any;
 
+  private parseAddress(shifts: any[]) {
+  return shifts.map(shift => {
+      const { address } = shift;
+      const firstComma = address.indexOf(',');
+      return Object.assign(shift, {
+        address: {
+          street: address.slice(0, firstComma),
+          rest: address.slice(firstComma + 1),
+        },
+      });
+    });
+  }
+
   /**
    * responds to an application, marking it as either accepted or declined
    * removes application from state
@@ -60,9 +73,9 @@ export class MakerPage implements OnInit {
               this.userService.getShifts('upcoming')
           ).subscribe(([applications, history, unfulfilled, fulfilled]) => {
             this.applications = applications;
-            this.history = history;
-            this.unfulfilled = unfulfilled;
-            this.upcomingFulfilled = fulfilled;
+            this.history = this.parseAddress(history);
+            this.unfulfilled = this.parseAddress(unfulfilled);
+            this.upcomingFulfilled = this.parseAddress(fulfilled);
             this.view = 'home';
             loading.dismiss();
           }, err => {
