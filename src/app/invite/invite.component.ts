@@ -9,22 +9,22 @@ import { UserService } from '../user.service';
 export class InviteComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
+    // private userService: UserService,
   ) { }
-  @Input() shift: any;
-  @Input() results: any;
-  @Input() i: any;
+  // @Input() shift: any;
+  // @Input() results: any;
+  // @Input() i: any;
 
-  invite(i) {
-    console.log(this.shift['id']);
-    console.log(this.shift['positions'][i]['position']);
-    // this.NavClick.emit('search');
-    this.userService.getWerkers(this.shift['positions'][i]['position'])
-      .subscribe(results => {
-        this.results = results;
-        console.log(this.results);
-      });
-  }
+  // invite(i) {
+  //   console.log(this.shift['id']);
+  //   console.log(this.shift['positions'][i]['position']);
+  //   // this.NavClick.emit('search');
+  //   this.userService.getWerkers(this.shift['positions'][i]['position'])
+  //     .subscribe(results => {
+  //       this.results = results;
+  //       console.log(this.results);
+  //     });
+  // }
 
   ngOnInit() {}
 

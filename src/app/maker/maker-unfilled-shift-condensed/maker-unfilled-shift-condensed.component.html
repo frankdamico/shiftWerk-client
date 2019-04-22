@@ -20,12 +20,13 @@
       <ion-label text-wrap><b>Position(s):</b></ion-label>
     </ion-item>
 
-      <ion-card color="light"
-            *ngFor="let position of shift.positions let i=index" color="light" lines="none" >
-              <ion-item slot="start" color="light" lines="none" expand="block">{{position.position}}<ion-item slot="end" color="light" lines="none">
-                {{count}} out of 1</ion-item></ion-item>
-                <app-invite [i]="i" [shift]="shift" slot="end" color="light"></app-invite>
-      </ion-card>
+      <ion-item color="light"
+            *ngFor="let position of shift.positions let i=index" color="warning" lines="inset" >
+        <ion-label>{{position.position}}</ion-label>
+        <ion-text>{{count}} out of 1</ion-text>
+        <ion-button (click)="getInvites(position)">{{position.focused ? "Close" : "Invite"}}</ion-button>
+      </ion-item>
+      <app-maker-search [maker]="maker" [shift]="shift" [position]="focusedPosition" slot="end" color="light" *ngIf="focusedPosition"></app-maker-search>
     
   </mat-expansion-panel>
 </ion-card>

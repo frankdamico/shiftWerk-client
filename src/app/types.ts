@@ -1,3 +1,5 @@
+import { BooleanValueAccessor } from '@ionic/angular';
+
 export interface Werker {
   type: string;
   id?: number;
@@ -27,6 +29,7 @@ export interface Position {
   shift?: Shift;
   filled?: boolean;
   payment_type: string;
+  focused?: boolean;
 }
 
 export interface Maker {
